@@ -18,11 +18,10 @@ public class MachineGun : Weapon
 
     private void Update()
     {
-        TryShoot();
-        //if (Input.GetMouseButton(0))
-        //{
-        //    TryShoot();
-        //}
+        if (Input.GetMouseButton(0))
+        {
+            TryShoot();
+        }
 
         if (Input.GetMouseButtonDown(1))
         {

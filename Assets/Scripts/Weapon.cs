@@ -1,8 +1,8 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [SerializeField] protected Animator animator;
     [SerializeField] private float shootDelay = 0.05f;
 
     private float lastTimeShot = -1000f;

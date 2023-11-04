@@ -5,6 +5,7 @@ public class MachineGun : Weapon
 {
     [Header("Effects")]
     [SerializeField] private TrailRenderer bulletTrail;
+    [SerializeField] private ParticleSystem flashParticles;
     [SerializeField] private ParticleSystem impactParticles;
     [Space(20)]
     [SerializeField] private Transform bulletSpawnPoint;
@@ -25,7 +26,7 @@ public class MachineGun : Weapon
     protected override void Shoot()
     {
         base.Shoot();
-
+        Instantiate(flashParticles, bulletSpawnPoint.position, bulletSpawnPoint.transform.rotation, bulletSpawnPoint);
         Vector3 direction = GetShootDirection();
         if (Physics.Raycast(bulletSpawnPoint.position, direction, out RaycastHit hit, 100))
         {

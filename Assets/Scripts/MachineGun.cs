@@ -1,3 +1,4 @@
+using EvolveGames;
 using System.Collections;
 using UnityEngine;
 
@@ -9,9 +10,11 @@ public class MachineGun : Weapon
     [SerializeField] private ParticleSystem impactParticles;
     [Space(20)]
     [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private Transform handsSmooth;
     [Header("Parameters")]
     [SerializeField] private float reloadTime;
     [SerializeField] private int ammoAmount;
+    [SerializeField] private float recoilValue = -0.2f;
 
     private float bulletSpeed = 100;
     private bool isAiming = false;
@@ -41,6 +44,7 @@ public class MachineGun : Weapon
             trail.transform.position = bulletSpawnPoint.position;
             StartCoroutine(SpawnTrail(trail, hit, hit.normal, true));
         }
+        handsSmooth.localEulerAngles = handsSmooth.localEulerAngles + (Vector3.left * recoilValue);
     }
 
     private Vector3 GetShootDirection()

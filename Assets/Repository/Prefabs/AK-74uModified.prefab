@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10cef59521376e84fb7896d89bec8ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   shootDelay: 0.065
   bulletTrail: {fileID: 2173366263553201580, guid: f46031a96308f8c4996672fe3d69dc16,
     type: 3}
@@ -57,8 +58,11 @@ MonoBehaviour:
   impactParticles: {fileID: 198175801688348628, guid: af3623d7ef5d59249a9375a6284dad25,
     type: 3}
   bulletSpawnPoint: {fileID: 6898546490896942721}
+  handsSmooth: {fileID: 0}
   reloadTime: 3
   ammoAmount: 30
+  recoilValue: 2
+  recoilOffset: {x: 0, y: 0, z: 0}
 --- !u!33 &33000013164323904
 MeshFilter:
   m_ObjectHideFlags: 0

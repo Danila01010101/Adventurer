@@ -13,7 +13,7 @@ namespace EvolveGames
         [SerializeField, Range(1.0f, 3.0f)] float SprintAmount = 1.4f;
 
         [SerializeField, Range(5f, 20f)] float Frequency = 13.0f;
-        [SerializeField, Range(50f, 10f)] float Smooth = 24.2f;
+        [SerializeField, Range(50f, 0f)] float Smooth = 24.2f;
         [Header("RotationMovement")]
         [SerializeField] bool EnabledRotationMovement = true;
         [SerializeField, Range(0.1f, 10.0f)] float RotationMultipler = 6f;

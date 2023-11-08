@@ -962,7 +962,7 @@ MonoBehaviour:
   Frequency: 13
   Smooth: 44.7
   EnabledRoationMovement: 1
-  RoationMovementSmooth: 6.7
+  RoationMovementSmooth: 9.5
   RoationMovementAmount: 4
 --- !u!114 &4582019822591254239
 MonoBehaviour:

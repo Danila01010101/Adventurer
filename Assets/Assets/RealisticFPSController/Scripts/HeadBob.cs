@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace EvolveGames
@@ -8,24 +7,27 @@ namespace EvolveGames
     public class HeadBob : MonoBehaviour
     {
         [Header("HeadBob Effect")]
-        [SerializeField] bool Enabled = true;
+        [SerializeField] private bool Enabled = true;
         [Space, Header("Main")]
-        [SerializeField, Range(0.001f, 0.01f)] float Amount = 0.00484f;
-        [SerializeField, Range(10f, 30f)] float Frequency = 16.0f;
-        [SerializeField, Range(100f, 10f)] float Smooth = 44.7f;
+        [SerializeField, Range(0.001f, 0.01f)] private float Amount = 0.00484f;
+        [SerializeField, Range(10f, 30f)] private float Frequency = 16.0f;
+        [SerializeField, Range(100f, 10f)] private float Smooth = 44.7f;
         [Header("RoationMovement")]
-        [SerializeField] bool EnabledRoationMovement = true;
-        [SerializeField, Range(40f, 4f)] float RoationMovementSmooth = 10.0f;
-        [SerializeField, Range(1f, 10f)] float RoationMovementAmount = 3.0f;
+        [SerializeField] private bool EnabledRoationMovement = true;
+        [SerializeField, Range(40f, 0f)] private float RoationMovementSmooth = 10.0f;
+        [SerializeField, Range(1f, 10f)] private float RoationMovementAmount = 3.0f;
+        [SerializeField] private Camera playerCamera;
 
-        float ToggleSpeed = 3.0f;
-        Vector3 StartPos;
-        Vector3 StartRot;
-        Vector3 FinalRot;
-        CharacterController player;
+        private float ToggleSpeed = 3.0f;
+        private Vector3 StartPos;
+        private Vector3 StartRot;
+        private Vector3 FinalRot;
+        private CharacterController characterController;
+
+
         private void Awake()
         {
-            player = GetComponentInParent<CharacterController>();
+            characterController = GetComponentInParent<CharacterController>();
             StartPos = transform.localPosition;
             StartRot = transform.localRotation.eulerAngles;
         }
@@ -35,14 +37,14 @@ namespace EvolveGames
             if (!Enabled) return;
             CheckMotion();
             ResetPos();
-            if (EnabledRoationMovement) transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(FinalRot), RoationMovementSmooth * Time.deltaTime);
+            if (EnabledRoationMovement) transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(FinalRot), 1 * Time.deltaTime);
         }
 
         private void CheckMotion()
         {
-            float speed = new Vector3(player.velocity.x, 0, player.velocity.z).magnitude;
+            float speed = new Vector3(characterController.velocity.x, 0, characterController.velocity.z).magnitude;
             if (speed < ToggleSpeed) return;
-            if (!player.isGrounded) return;
+            if (!characterController.isGrounded) return;
             PlayMotion(HeadBobMotion());
         }
 
@@ -65,6 +67,30 @@ namespace EvolveGames
             transform.localPosition = Vector3.Lerp(transform.localPosition, StartPos, 1 * Time.deltaTime);
             FinalRot = Vector3.Lerp(FinalRot, StartRot, 1 * Time.deltaTime);
         }
-    }
 
+        private IEnumerator BobPunching(Vector3 direction, float duration)
+        {
+            float timer = duration;
+            while (timer > 0)
+            {
+                Vector3 directionInFrame = direction * Time.deltaTime;
+                FinalRot += directionInFrame;
+                timer -= Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+            timer = duration;
+            while (timer > 0)
+            {
+                Vector3 directionInFrame = direction * Time.deltaTime;
+                FinalRot -= directionInFrame;
+                timer -= Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+        }
+
+        public void ShowHeadPunch(Vector3 direction, float duration)
+        {
+            StartCoroutine(BobPunching(direction, duration));
+        }
+    }
 }

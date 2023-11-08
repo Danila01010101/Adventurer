@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace EvolveGames
@@ -12,7 +10,7 @@ namespace EvolveGames
         [SerializeField, Range(0.001f, 1)] float amount = 0.03f;
         [SerializeField, Range(0.001f, 1)] float maxAmount = 0.04f;
         [Header("Rotation")]
-        [SerializeField, Range(0, 10)] float RotationSmooth = 4.0f;
+        [SerializeField, Range(4, 10)] float RotationSmooth = 4.0f;
         [SerializeField, Range(0.1f, 10)] float RotationAmount = 1.0f;
         [SerializeField, Range(0.1f, 10)] float MaxRotationAmount = 5.0f;
         [SerializeField, Range(0.1f, 10)] float RotationMovementMultipler = 1.0f;

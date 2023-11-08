@@ -1,7 +1,4 @@
-﻿//by EvolveGames
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace EvolveGames
 {
@@ -16,7 +13,7 @@ namespace EvolveGames
         [SerializeField, Range(2, 20)] float RuningSpeed = 4.0f;
         [SerializeField, Range(0, 20)] float jumpSpeed = 6.0f;
         [SerializeField, Range(0.5f, 10)] float lookSpeed = 2.0f;
-        [SerializeField, Range(10, 120)] float lookXLimit = 80.0f;
+        [SerializeField, Range(10, 120)] public float lookXLimit = 80.0f;
         [Space(20)]
         [Header("Advance")]
         [SerializeField] float RunningFOV = 65.0f;
@@ -146,6 +143,12 @@ namespace EvolveGames
                 Items.ani.SetBool("Hide", WallDistance);
                 Items.DefiniteHide = WallDistance;
             }
+        }
+
+        public void PunchHead(Vector3 direction)
+        {
+            //rotationX = Mathf.Lerp(rotationX, rotationX += direction.x, 0.9f);
+            rotationX += direction.x;
         }
 
         private void OnTriggerEnter(Collider other)

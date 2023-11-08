@@ -10,7 +10,8 @@ public class MachineGun : Weapon
     [SerializeField] private ParticleSystem impactParticles;
     [Space(20)]
     [SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private Transform handsSmooth;
+    [SerializeField] private PlayerController playerController;
+    [SerializeField] private HeadBob headBob;
     [Header("Parameters")]
     [SerializeField] private float reloadTime;
     [SerializeField] private int ammoAmount;
@@ -44,7 +45,8 @@ public class MachineGun : Weapon
             trail.transform.position = bulletSpawnPoint.position;
             StartCoroutine(SpawnTrail(trail, hit, hit.normal, true));
         }
-        handsSmooth.localEulerAngles = handsSmooth.localEulerAngles + (Vector3.left * recoilValue);
+        playerController.PunchHead(Vector3.left * recoilValue);
+        headBob.ShowHeadPunch(Vector3.left * recoilValue, 0.09f);
     }
 
     private Vector3 GetShootDirection()

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-public class TopDownController : MonoBehaviour
+public class WizardController : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera mainCamera;
     [SerializeField] private CinemachineBrain virtualCamera;

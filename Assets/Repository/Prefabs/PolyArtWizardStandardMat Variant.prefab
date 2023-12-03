@@ -309,7 +309,8 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0.9467017
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 136306802490482818, guid: ccd8c3b89aa02e943a08ab9238a8a70c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4463868907105534, guid: ccd8c3b89aa02e943a08ab9238a8a70c,
@@ -333,6 +334,14 @@ PrefabInstance:
         type: 3}
       insertIndex: 3
       addedObject: {fileID: 2211307380508923297}
+    - targetCorrespondingSourceObject: {fileID: 1248815240492774, guid: ccd8c3b89aa02e943a08ab9238a8a70c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5031687425784440054}
+    - targetCorrespondingSourceObject: {fileID: 1248815240492774, guid: ccd8c3b89aa02e943a08ab9238a8a70c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5059898776440777689}
   m_SourcePrefab: {fileID: 100100000, guid: ccd8c3b89aa02e943a08ab9238a8a70c, type: 3}
 --- !u!4 &1928148123257891672 stripped
 Transform:
@@ -418,3 +427,42 @@ MonoBehaviour:
   m_DefaultActionMap: Move
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5031687425784440054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930246090164793664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8467f6659898bec48ac1affdcc453291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &5059898776440777689
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930246090164793664}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

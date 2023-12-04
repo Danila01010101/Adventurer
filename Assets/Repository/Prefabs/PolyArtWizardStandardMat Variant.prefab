@@ -395,6 +395,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 6719134324253726632}
   virtualCamera: {fileID: 5996962615775610167}
+  animationPlayer: {fileID: 5031687425784440054}
+  characterController: {fileID: 4938339612036159749}
   speed: 4
 --- !u!114 &2211307380508923297
 MonoBehaviour:
@@ -439,6 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8467f6659898bec48ac1affdcc453291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1990196133422935656}
 --- !u!54 &5059898776440777689
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -466,3 +469,9 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &1990196133422935656 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95538263452871118, guid: ccd8c3b89aa02e943a08ab9238a8a70c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1931467399754106790}
+  m_PrefabAsset: {fileID: 0}

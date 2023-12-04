@@ -3,12 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class MageAnimationPlayer : MonoBehaviour
 {
-    private Animator animator;
+    [SerializeField] private Animator animator;
+
     private string currentState;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        animator ??= GetComponent<Animator>();
     }
 
     public void ChangeAnimationState(string newState)

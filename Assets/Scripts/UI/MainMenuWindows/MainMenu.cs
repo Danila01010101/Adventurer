@@ -8,4 +8,9 @@ public class MainMenu : UIWindow
     {
         Application.Quit();
     }
+
+    public void ShowOptions()
+    {
+        UIWindowManager.Show<Options>();
+    }
 }

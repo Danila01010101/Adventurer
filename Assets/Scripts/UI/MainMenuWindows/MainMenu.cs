@@ -13,4 +13,9 @@ public class MainMenu : UIWindow
     {
         UIWindowManager.Show<Options>();
     }
+
+    public void ShowSlotWindow()
+    {
+        UIWindowManager.Show<SlotSelectionWindow>();
+    }
 }

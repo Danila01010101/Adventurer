@@ -35,12 +35,17 @@ namespace Adventurer.Shooting
 
         private void Recoil()
         {
-
+            targetPosition -= new Vector3(0, 0, kickBackZ);
+            targetRotation += new Vector3(recoilX,
+                Random.Range(-recoilY, recoilY),
+                Random.Range(-recoilZ, recoilZ));
         }
 
         private void Kickback()
         {
-
+            targetPosition = Vector3.Lerp(targetPosition, initialGunPosition, Time.deltaTime * returnAmount);
+            currentPosition = Vector3.Lerp(currentPosition, targetPosition, Time.deltaTime * snappiness);
+            transform.localPosition = currentPosition;
         }
     }
 }

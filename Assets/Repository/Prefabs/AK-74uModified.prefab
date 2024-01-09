@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 698890566075862349}
   - component: {fileID: 33000013164323904}
   - component: {fileID: 23000010966259982}
-  m_Layer: 0
+  - component: {fileID: 6200599872059321665}
+  m_Layer: 6
   m_Name: AK-74uModified
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   shootDelay: 0.065
+  recoil: {fileID: 6200599872059321665}
   bulletTrail: {fileID: 2173366263553201580, guid: f46031a96308f8c4996672fe3d69dc16,
     type: 3}
   flashParticles: {fileID: 198234346748616026, guid: f583445e236fec942b518fc9f3db0028,
@@ -58,11 +60,10 @@ MonoBehaviour:
   impactParticles: {fileID: 198175801688348628, guid: af3623d7ef5d59249a9375a6284dad25,
     type: 3}
   bulletSpawnPoint: {fileID: 6898546490896942721}
-  handsSmooth: {fileID: 0}
+  playerController: {fileID: 0}
+  headBob: {fileID: 0}
   reloadTime: 3
   ammoAmount: 30
-  recoilValue: 2
-  recoilOffset: {x: 0, y: 0, z: 0}
 --- !u!33 &33000013164323904
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -113,6 +114,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6200599872059321665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010118919020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa984a4f1b50e64fa670b749f146766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recoilCamera: {fileID: 0}
+  recoilX: -2
+  recoilY: 2
+  recoilZ: 7
+  kickBackZ: 0.05
+  snappiness: 5
+  returnAmount: 8
 --- !u!1 &1000012093257676
 GameObject:
   m_ObjectHideFlags: 0

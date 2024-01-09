@@ -1,9 +1,11 @@
+using Adventurer.Shooting;
 using EvolveGames;
 using System.Collections;
 using UnityEngine;
 
 public class MachineGun : Weapon
 {
+    [SerializeField] private ProceduralRecoil recoil;
     [Header("Effects")]
     [SerializeField] private TrailRenderer bulletTrail;
     [SerializeField] private ParticleSystem flashParticles;
@@ -15,7 +17,6 @@ public class MachineGun : Weapon
     [Header("Parameters")]
     [SerializeField] private float reloadTime;
     [SerializeField] private int ammoAmount;
-    [SerializeField] private float recoilValue = -0.2f;
 
     private float bulletSpeed = 100;
     private bool isAiming = false;
@@ -45,8 +46,9 @@ public class MachineGun : Weapon
             trail.transform.position = bulletSpawnPoint.position;
             StartCoroutine(SpawnTrail(trail, hit, hit.normal, true));
         }
-        playerController.PunchHead(Vector3.left * recoilValue);
-        headBob.ShowHeadPunch(Vector3.left * recoilValue, 0.09f);
+        recoil.Recoil();
+        //playerController.PunchHead(Vector3.left * recoilValue);
+        //headBob.ShowHeadPunch(Vector3.left * recoilValue, 0.09f);
     }
 
     private Vector3 GetShootDirection()

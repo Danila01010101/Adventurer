@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Adventurer.Shooting
@@ -26,14 +27,18 @@ namespace Adventurer.Shooting
 
         private void Update()
         {
-            targetPosition = Vector3.Lerp(targetRotation, VectorZero, Time.deltaTime * returnAmount);
-            currentRotation = Vector3.Slerp(currentRotation, targetRotation, Time.fixedDeltaTime * snappiness);
-            transform.localRotation = Quaternion.Euler(currentRotation);
+            targetRotation = Vector3.Lerp(targetRotation, VectorZero, Time.deltaTime * returnAmount);
             recoilCamera.localRotation = Quaternion.Euler(currentRotation);
             Kickback();
         }
 
-        private void Recoil()
+        private void FixedUpdate()
+        {
+            currentRotation = Vector3.Slerp(currentRotation, targetRotation, Time.fixedDeltaTime * snappiness);
+            transform.localRotation = Quaternion.Euler(currentRotation);
+        }
+
+        public void Recoil()
         {
             targetPosition -= new Vector3(0, 0, kickBackZ);
             targetRotation += new Vector3(recoilX,

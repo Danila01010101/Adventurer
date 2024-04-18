@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Adventurer
 {
     public enum CharacterType { Shooter, Meele, Mage, Summoner }

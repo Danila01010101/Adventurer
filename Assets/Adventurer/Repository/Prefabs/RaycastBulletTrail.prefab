@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4052169129185668527}
   - component: {fileID: 2173366263553201580}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: RaycastBulletTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

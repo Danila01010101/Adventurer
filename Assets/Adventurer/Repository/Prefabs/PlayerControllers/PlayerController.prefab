@@ -1014,7 +1014,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4582019822591254235}
   - component: {fileID: 4582019822591254233}
-  - component: {fileID: 4582019822591254234}
   - component: {fileID: 4582019822591254232}
   - component: {fileID: 4582019822591254239}
   m_Layer: 0
@@ -1093,14 +1092,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &4582019822591254234
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4582019822591254244}
-  m_Enabled: 1
 --- !u!114 &4582019822591254232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1340,7 +1331,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 4582019823802981677}
-  Items: {fileID: 4434987455403460021}
   walkingSpeed: 3
   CroughSpeed: 1
   RuningSpeed: 4
@@ -1369,6 +1359,7 @@ MonoBehaviour:
   Lookvertical: 0
   Lookhorizontal: 0
   WalkingValue: 0
+  _itemChange: {fileID: 4434987455403460021}
 --- !u!114 &4434987455403460021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1382,7 +1373,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ani: {fileID: 4434987455181619956}
-  ItemCanvasLogo: {fileID: 0}
   LoopItems: 1
   Items:
   - {fileID: 997515318630210110}
@@ -2390,7 +2380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010118919020, guid: 55d77218316985449bd3cb4b8296193b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1000012093257676, guid: 55d77218316985449bd3cb4b8296193b, type: 3}
       propertyPath: m_Layer

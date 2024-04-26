@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace EvolveGames
 {
     [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(ItemChange))]
     public class PlayerController : MonoBehaviour
     {
         [Header("PlayerController")]
         [SerializeField] public Transform Camera;
-        [SerializeField] public ItemChange Items;
         [SerializeField, Range(1, 10)] float walkingSpeed = 3.0f;
         [Range(0.1f, 5)] public float CroughSpeed = 1.0f;
         [SerializeField, Range(2, 20)] float RuningSpeed = 4.0f;
@@ -59,10 +60,14 @@ namespace EvolveGames
         float installGravity;
         bool WallDistance;
         [HideInInspector] public float WalkingValue;
-        void Start()
+
+        public ItemChange ItemChange { get; private set; }
+
+        [Inject]
+        private void Construct()
         {
+            ItemChange = GetComponent<ItemChange>();
             characterController = GetComponent<CharacterController>();
-            if (Items == null && GetComponent<ItemChange>()) Items = GetComponent<ItemChange>();
             cam = GetComponentInChildren<Camera>();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -140,8 +145,8 @@ namespace EvolveGames
             if(WallDistance != Physics.Raycast(GetComponentInChildren<Camera>().transform.position, transform.TransformDirection(Vector3.forward), out ObjectCheck, HideDistance, LayerMaskInt) && CanHideDistanceWall)
             {
                 WallDistance = Physics.Raycast(GetComponentInChildren<Camera>().transform.position, transform.TransformDirection(Vector3.forward), out ObjectCheck, HideDistance, LayerMaskInt);
-                Items.ani.SetBool("Hide", WallDistance);
-                Items.DefiniteHide = WallDistance;
+                ItemChange.ani.SetBool("Hide", WallDistance);
+                ItemChange.DefiniteHide = WallDistance;
             }
         }
 
@@ -158,7 +163,7 @@ namespace EvolveGames
                 CanRunning = false;
                 isClimbing = true;
                 WalkingValue /= 2;
-                Items.Hide(true);
+                ItemChange.Hide(true);
             }
         }
         private void OnTriggerStay(Collider other)
@@ -175,8 +180,8 @@ namespace EvolveGames
                 CanRunning = true;
                 isClimbing = false;
                 WalkingValue *= 2;
-                Items.ani.SetBool("Hide", false);
-                Items.Hide(false);
+                ItemChange.ani.SetBool("Hide", false);
+                ItemChange.Hide(false);
             }
         }
 

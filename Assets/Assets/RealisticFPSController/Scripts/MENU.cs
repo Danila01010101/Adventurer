@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using Zenject;
 
 namespace EvolveGames
 {
@@ -7,9 +9,17 @@ namespace EvolveGames
         [Header("MENU")]
         [SerializeField] GameObject MenuPanel;
         [SerializeField] Animator ani;
-        [SerializeField] PlayerController Player;
         [Header("Input")]
         [SerializeField] KeyCode BackKey = KeyCode.Escape;
+
+        private PlayerController Player;
+        [SerializeField] private Image _logo;
+
+        public Image Logo => _logo;
+
+        [Inject]
+        private void Construct(PlayerController player) => Player = player;
+
         private void Update()
         {
             if (Input.GetKeyDown(BackKey))

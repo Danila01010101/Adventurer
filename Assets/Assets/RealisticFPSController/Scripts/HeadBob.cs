@@ -14,7 +14,6 @@ namespace EvolveGames
         [SerializeField, Range(100f, 10f)] private float Smooth = 44.7f;
         [Header("RoationMovement")]
         [SerializeField] private bool EnabledRoationMovement = true;
-        [SerializeField, Range(40f, 0f)] private float RoationMovementSmooth = 10.0f;
         [SerializeField, Range(1f, 10f)] private float RoationMovementAmount = 3.0f;
         [SerializeField] private Camera playerCamera;
 

@@ -1330,36 +1330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a605aa1aa281f24a860449f9f60a2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 4582019823802981677}
-  walkingSpeed: 3
-  CroughSpeed: 1
-  RuningSpeed: 4
-  jumpSpeed: 6
-  lookSpeed: 2
-  lookXLimit: 80
-  RunningFOV: 70
-  SpeedToFOV: 4
-  CroughHeight: 1
-  gravity: 20
-  timeToRunning: 2
-  canMove: 1
-  CanRunning: 1
-  CanClimbing: 1
-  Speed: 12.11
-  CanHideDistanceWall: 0
-  HideDistance: 1.5
-  LayerMaskInt: 1
-  CroughKey: 306
-  characterController: {fileID: 0}
-  moveDirection: {x: 0, y: 0, z: 0}
-  isRunning: 0
-  Moving: 0
-  vertical: 0
-  horizontal: 0
-  Lookvertical: 0
-  Lookhorizontal: 0
-  WalkingValue: 0
-  _itemChange: {fileID: 4434987455403460021}
+  characterData: {fileID: 11400000, guid: 58cbf0a59a1c0834d83acde69cdb4a48, type: 2}
+  characterCamera: {fileID: 4582019822591254235}
 --- !u!114 &4434987455403460021
 MonoBehaviour:
   m_ObjectHideFlags: 0

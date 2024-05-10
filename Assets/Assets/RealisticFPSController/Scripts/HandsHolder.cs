@@ -27,7 +27,8 @@ namespace EvolveGames
         private void Awake()
         {
             player = GetComponentInParent<CharacterController>();
-            if (player.transform.GetComponent<PlayerController>() != null) ToggleSpeed = player.transform.GetComponent<PlayerController>().CroughSpeed * 1.5f;
+            var playerController = player.transform.GetComponent<PlayerController>();
+            if (player.transform.TryGetComponent<PlayerController>(out playerController)) ToggleSpeed = playerController.CroughtSpeed * 1.5f;
             else ToggleSpeed = 1.5f;
             AmountValue = Amount;
             StartPos = transform.localPosition;

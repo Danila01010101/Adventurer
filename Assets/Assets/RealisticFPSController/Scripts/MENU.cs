@@ -27,7 +27,7 @@ namespace EvolveGames
                 if (MenuPanel.activeInHierarchy)
                 {
                     MenuPanel.SetActive(false);
-                    Player.canMove = true;
+                    Player.EnterPause();
                     Cursor.visible = false;
                     Cursor.lockState = CursorLockMode.Locked;
                     Time.timeScale = 1.0f;
@@ -36,7 +36,7 @@ namespace EvolveGames
                 else
                 {
                     MenuPanel.SetActive(true);
-                    Player.canMove = false;
+                    Player.ExitPause();
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
                     Time.timeScale = 0.0f;

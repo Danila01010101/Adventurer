@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10cef59521376e84fb7896d89bec8ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: b006d44857508d244ba2d6d3d1ce5f61, type: 2}
   animator: {fileID: 0}
-  shootDelay: 0.065
   recoil: {fileID: 6200599872059321665}
   bulletTrail: {fileID: 2173366263553201580, guid: f46031a96308f8c4996672fe3d69dc16,
     type: 3}
@@ -61,7 +61,6 @@ MonoBehaviour:
     type: 3}
   bulletSpawnPoint: {fileID: 6898546490896942721}
   playerController: {fileID: 0}
-  headBob: {fileID: 0}
   reloadTime: 3
   ammoAmount: 30
 --- !u!33 &33000013164323904

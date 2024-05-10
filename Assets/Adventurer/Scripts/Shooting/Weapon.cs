@@ -2,19 +2,28 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [SerializeField] private WeaponData weaponData;
     [SerializeField] protected Animator animator;
-    [SerializeField] private float shootDelay = 0.05f;
 
-    private float lastTimeShot = -1000f;
+    private float timeSinceLastShot = Mathf.Infinity;
+    private bool isReloading = false;
 
     public void TryShoot()
     {
-        if (lastTimeShot + shootDelay > Time.time) return;
+        if (CanShoot() == false) return;
+
         Shoot();
     }
 
+    protected virtual void Update()
+    {
+        timeSinceLastShot += Time.deltaTime;
+    }
+
+    private bool CanShoot() => !isReloading && timeSinceLastShot > 1f / (weaponData.FireRate / 60f);
+
     protected virtual void Shoot()
     {
-        lastTimeShot = Time.time;
+        timeSinceLastShot = 0;
     }
 }

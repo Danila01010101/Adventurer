@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Adventurer.Shooting
@@ -18,7 +17,12 @@ namespace Adventurer.Shooting
         private Vector3 currentRotation, targetRotation;
         private Vector3 currentPosition, targetPosition;
         private Vector3 initialGunPosition;
-        private Vector3 VectorZero = Vector3.zero;
+        private System.Func<Vector3> defaultRotation;
+
+        public void Initialize(System.Func<Vector3> GetRotation)
+        {
+            defaultRotation = GetRotation;
+        }
 
         private void Start()
         {
@@ -27,7 +31,7 @@ namespace Adventurer.Shooting
 
         private void Update()
         {
-            targetRotation = Vector3.Lerp(targetRotation, VectorZero, Time.deltaTime * returnAmount);
+            targetRotation = Vector3.Lerp(targetRotation, defaultRotation(), Time.deltaTime * returnAmount);
             recoilCamera.localRotation = Quaternion.Euler(currentRotation);
             Kickback();
         }

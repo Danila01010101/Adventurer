@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 33000013164323904}
   - component: {fileID: 23000010966259982}
   - component: {fileID: 6200599872059321665}
+  - component: {fileID: 852911892831223372}
   m_Layer: 6
   m_Name: AK-74uModified
   m_TagString: Untagged
@@ -132,6 +133,20 @@ MonoBehaviour:
   kickBackZ: 0.05
   snappiness: 5
   returnAmount: 8
+--- !u!114 &852911892831223372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010118919020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298cd1a9c7dee8544b430108af35caa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recoil: {fileID: 6200599872059321665}
+  currentDirection: {x: 0, y: 0, z: 0}
 --- !u!1 &1000012093257676
 GameObject:
   m_ObjectHideFlags: 0

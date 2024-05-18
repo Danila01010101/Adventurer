@@ -145,8 +145,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298cd1a9c7dee8544b430108af35caa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
   recoil: {fileID: 6200599872059321665}
-  currentDirection: {x: 0, y: 0, z: 0}
+  bulletSpawnPosition: {fileID: 6898546490896942721}
+  defaultRotation: {x: 0, y: 0, z: 0}
+  offset: {x: -2, y: -50, z: 0}
+  gunUpwardsDirection: {x: 0, y: 1, z: 0}
 --- !u!1 &1000012093257676
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +341,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509468754121897700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0038, y: 0.2177, z: 0.4278}
+  m_LocalPosition: {x: -0.0038, y: 0.2177, z: 0.4316}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

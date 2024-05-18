@@ -1109,9 +1109,8 @@ MonoBehaviour:
   Frequency: 13
   Smooth: 44.7
   EnabledRoationMovement: 1
-  RoationMovementSmooth: 9.5
   RoationMovementAmount: 4
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 6990563542916841824}
 --- !u!114 &4582019822591254239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2437,6 +2436,16 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 4582019824381016672}
+    - target: {fileID: 852911892831223372, guid: 55d77218316985449bd3cb4b8296193b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 852911892831223372, guid: 55d77218316985449bd3cb4b8296193b,
+        type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 6990563542916841824}
     - target: {fileID: 1509468754121897700, guid: 55d77218316985449bd3cb4b8296193b,
         type: 3}
       propertyPath: m_Layer

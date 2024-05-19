@@ -149,8 +149,11 @@ MonoBehaviour:
   recoil: {fileID: 6200599872059321665}
   bulletSpawnPosition: {fileID: 6898546490896942721}
   defaultRotation: {x: 0, y: 0, z: 0}
-  offset: {x: -2, y: -50, z: 0}
   gunUpwardsDirection: {x: 0, y: 1, z: 0}
+  testAimTransform: {fileID: 0}
+  pointingLayerMask:
+    serializedVersion: 2
+    m_Bits: 27
 --- !u!1 &1000012093257676
 GameObject:
   m_ObjectHideFlags: 0

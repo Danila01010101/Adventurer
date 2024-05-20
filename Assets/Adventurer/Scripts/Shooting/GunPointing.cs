@@ -1,9 +1,10 @@
 using Adventurer.Shooting;
 using UnityEngine;
+using Zenject.SpaceFighter;
 
 public class GunPointing : MonoBehaviour
 {
-    [SerializeField] private Camera playerCamera; 
+    [SerializeField] private Camera playerCamera;
     [SerializeField] private ProceduralRecoil recoil;
     [SerializeField] private Transform bulletSpawnPosition;
     [SerializeField] private Vector3 defaultRotation;
@@ -21,7 +22,6 @@ public class GunPointing : MonoBehaviour
         pointingExample.SetParent(bulletSpawnPosition.parent.parent);
         pointingExample.transform.localPosition = Vector3.zero;
     }
-
     public Vector3 GetCurrentDirection()
     {
         Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
@@ -30,12 +30,17 @@ public class GunPointing : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1000, layerMask))
         {
+            //debug
             Debug.Log(hit.collider.gameObject.name);
-            pointingExample.LookAt(hit.point);
-            Debug.DrawRay(pointingExample.transform.position, pointingExample.transform.forward * 200, Color.red);
+            Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * 200, Color.red);
+            Debug.DrawRay(bulletSpawnPosition.position, bulletSpawnPosition.transform.forward * 200, Color.red);
             aimGizmosPosition = hit.point;
+
+            Vector3 direction = (hit.point - bulletSpawnPosition.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(direction, gunUpwardsDirection);
+            pointingExample.rotation = lookRotation;
+
             return pointingExample.localEulerAngles;
-            return Quaternion.LookRotation(hit.point, gunUpwardsDirection).eulerAngles;
         }
 
         return defaultRotation;

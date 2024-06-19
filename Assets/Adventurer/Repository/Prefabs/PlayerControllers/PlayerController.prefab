@@ -1346,7 +1346,7 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.0001
+  m_SkinWidth: 0.05
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4582019824381016672
@@ -1393,7 +1393,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 39f33caad60ffff409bdd3dd8c27f4bf, type: 3}
   - {fileID: 21300000, guid: d63e7542ae3161349891bea9c700f922, type: 3}
   - {fileID: 21300000, guid: e31336f90594ef941a8b25959960a5d8, type: 3}
-  ItemIdInt: 0
+  ItemIdInt: 6
   DefiniteHide: 0
 --- !u!136 &4434987454404763374
 CapsuleCollider:
@@ -2465,6 +2465,11 @@ PrefabInstance:
       objectReference: {fileID: 4434987455181619956}
     - target: {fileID: 698890566075862349, guid: 55d77218316985449bd3cb4b8296193b,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 698890566075862349, guid: 55d77218316985449bd3cb4b8296193b,
+        type: 3}
       propertyPath: playerController
       value: 
       objectReference: {fileID: 4582019824381016672}
@@ -2485,9 +2490,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6200599872059321665, guid: 55d77218316985449bd3cb4b8296193b,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6200599872059321665, guid: 55d77218316985449bd3cb4b8296193b,
+        type: 3}
       propertyPath: recoilCamera
       value: 
       objectReference: {fileID: 1579608738119045140}
+    - target: {fileID: 6200599872059321665, guid: 55d77218316985449bd3cb4b8296193b,
+        type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 4582019824381016672}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

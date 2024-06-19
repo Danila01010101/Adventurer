@@ -13,7 +13,6 @@ public class MachineGun : Weapon
     [Space(20)]
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private PlayerController playerController;
-    [SerializeField] private HeadBob headBob;
     [Header("Parameters")]
     [SerializeField] private float reloadTime;
     [SerializeField] private int ammoAmount;
@@ -21,8 +20,10 @@ public class MachineGun : Weapon
     private float bulletSpeed = 100;
     private bool isAiming = false;
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if (Input.GetMouseButton(0))
         {
             TryShoot();
@@ -47,13 +48,11 @@ public class MachineGun : Weapon
             StartCoroutine(SpawnTrail(trail, hit, hit.normal, true));
         }
         recoil.Recoil();
-        //playerController.PunchHead(Vector3.left * recoilValue);
-        //headBob.ShowHeadPunch(Vector3.left * recoilValue, 0.09f);
     }
 
     private Vector3 GetShootDirection()
     {
-        Vector3 direction = transform.forward;
+        Vector3 direction = bulletSpawnPoint.forward;
         Vector3.Normalize(direction);
         return direction;
     }

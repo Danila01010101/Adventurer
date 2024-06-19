@@ -95,7 +95,6 @@ namespace EvolveGames
 
         private void FixedUpdate()
         {
-            
             if (ItemChangeLogo)
             {
                 Color OpacityColor = _itemCanvasLogo.color;

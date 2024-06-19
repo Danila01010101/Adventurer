@@ -1,11 +1,12 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using EvolveGames;
 
 namespace Adventurer.Shooting
 {
     public class ProceduralRecoil : MonoBehaviour
     {
         [SerializeField] private Transform recoilCamera;
+        [SerializeField] private PlayerController playerController;
 
         [Header("Parameters")]
         [SerializeField] private float recoilX;
@@ -15,35 +16,47 @@ namespace Adventurer.Shooting
         [SerializeField] private float snappiness;
         [SerializeField] private float returnAmount;
 
-        private Vector3 currentRotation, targetRotation;
+        private Quaternion currentRotation, targetRotation;
         private Vector3 currentPosition, targetPosition;
         private Vector3 initialGunPosition;
-        private Vector3 VectorZero = Vector3.zero;
+        private System.Func<Quaternion> defaultRotation;
+
+        private bool isPointing => playerController.IsControllingItem == false;
+
+        public void Initialize(System.Func<Quaternion> defaultRot)
+        {
+            defaultRotation = defaultRot;
+        }
 
         private void Start()
         {
             initialGunPosition = transform.localPosition;
+            currentPosition = initialGunPosition;
+            currentRotation = transform.localRotation;
         }
 
         private void Update()
         {
-            targetRotation = Vector3.Lerp(targetRotation, VectorZero, Time.deltaTime * returnAmount);
-            recoilCamera.localRotation = Quaternion.Euler(currentRotation);
-            Kickback();
-        }
+            if (isPointing == false)
+                return;
 
-        private void FixedUpdate()
-        {
-            currentRotation = Vector3.Slerp(currentRotation, targetRotation, Time.fixedDeltaTime * snappiness);
-            transform.localRotation = Quaternion.Euler(currentRotation);
+            Stabilisation();
+            Kickback();
         }
 
         public void Recoil()
         {
             targetPosition -= new Vector3(0, 0, kickBackZ);
-            targetRotation += new Vector3(recoilX,
-                Random.Range(-recoilY, recoilY),
-                Random.Range(-recoilZ, recoilZ));
+            Quaternion recoilRotation = Quaternion.Euler(recoilX, Random.Range(-recoilY, recoilY), Random.Range(-recoilZ, recoilZ));
+
+            targetRotation = recoilRotation * targetRotation;
+        }
+
+        private void Stabilisation()
+        {
+            targetRotation = Quaternion.Lerp(targetRotation, defaultRotation(), Time.deltaTime * returnAmount);
+            currentRotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * snappiness);
+            transform.localRotation = currentRotation;
         }
 
         private void Kickback()

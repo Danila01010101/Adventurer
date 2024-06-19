@@ -38,6 +38,7 @@ namespace EvolveGames
         public float Horizontal => horizontal;
         public float yVelocity => characterController.velocity.y;
         public float CroughtSpeed => characterData.CroughSpeed;
+        public bool IsControllingItem => isRunning || ItemChange.DefiniteHide;
 
         public ItemChange ItemChange { get; private set; }
 

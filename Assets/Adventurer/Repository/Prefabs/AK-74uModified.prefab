@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 33000013164323904}
   - component: {fileID: 23000010966259982}
   - component: {fileID: 6200599872059321665}
+  - component: {fileID: 852911892831223372}
   m_Layer: 6
   m_Name: AK-74uModified
   m_TagString: Untagged
@@ -50,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10cef59521376e84fb7896d89bec8ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: b006d44857508d244ba2d6d3d1ce5f61, type: 2}
   animator: {fileID: 0}
-  shootDelay: 0.065
   recoil: {fileID: 6200599872059321665}
   bulletTrail: {fileID: 2173366263553201580, guid: f46031a96308f8c4996672fe3d69dc16,
     type: 3}
@@ -61,7 +62,6 @@ MonoBehaviour:
     type: 3}
   bulletSpawnPoint: {fileID: 6898546490896942721}
   playerController: {fileID: 0}
-  headBob: {fileID: 0}
   reloadTime: 3
   ammoAmount: 30
 --- !u!33 &33000013164323904
@@ -133,6 +133,27 @@ MonoBehaviour:
   kickBackZ: 0.05
   snappiness: 5
   returnAmount: 8
+--- !u!114 &852911892831223372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010118919020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298cd1a9c7dee8544b430108af35caa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
+  recoil: {fileID: 6200599872059321665}
+  bulletSpawnPosition: {fileID: 6898546490896942721}
+  defaultRotation: {x: 0, y: 0, z: 0}
+  gunUpwardsDirection: {x: 0, y: 1, z: 0}
+  testAimTransform: {fileID: 0}
+  pointingLayerMask:
+    serializedVersion: 2
+    m_Bits: 27
 --- !u!1 &1000012093257676
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,7 +344,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509468754121897700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0038, y: 0.2177, z: 0.4278}
+  m_LocalPosition: {x: -0.0038, y: 0.2177, z: 0.4316}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -40,13 +40,8 @@ namespace Adventurer.Shooting
             if (isPointing == false)
                 return;
 
-            targetRotation = Quaternion.Lerp(targetRotation, defaultRotation(), Time.deltaTime * returnAmount);
-            currentRotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * snappiness);
-            transform.localRotation = currentRotation;
-
-            targetPosition = Vector3.Lerp(targetPosition, initialGunPosition, Time.deltaTime * returnAmount);
-            currentPosition = Vector3.Lerp(currentPosition, targetPosition, Time.deltaTime * snappiness);
-            transform.localPosition = currentPosition;
+            Stabilisation();
+            Kickback();
         }
 
         public void Recoil()
@@ -55,6 +50,20 @@ namespace Adventurer.Shooting
             Quaternion recoilRotation = Quaternion.Euler(recoilX, Random.Range(-recoilY, recoilY), Random.Range(-recoilZ, recoilZ));
 
             targetRotation = recoilRotation * targetRotation;
+        }
+
+        private void Stabilisation()
+        {
+            targetRotation = Quaternion.Lerp(targetRotation, defaultRotation(), Time.deltaTime * returnAmount);
+            currentRotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * snappiness);
+            transform.localRotation = currentRotation;
+        }
+
+        private void Kickback()
+        {
+            targetPosition = Vector3.Lerp(targetPosition, initialGunPosition, Time.deltaTime * returnAmount);
+            currentPosition = Vector3.Lerp(currentPosition, targetPosition, Time.deltaTime * snappiness);
+            transform.localPosition = currentPosition;
         }
     }
 }

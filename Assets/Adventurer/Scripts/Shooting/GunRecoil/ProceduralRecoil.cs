@@ -14,14 +14,14 @@ namespace Adventurer.Shooting
         [SerializeField] private float snappiness;
         [SerializeField] private float returnAmount;
 
-        private Vector3 currentRotation, targetRotation;
+        private Quaternion currentRotation, targetRotation;
         private Vector3 currentPosition, targetPosition;
         private Vector3 initialGunPosition;
-        private System.Func<Vector3> defaultRotation;
+        private System.Func<Quaternion> defaultRotation;
 
-        public void Initialize(System.Func<Vector3> GetRotation)
+        public void Initialize(System.Func<Quaternion> defaultRot)
         {
-            defaultRotation = GetRotation;
+            defaultRotation = defaultRot;
         }
 
         private void Start()
@@ -31,23 +31,26 @@ namespace Adventurer.Shooting
 
         private void Update()
         {
-            targetRotation = Vector3.Lerp(targetRotation, defaultRotation(), Time.deltaTime * returnAmount);
-            recoilCamera.localRotation = Quaternion.Euler(currentRotation);
+            targetRotation = Quaternion.Lerp(targetRotation, Quaternion.identity, Time.deltaTime * returnAmount);
             Kickback();
+        }
+
+        private void LateUpdate()
+        {
+            recoilCamera.localRotation = currentRotation;
         }
 
         private void FixedUpdate()
         {
-            currentRotation = Vector3.Slerp(currentRotation, targetRotation, Time.fixedDeltaTime * snappiness);
-            transform.localRotation = Quaternion.Euler(currentRotation);
+            currentRotation = Quaternion.Slerp(currentRotation, targetRotation, Time.fixedDeltaTime * snappiness);
+            transform.localRotation = defaultRotation() * currentRotation;
         }
 
         public void Recoil()
         {
             targetPosition -= new Vector3(0, 0, kickBackZ);
-            targetRotation += new Vector3(recoilX,
-                Random.Range(-recoilY, recoilY),
-                Random.Range(-recoilZ, recoilZ));
+            Quaternion recoilRotation = Quaternion.Euler(recoilX, Random.Range(-recoilY, recoilY), Random.Range(-recoilZ, recoilZ));
+            targetRotation = recoilRotation * targetRotation;
         }
 
         private void Kickback()

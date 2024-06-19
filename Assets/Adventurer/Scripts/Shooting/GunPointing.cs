@@ -13,17 +13,12 @@ namespace Adventurer.Shooting
         [SerializeField] private LayerMask pointingLayerMask;
 
         private Vector3 aimGizmosPosition;
-        private Transform pointingExample;
 
         private void Start()
         {
             recoil.Initialize(GetCurrentDirection);
-            pointingExample = new GameObject("PointingExample").transform;
-            pointingExample.SetParent(bulletSpawnPosition.parent.parent);
-            pointingExample.transform.localPosition = Vector3.zero;
         }
-
-        public Vector3 GetCurrentDirection()
+        public Quaternion GetCurrentDirection()
         {
             Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
             RaycastHit hit;
@@ -39,12 +34,14 @@ namespace Adventurer.Shooting
 
                 Vector3 direction = (hit.point - bulletSpawnPosition.position).normalized;
                 Quaternion lookRotation = Quaternion.LookRotation(direction, gunUpwardsDirection);
-                pointingExample.rotation = lookRotation;
 
-                return pointingExample.localEulerAngles;
+                // Переводим глобальный поворот в локальный относительно bulletSpawnPosition
+                Quaternion localRotation = Quaternion.Inverse(transform.parent.rotation) * lookRotation;
+
+                return localRotation;
             }
 
-            return defaultRotation;
+            return Quaternion.identity;
         }
 
         private void OnDrawGizmos()

@@ -68,13 +68,18 @@ namespace EvolveGames
             {
                 moveDirection.y -= characterData.Gravity * Time.deltaTime;
             }
+
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 right = transform.TransformDirection(Vector3.right);
             isRunning = !isCrough ? canRun ? Input.GetKey(KeyCode.LeftShift) : false : false;
             vertical = canMove ? (isRunning ? RunningValue : WalkingValue) * Input.GetAxis("Vertical") : 0;
             horizontal = canMove ? (isRunning ? RunningValue : WalkingValue) * Input.GetAxis("Horizontal") : 0;
-            if (isRunning) RunningValue = Mathf.Lerp(RunningValue, characterData.RunningSpeed, characterData.TimeToRunning * Time.deltaTime);
-            else RunningValue = WalkingValue;
+
+            if (isRunning) 
+                RunningValue = Mathf.Lerp(RunningValue, characterData.RunningSpeed, characterData.TimeToRunning * Time.deltaTime);
+            else 
+                RunningValue = WalkingValue;
+
             float movementDirectionY = moveDirection.y;
             moveDirection = (forward * vertical) + (right * horizontal);
 
@@ -86,6 +91,7 @@ namespace EvolveGames
             {
                 moveDirection.y = movementDirectionY;
             }
+
             characterController.Move(moveDirection * Time.deltaTime);
             Moving = horizontal < 0 || vertical < 0 || horizontal > 0 || vertical > 0 ? true : false;
 
@@ -99,8 +105,10 @@ namespace EvolveGames
                 characterCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
                 transform.rotation *= Quaternion.Euler(0, Lookhorizontal * characterData.LookSpeed, 0);
 
-                if (isRunning && Moving) cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, characterData.RunningFOV, characterData.SpeedToFOV * Time.deltaTime);
-                else cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, InstallFOV, characterData.SpeedToFOV * Time.deltaTime);
+                if (isRunning && Moving) 
+                    cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, characterData.RunningFOV, characterData.SpeedToFOV * Time.deltaTime);
+                else 
+                    cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, InstallFOV, characterData.SpeedToFOV * Time.deltaTime);
             }
 
             if (Input.GetKey(characterData.CroughKey))
@@ -109,7 +117,6 @@ namespace EvolveGames
                 float Height = Mathf.Lerp(characterController.height, characterData.CroughHeight, 5 * Time.deltaTime);
                 characterController.height = Height;
                 WalkingValue = Mathf.Lerp(WalkingValue, characterData.CroughSpeed, 6 * Time.deltaTime);
-
             }
             else if (!Physics.Raycast(GetComponentInChildren<Camera>().transform.position, transform.TransformDirection(Vector3.up), out CroughCheck, 0.8f, 1))
             {
@@ -131,12 +138,6 @@ namespace EvolveGames
                 ItemChange.ani.SetBool("Hide", WallDistance);
                 ItemChange.DefiniteHide = WallDistance;
             }
-        }
-
-        public void PunchHead(Vector3 direction)
-        {
-            //rotationX = Mathf.Lerp(rotationX, rotationX += direction.x, 0.9f);
-            rotationX += direction.x;
         }
 
         public void EnterPause() => canMove = false;

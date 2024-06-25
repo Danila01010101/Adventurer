@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Adventurer/Scenes/Bootstrap.unity
+    guid: 84f783a4b3c17314d8dae68f1083ab19
+  - enabled: 1
     path: Assets/Adventurer/Scenes/GameScenes/MainMenu.unity
     guid: 897516610715fab4c91fdaab16458d11
   - enabled: 1

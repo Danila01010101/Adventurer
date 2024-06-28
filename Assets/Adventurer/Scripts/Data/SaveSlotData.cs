@@ -4,7 +4,8 @@ namespace Adventurer
 {
     public class SaveSlotData : MonoBehaviour
     {
-        public int CurrentLevel { get; private set; }
-        public CharacterType Character { get; private set; }
+        public int LastSceneIndex { get; private set; }
+        public Vector3 LastPosition { get; private set; }
+        public Vector3 LastRotation { get; private set; }
     }
 }

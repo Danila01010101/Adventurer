@@ -1,7 +1,7 @@
 namespace Adventurer.Saves
 {
     [System.Serializable]
-	public class GameData
+	public class GameSettingsData
 	{
 		public float MainVolume;
 		public float MusicVolume;

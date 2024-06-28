@@ -1,21 +1,52 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenu : UIWindow
 {
-    public override void Initialize() { }
+    [SerializeField] private Button continueGame;
+    [SerializeField] private Button selectSave;
+    [SerializeField] private Button options;
+    [SerializeField] private Button exitGame;
 
-    public void Exit()
+    public override void Initialize()
     {
-        Application.Quit();
+        continueGame.onClick.AddListener(Continue);
+        selectSave.onClick.AddListener(ShowSlotWindow);
+        options.onClick.AddListener(ShowOptions);
+        exitGame.onClick.AddListener(Exit);
     }
 
-    public void ShowOptions()
+    public override void Hide()
+    {
+        base.Hide();
+    }
+
+    private void Continue()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void ShowSlotWindow()
+    {
+        UIWindowManager.Show<SlotSelectionWindow>();
+    }
+
+    private void ShowOptions()
     {
         UIWindowManager.Show<Options>();
     }
 
-    public void ShowSlotWindow()
+    private void Exit()
     {
-        UIWindowManager.Show<SlotSelectionWindow>();
+        Application.Quit();
+    }
+
+    private void OnDestroy()
+    {
+        continueGame.onClick.RemoveListener(Continue);
+        selectSave.onClick.RemoveListener(ShowSlotWindow);
+        options.onClick.RemoveListener(ShowOptions);
+        exitGame.onClick.RemoveListener(Exit);
     }
 }

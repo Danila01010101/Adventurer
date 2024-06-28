@@ -1,4 +1,3 @@
-using System;
 using Zenject;
 
 namespace Adventurer
@@ -8,6 +7,14 @@ namespace Adventurer
         public override void InstallBindings()
         {
             BindInput();
+            BindLoader();
+        }
+
+        private void BindLoader()
+        {
+            Container.Bind<ZenjectSceneLoader>().AsSingle();
+            Container.BindInterfacesAndSelfTo<SceneLoader>().AsSingle();
+            Container.Bind<SceneLoaderMediator>().AsSingle();
         }
 
         private void BindInput()

@@ -2,7 +2,7 @@ using System;
 
 namespace Adventurer
 {
-    public class SceneLoader : ISlotLoader, ISimpleSceneLoader
+    public class SceneLoader : ISceneLoader, ISimpleSceneLoader
     {
         private ZenjectSceneLoaderWrapper zenjectSceneLoader;
 
@@ -13,7 +13,7 @@ namespace Adventurer
 
         public void Load(SceneID sceneID)
         {
-            if (sceneID != SceneID.Bootstrap || sceneID != SceneID.MainMenu)
+            if (sceneID != SceneID.Bootstrap && sceneID != SceneID.MainMenu)
                 throw new ArgumentException($"Scene with {sceneID} index cannot be started without data, use ILevelLoader");
 
             zenjectSceneLoader.Load(null, (int)sceneID);

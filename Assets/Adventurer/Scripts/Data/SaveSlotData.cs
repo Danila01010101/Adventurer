@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Adventurer
 {
-    public class SaveSlotData : MonoBehaviour
+    public class SaveSlotData
     {
         public SceneID LastSceneIndex { get; private set; }
         public Vector3 LastPosition { get; private set; }

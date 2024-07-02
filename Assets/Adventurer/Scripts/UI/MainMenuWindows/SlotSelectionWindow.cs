@@ -1,15 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class SlotSelectionWindow : UIWindow
 {
-    [SerializeField] private Button _wizardButton;
-    [SerializeField] private Button _warriorButton;
-    [SerializeField] private Button _shooterButton;
-    [SerializeField] private Button _summonerButton;
+    [SerializeField] private Button firstSlotButton;
+    [SerializeField] private Button secondSlotButton;
+    [SerializeField] private Button thirdSlotButton;
+    [SerializeField] private Button fourthSlotButton;
 
-    public override void Initialize()
+    [Inject]
+    private void Construct(SavesContainer data)
     {
-
+        
     }
+
+    public override void Initialize() { }
 }

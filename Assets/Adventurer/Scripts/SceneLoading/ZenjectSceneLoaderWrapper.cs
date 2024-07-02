@@ -1,11 +1,10 @@
 using System;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Adventurer
 {
-    public class ZenjectSceneLoaderWrapper : MonoBehaviour
+    public class ZenjectSceneLoaderWrapper
     {
         private readonly ZenjectSceneLoader zenjectSceneLoader;
 

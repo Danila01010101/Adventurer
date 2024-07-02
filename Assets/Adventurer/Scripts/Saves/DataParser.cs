@@ -5,7 +5,7 @@ using Adventurer;
 
 public class DataParser
 {
-    public static void Save(string fileName, SaveSlotData gameData)
+    public static void Save(string fileName, SavesData.Data gameData)
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + fileName);
@@ -15,18 +15,18 @@ public class DataParser
         Debug.Log($"Saved: {Application.persistentDataPath}{fileName}");
     }
 
-    public static SaveSlotData Load(string fileName)
+    public static SavesData.Data Load(string fileName)
     {
         if (File.Exists(Application.persistentDataPath + fileName))
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + fileName, FileMode.Open);
-            var savedGame = (SaveSlotData)bf.Deserialize(file);
+            var savedGame = (SavesData.Data)bf.Deserialize(file);
             file.Close();
 
             return savedGame;
         }
 
-        return new SaveSlotData();
+        return new SavesData.Data();
     }
 }

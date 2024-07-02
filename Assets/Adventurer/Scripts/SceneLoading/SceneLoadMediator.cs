@@ -3,13 +3,13 @@ using Zenject;
 
 namespace Adventurer
 {
-	public class SceneLoaderMediator : MonoBehaviour
+	public class SceneLoadMediator
 	{
-		private ISlotLoader sceneLoader;
+		private ISceneLoader sceneLoader;
 		private ISimpleSceneLoader simpleSceneLoader;
 
 		[Inject]
-		private void Construct(ISlotLoader sceneLoader, ISimpleSceneLoader simpleSceneLoader)
+		private void Construct(ISceneLoader sceneLoader, ISimpleSceneLoader simpleSceneLoader)
 		{
 			this.sceneLoader = sceneLoader;
 			this.simpleSceneLoader = simpleSceneLoader;

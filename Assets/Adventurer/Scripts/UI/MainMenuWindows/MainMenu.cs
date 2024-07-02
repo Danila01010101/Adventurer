@@ -1,6 +1,8 @@
+using Adventurer;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class MainMenu : UIWindow
 {
@@ -9,8 +11,18 @@ public class MainMenu : UIWindow
     [SerializeField] private Button options;
     [SerializeField] private Button exitGame;
 
+    private SceneLoadMediator sceneLoadMediator;
+    private bool HasLastSaveData = false;
+
+    [Inject]
+    private void Construct(SceneLoadMediator sceneLoadMediator)
+    {
+        this.sceneLoadMediator = sceneLoadMediator;
+    }
+
     public override void Initialize()
     {
+        continueGame.interactable = HasLastSaveData;
         continueGame.onClick.AddListener(Continue);
         selectSave.onClick.AddListener(ShowSlotWindow);
         options.onClick.AddListener(ShowOptions);
@@ -25,6 +37,12 @@ public class MainMenu : UIWindow
     private void Continue()
     {
         throw new NotImplementedException();
+    }
+
+    private void ActivateContinueButton()
+    {
+        HasLastSaveData = true;
+        continueGame.interactable = HasLastSaveData;
     }
 
     private void ShowSlotWindow()

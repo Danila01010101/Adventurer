@@ -12,9 +12,9 @@ namespace Adventurer
 
         private void BindLoader()
         {
-            Container.Bind<ZenjectSceneLoader>().AsSingle();
+            Container.Bind<ZenjectSceneLoaderWrapper>().AsSingle();
             Container.BindInterfacesAndSelfTo<SceneLoader>().AsSingle();
-            Container.Bind<SceneLoaderMediator>().AsSingle();
+            Container.Bind<SceneLoadMediator>().AsSingle();
         }
 
         private void BindInput()

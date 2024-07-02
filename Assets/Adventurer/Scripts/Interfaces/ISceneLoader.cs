@@ -1,6 +1,6 @@
 namespace Adventurer
 {
-    public interface ISlotLoader
+    public interface ISceneLoader
     {
         void Load(SaveSlotData data);
     }

@@ -4,8 +4,8 @@ namespace Adventurer
 {
     public struct SaveSlotData
     {
-        public SceneID LastSceneIndex { get; private set; }
-        public Vector3 LastPosition { get; private set; }
-        public Vector3 LastRotation { get; private set; }
+        public SceneID LastSceneIndex;
+        public Vector3 LastPosition;
+        public Vector3 LastRotation;
     }
 }

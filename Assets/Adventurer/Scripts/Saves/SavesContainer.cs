@@ -1,19 +1,24 @@
 using Adventurer;
 using System;
+using Zenject;
 
-public class SavesContainer
+public class SavesContainer : ISlotDataNotifier
 {
-    private SaveSlotData currentSlotData => globalData.CurrentSlotData;
+    public SaveSlotData currentSlotData => globalData.CurrentSlotData;
+
     private SavesData globalData;
 
     #region Get/Set Methods
 
     #endregion
 
-    public SavesContainer() 
+    [Inject]
+    private void Construct(SavesData data)
     {
-        globalData = new SavesData();
+        globalData = data;
     }
+
+    public bool HasDataSelected() => globalData.IsDataEmpty == false;
 
     private void SetValueInBounds<T>(T min, T max, T valueToSet, out T settableValue) where T : IComparable
     {

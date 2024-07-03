@@ -7,9 +7,10 @@ namespace Adventurer
     public class SavesData : ISlotChooser
     {
         public SaveSlotData CurrentSlotData;
-        public static Action OnDefaultSlotEmpty;
+        public bool IsDataEmpty => data.CurrentSlot == Slot.None;
 
         private Data data;
+        private const SceneID startLocation = SceneID.StartLocation;
         private const string FILENAME = "/data.gd";
 
         public SavesData()
@@ -18,8 +19,6 @@ namespace Adventurer
 
             if (data.CurrentSlot != Slot.None)
                 CurrentSlotData = SlotChooser.GetSlot(data, data.CurrentSlot);
-            else
-                OnDefaultSlotEmpty?.Invoke();
         }
 
         public void Save()
@@ -63,6 +62,9 @@ namespace Adventurer
         {
             Debug.Log($"Switching slot { data.CurrentSlot } to slot { slot }");
             CurrentSlotData =  SlotChooser.GetSlot(data, slot);
+            data.CurrentSlot = slot;
+            if (CurrentSlotData.LastSceneIndex == SceneID.Bootstrap)
+                CurrentSlotData.LastSceneIndex = SceneID.StartLocation;
         }
     }
 }

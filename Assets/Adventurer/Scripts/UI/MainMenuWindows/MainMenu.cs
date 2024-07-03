@@ -11,22 +11,28 @@ public class MainMenu : UIWindow
     [SerializeField] private Button options;
     [SerializeField] private Button exitGame;
 
-    private SceneLoadMediator sceneLoadMediator;
-    private bool HasLastSaveData = false;
+    private ISlotDataNotifier dataNotifier;
+
+    public static Action OnContinueButtonPress;
 
     [Inject]
-    private void Construct(SceneLoadMediator sceneLoadMediator)
+    private void Construct(ISlotDataNotifier dataNotifier)
     {
-        this.sceneLoadMediator = sceneLoadMediator;
+        this.dataNotifier = dataNotifier;
     }
 
     public override void Initialize()
     {
-        continueGame.interactable = HasLastSaveData;
         continueGame.onClick.AddListener(Continue);
         selectSave.onClick.AddListener(ShowSlotWindow);
         options.onClick.AddListener(ShowOptions);
         exitGame.onClick.AddListener(Exit);
+    }
+
+    public override void Show()
+    {
+        base.Show();
+        continueGame.interactable = dataNotifier.HasDataSelected();
     }
 
     public override void Hide()
@@ -36,13 +42,7 @@ public class MainMenu : UIWindow
 
     private void Continue()
     {
-        throw new NotImplementedException();
-    }
-
-    private void ActivateContinueButton()
-    {
-        HasLastSaveData = true;
-        continueGame.interactable = HasLastSaveData;
+        OnContinueButtonPress?.Invoke();
     }
 
     private void ShowSlotWindow()

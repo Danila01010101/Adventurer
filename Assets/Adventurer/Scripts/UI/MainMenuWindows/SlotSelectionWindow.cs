@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
+using static Adventurer.SavesData.Data;
 
 public class SlotSelectionWindow : UIWindow
 {
@@ -9,11 +10,18 @@ public class SlotSelectionWindow : UIWindow
     [SerializeField] private Button thirdSlotButton;
     [SerializeField] private Button fourthSlotButton;
 
-    [Inject]
-    private void Construct(SavesContainer data)
+    public static Action<Slot> OnSlotSelected;
+
+    public override void Initialize() 
     {
-        
+        firstSlotButton.onClick.AddListener(() => SlotSelected(Slot.First));
+        secondSlotButton.onClick.AddListener(() => SlotSelected(Slot.Second));
+        thirdSlotButton.onClick.AddListener(() => SlotSelected(Slot.Third));
+        fourthSlotButton.onClick.AddListener(() => SlotSelected(Slot.Fourth));
     }
 
-    public override void Initialize() { }
+    private void SlotSelected(Slot slot)
+    {
+        OnSlotSelected?.Invoke(slot);
+    }
 }

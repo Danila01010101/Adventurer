@@ -12,7 +12,10 @@ namespace Adventurer
         private void BindData()
         {
             Container.Bind<DataParser>().AsSingle();
-            Container.Bind<SavesContainer>().AsSingle();
+            Container.BindInterfacesAndSelfTo<SavesData>().AsSingle();
+            Container.BindInterfacesAndSelfTo<SavesContainer>().AsSingle().NonLazy();
+            Container.Bind<MainMenuSlotSelector>().AsSingle().NonLazy();
+            Container.Bind<GameStarter>().AsSingle().NonLazy();
         }
     }
 }

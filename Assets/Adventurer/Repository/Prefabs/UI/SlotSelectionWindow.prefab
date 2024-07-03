@@ -54,10 +54,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340cd542f2a57ba42a8f789390b96d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wizardButton: {fileID: 8076979169526909946}
-  _warriorButton: {fileID: 2170203076132638002}
-  _shooterButton: {fileID: 7169178877098364621}
-  _summonerButton: {fileID: 7205916924469103351}
+  firstSlotButton: {fileID: 8076979169526909946}
+  secondSlotButton: {fileID: 2170203076132638002}
+  thirdSlotButton: {fileID: 7169178877098364621}
+  fourthSlotButton: {fileID: 7205916924469103351}
 --- !u!1001 &3559388549041750616
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69,7 +69,7 @@ PrefabInstance:
     - target: {fileID: 138258025230247727, guid: 86f74cca54124d14da071329f7ed7657,
         type: 3}
       propertyPath: m_Name
-      value: WarriorSlot
+      value: SecondSlot
       objectReference: {fileID: 0}
     - target: {fileID: 2013390216051198255, guid: 86f74cca54124d14da071329f7ed7657,
         type: 3}
@@ -222,7 +222,7 @@ PrefabInstance:
     - target: {fileID: 138258025230247727, guid: 86f74cca54124d14da071329f7ed7657,
         type: 3}
       propertyPath: m_Name
-      value: SummonerSlot
+      value: FourthSlot
       objectReference: {fileID: 0}
     - target: {fileID: 2013390216051198255, guid: 86f74cca54124d14da071329f7ed7657,
         type: 3}
@@ -375,7 +375,7 @@ PrefabInstance:
     - target: {fileID: 138258025230247727, guid: 86f74cca54124d14da071329f7ed7657,
         type: 3}
       propertyPath: m_Name
-      value: ShooterSlot
+      value: ThirdSlot
       objectReference: {fileID: 0}
     - target: {fileID: 2013390216051198255, guid: 86f74cca54124d14da071329f7ed7657,
         type: 3}
@@ -798,7 +798,7 @@ PrefabInstance:
     - target: {fileID: 138258025230247727, guid: 86f74cca54124d14da071329f7ed7657,
         type: 3}
       propertyPath: m_Name
-      value: MageSlot
+      value: FirstSlot
       objectReference: {fileID: 0}
     - target: {fileID: 2013390216051198255, guid: 86f74cca54124d14da071329f7ed7657,
         type: 3}

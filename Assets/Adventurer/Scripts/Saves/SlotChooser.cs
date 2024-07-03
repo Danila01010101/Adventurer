@@ -1,16 +1,13 @@
 using System;
-using UnityEngine;
 using static Adventurer.SavesData;
 
 namespace Adventurer
 {
-    public class SavesSwitcher
+    public static class SlotChooser
     {
-        private SavesData savesData;
-
         public static Action<Data.Slot> slotChanged;
 
-        public SaveSlotData ChooseSlot(Data data, Data.Slot slot)
+        public static SaveSlotData GetSlot(Data data, Data.Slot slot)
         {
             switch (slot)
             {

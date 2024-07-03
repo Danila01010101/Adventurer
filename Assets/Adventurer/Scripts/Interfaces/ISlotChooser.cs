@@ -2,7 +2,7 @@ using static SavesContainer;
 
 namespace Adventurer
 {
-    public interface ISaveSwitcher
+    public interface ISlotChooser
 	{
         void ChooseSlot(SavesData.Data.Slot slot);
 	}

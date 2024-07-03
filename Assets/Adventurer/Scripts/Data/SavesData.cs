@@ -1,20 +1,25 @@
 using System;
-using static Adventurer.SavesData.Data;
 using UnityEngine;
+using static Adventurer.SavesData.Data;
 
 namespace Adventurer
 {
-    public class SavesData : ISaveSwitcher
+    public class SavesData : ISlotChooser
     {
-        public SaveSlotData CurrentSlotData { get; private set; }
+        public SaveSlotData CurrentSlotData;
+        public static Action OnDefaultSlotEmpty;
 
-        private SavesSwitcher switcher;
         private Data data;
         private const string FILENAME = "/data.gd";
 
         public SavesData()
         {
             DataParser.Load(FILENAME);
+
+            if (data.CurrentSlot != Slot.None)
+                CurrentSlotData = SlotChooser.GetSlot(data, data.CurrentSlot);
+            else
+                OnDefaultSlotEmpty?.Invoke();
         }
 
         public void Save()
@@ -57,7 +62,7 @@ namespace Adventurer
         public void ChooseSlot(Slot slot)
         {
             Debug.Log($"Switching slot { data.CurrentSlot } to slot { slot }");
-            switcher.ChooseSlot(data, slot);
+            CurrentSlotData =  SlotChooser.GetSlot(data, slot);
         }
     }
 }

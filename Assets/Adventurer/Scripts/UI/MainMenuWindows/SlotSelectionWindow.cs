@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using static Adventurer.SavesData;
+using static Adventurer.SaveSlotData;
 
 public class SlotSelectionWindow : UIWindow
 {

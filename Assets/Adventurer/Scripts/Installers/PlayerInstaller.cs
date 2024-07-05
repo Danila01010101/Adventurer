@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class GameplaySceneInstaller : MonoInstaller
+public class PlayerInstaller : MonoInstaller
 {
     [SerializeField] private GameplaySceneData _gameplaySceneData;
     [SerializeField] private Transform _playerSpawnPoint;

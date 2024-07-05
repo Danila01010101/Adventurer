@@ -2,6 +2,6 @@ namespace Adventurer
 {
     public interface ISlotChooser
 	{
-        void ChooseSlot(SavesData.Data.Slot slot);
+        void ChooseSlot(SavesData.Slot slot);
 	}
 }

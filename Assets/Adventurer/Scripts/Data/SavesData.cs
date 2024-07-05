@@ -1,13 +1,14 @@
 using System;
 using UnityEngine;
-using static Adventurer.SavesData.Data;
 
 namespace Adventurer
 {
     public class SavesData : ISlotChooser
     {
         public SaveSlotData CurrentSlotData;
-        public bool IsDataEmpty => data.CurrentSlot == Slot.None;
+        public bool IsDataEmpty => data.CurrentSlot == (int)Slot.None;
+
+        public enum Slot { None = 0, First = 1, Second = 2, Third = 3, Fourth = 4 }
 
         private Data data;
         private const SceneID startLocation = SceneID.StartLocation;
@@ -15,30 +16,30 @@ namespace Adventurer
 
         public SavesData()
         {
-            DataParser.Load(FILENAME);
+            data = DataParser.Load(FILENAME);
 
-            if (data.CurrentSlot != Slot.None)
-                CurrentSlotData = SlotChooser.GetSlot(data, data.CurrentSlot);
+            if (data.CurrentSlot != (int)Slot.None)
+                CurrentSlotData = SlotChooser.GetSlot(data, (Slot)data.CurrentSlot);
         }
 
         public void Save()
         {
-            switch (data.CurrentSlot)
+            switch ((Slot)data.CurrentSlot)
             {
                 case Slot.First:
-                    data.CurrentSlot = Slot.First;
+                    data.CurrentSlot = (int) Slot.First;
                     data.FirstSlotData = CurrentSlotData;
                     break;
                 case Slot.Second:
-                    data.CurrentSlot = Slot.Second;
+                    data.CurrentSlot = (int) Slot.Second;
                     data.SecondSlotData = CurrentSlotData;
                     break;
                 case Slot.Third:
-                    data.CurrentSlot = Slot.Third;
+                    data.CurrentSlot = (int) Slot.Third;
                     data.ThirdSlotData = CurrentSlotData;
                     break;
                 case Slot.Fourth:
-                    data.CurrentSlot = Slot.Fourth;
+                    data.CurrentSlot = (int) Slot.Fourth;
                     data.FourthSlotData = CurrentSlotData;
                     break;
                 default:
@@ -48,23 +49,23 @@ namespace Adventurer
             DataParser.Save(FILENAME, data);
         }
 
+        [Serializable]
         public struct Data
         {
             public SaveSlotData FirstSlotData;
             public SaveSlotData SecondSlotData;
             public SaveSlotData ThirdSlotData;
             public SaveSlotData FourthSlotData;
-            public Slot CurrentSlot;
-            public enum Slot { None = 0, First = 1, Second = 2, Third = 3, Fourth = 4 }
+            public int CurrentSlot;
         }
 
         public void ChooseSlot(Slot slot)
         {
             Debug.Log($"Switching slot { data.CurrentSlot } to slot { slot }");
             CurrentSlotData =  SlotChooser.GetSlot(data, slot);
-            data.CurrentSlot = slot;
-            if (CurrentSlotData.LastSceneIndex == SceneID.Bootstrap)
-                CurrentSlotData.LastSceneIndex = SceneID.StartLocation;
+            data.CurrentSlot = (int)slot;
+            if ((SceneID)CurrentSlotData.LastSceneIndex == SceneID.Bootstrap)
+                CurrentSlotData.LastSceneIndex = (int)SceneID.StartLocation;
         }
     }
 }

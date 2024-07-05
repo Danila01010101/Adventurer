@@ -19,6 +19,7 @@ public class DataParser
     {
         if (File.Exists(Application.persistentDataPath + fileName))
         {
+            Debug.Log(Application.persistentDataPath);
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + fileName, FileMode.Open);
             var savedGame = (SavesData.Data)bf.Deserialize(file);

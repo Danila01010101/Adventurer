@@ -23,7 +23,7 @@ namespace Adventurer
         {
             var sceneID = data.LastSceneIndex;
 
-            if (sceneID == SceneID.Bootstrap || sceneID == SceneID.MainMenu)
+            if ((SceneID)sceneID == SceneID.Bootstrap || (SceneID)sceneID == SceneID.MainMenu)
                 throw new ArgumentException($"Save slot has {sceneID} index as start scene");
 
             zenjectSceneLoader.Load(container =>

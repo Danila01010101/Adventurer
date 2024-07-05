@@ -20,6 +20,8 @@ public class SavesContainer : ISlotDataNotifier
 
     public bool HasDataSelected() => globalData.IsDataEmpty == false;
 
+    public void Save() => globalData.Save();
+
     private void SetValueInBounds<T>(T min, T max, T valueToSet, out T settableValue) where T : IComparable
     {
         if (valueToSet.CompareTo(max) <= 0 || valueToSet.CompareTo(min) >= 0)

@@ -8,6 +8,7 @@ namespace Adventurer
         {
             BindInput();
             BindLoader();
+            BindData();
         }
 
         private void BindLoader()
@@ -20,6 +21,13 @@ namespace Adventurer
         private void BindInput()
         {
             Container.BindInterfacesAndSelfTo<DesctopInput>().AsSingle();
+        }
+
+        private void BindData()
+        {
+            Container.Bind<DataParser>().AsSingle();
+            Container.BindInterfacesAndSelfTo<SavesData>().AsSingle();
+            Container.BindInterfacesAndSelfTo<SavesContainer>().AsSingle().NonLazy();
         }
     }
 }

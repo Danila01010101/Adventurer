@@ -1,4 +1,3 @@
-using UnityEngine;
 using Zenject;
 
 namespace Adventurer
@@ -8,11 +7,17 @@ namespace Adventurer
         public override void InstallBindings()
         {
             InstallMovement();
+            InstallCheckpoints();
         }
 
         private void InstallMovement()
         {
             Container.Bind<MovementHandler>().AsSingle().NonLazy();
+        }
+
+        private void InstallCheckpoints()
+        {
+            Container.Bind<CheckpointListener>().AsSingle().NonLazy();
         }
     }
 }

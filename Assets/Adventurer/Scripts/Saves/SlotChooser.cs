@@ -5,19 +5,19 @@ namespace Adventurer
 {
     public static class SlotChooser
     {
-        public static Action<Data.Slot> slotChanged;
+        public static Action<Data> slotChanged;
 
-        public static SaveSlotData GetSlot(Data data, Data.Slot slot)
+        public static SaveSlotData GetSlot(Data data, Slot slot)
         {
             switch (slot)
             {
-                case Data.Slot.First:
+                case Slot.First:
                     return data.FirstSlotData;
-                case Data.Slot.Second:
+                case Slot.Second:
                     return data.SecondSlotData;
-                case Data.Slot.Third:
+                case Slot.Third:
                     return data.ThirdSlotData;
-                case Data.Slot.Fourth:
+                case Slot.Fourth:
                     return data.FourthSlotData;
                 default:
                     throw new ArgumentException("Invalid slot parameters, cant switch to empty slot");

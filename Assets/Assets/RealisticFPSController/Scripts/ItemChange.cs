@@ -6,7 +6,7 @@ using Zenject;
 
 namespace EvolveGames
 {
-    public class ItemChange : MonoBehaviour
+    public class ItemChange : ITickable, IFixedTickable
     {
         [Header("Item Change")]
         [SerializeField] public Animator ani;
@@ -22,9 +22,10 @@ namespace EvolveGames
 
         public void Initialize(Image logo) => _itemCanvasLogo = logo;
 
-        private void Start()
+        [Inject]
+        private void Construct(MonoBehaviour coroutineStarter, PlayerController player)
         {
-            if (ani == null && GetComponent<Animator>()) ani = GetComponent<Animator>();
+            if (ani == null && player.GetComponent<Animator>()) ani = player.GetComponent<Animator>();
             Color OpacityColor = _itemCanvasLogo.color;
             OpacityColor.a = 0;
             _itemCanvasLogo.color = OpacityColor;
@@ -34,34 +35,6 @@ namespace EvolveGames
             _itemCanvasLogo.sprite = ItemLogos[ItemIdInt];
             MaxItems = Items.Length - 1;
             StartCoroutine(ItemChangeObject());
-        }
-        private void Update()
-        {
-            if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-            {
-                ItemIdInt++;
-            }
-
-            if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-            {
-                ItemIdInt--;
-            }
-
-            if(Input.GetKeyDown(KeyCode.H))
-            {
-                if (ani.GetBool("Hide")) Hide(false);
-                else Hide(true);
-            }
-
-            if (ItemIdInt < 0) ItemIdInt = LoopItems ? MaxItems : 0;
-            if (ItemIdInt > MaxItems) ItemIdInt = LoopItems ? 0 : MaxItems;
-
-
-            if (ItemIdInt != ChangeItemInt)
-            {
-                ChangeItemInt = ItemIdInt;
-                StartCoroutine(ItemChangeObject());
-            }
         }
 
         public void Hide(bool Hide)
@@ -93,7 +66,36 @@ namespace EvolveGames
             ItemChangeLogo = false;
         }
 
-        private void FixedUpdate()
+        public void Tick()
+        {
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+            {
+                ItemIdInt++;
+            }
+
+            if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+            {
+                ItemIdInt--;
+            }
+
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                if (ani.GetBool("Hide")) Hide(false);
+                else Hide(true);
+            }
+
+            if (ItemIdInt < 0) ItemIdInt = LoopItems ? MaxItems : 0;
+            if (ItemIdInt > MaxItems) ItemIdInt = LoopItems ? 0 : MaxItems;
+
+
+            if (ItemIdInt != ChangeItemInt)
+            {
+                ChangeItemInt = ItemIdInt;
+                StartCoroutine(ItemChangeObject());
+            }
+        }
+
+        public void FixedTick()
         {
             if (ItemChangeLogo)
             {

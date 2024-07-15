@@ -43,9 +43,9 @@ namespace EvolveGames
         public ItemChange ItemChange { get; private set; }
 
         [Inject]
-        private void Construct()
+        private void Construct(ItemChange itemChange)
         {
-            ItemChange = GetComponent<ItemChange>();
+            ItemChange = ItemChange;
             characterController = GetComponent<CharacterController>();
             cam = GetComponentInChildren<Camera>();
             Cursor.lockState = CursorLockMode.Locked;

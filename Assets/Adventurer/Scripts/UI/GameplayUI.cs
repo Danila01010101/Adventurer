@@ -1,6 +1,5 @@
 using EvolveGames;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameplayUI : MonoBehaviour
 {

@@ -1,3 +1,4 @@
+using Adventurer;
 using Cinemachine;
 using EvolveGames;
 using GenshinImpactMovementSystem;
@@ -13,6 +14,7 @@ public class PlayerInstaller : MonoInstaller
     public override void InstallBindings()
     {
         BindPlayer();
+        BindPlayerViewSwitcher();
         //var player = BindFirstPersonPlayer();
         //var canvas = BindGameplayCanvas();
         //BindItemChange(player.ItemChange, canvas.Menu.Logo);
@@ -34,9 +36,13 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindPlayer()
     {
-        var player = Instantiate(gameplaySceneData.PlayerUnpacker).Unpack();
-        Container.Bind<Player>().FromInstance(player);
+        var thirdPersonViewPlayer = Instantiate(gameplaySceneData.PlayerUnpacker).Unpack();
+        Container.Bind<Player>().FromInstance(thirdPersonViewPlayer);
+        var firstPersonViewPlayer = Container.InstantiatePrefabForComponent<PlayerController>(gameplaySceneData.PlayerPrefab, playerSpawnPoint.position, Quaternion.identity, null);
+        Container.Bind<ItemChange>().FromInstance(firstPersonViewPlayer.GetComponent<ItemChange>());
+        Container.Bind<PlayerController>().FromInstance(firstPersonViewPlayer).AsSingle();
     }
+    private void BindPlayerViewSwitcher() => Container.BindInterfacesAndSelfTo<PlayerViewStateMachine>().AsSingle().NonLazy();
 
     private void BindItemChange(ItemChange itemChange, Image logo) => itemChange.Initialize(logo);
 }

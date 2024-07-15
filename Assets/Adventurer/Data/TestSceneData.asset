@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709b35417f4b4e0428e64264224cfca4, type: 3}
   m_Name: TestSceneData
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 4582019824381016672, guid: a01c7516e659bdf4b9897ab54df69b69,
+  playerUnpacker: {fileID: 6801838522122928850, guid: 7ccddf21e1d5a7141ad7fea4f8ccebf5,
     type: 3}
-  _gameplayUI: {fileID: 3319928383299600992, guid: e78d03010a13e2c46861e70c428745cc,
+  playerPrefab: {fileID: 4582019824381016672, guid: a01c7516e659bdf4b9897ab54df69b69,
+    type: 3}
+  gameplayUI: {fileID: 3319928383299600992, guid: e78d03010a13e2c46861e70c428745cc,
     type: 3}

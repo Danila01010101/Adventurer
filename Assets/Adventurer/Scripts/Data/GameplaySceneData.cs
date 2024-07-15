@@ -1,12 +1,17 @@
+using Adventurer;
+using Cinemachine;
 using EvolveGames;
+using GenshinImpactMovementSystem;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LevelData", menuName = "ScriptableObjects/LevelDataScriptableObject")]
 public class GameplaySceneData : ScriptableObject
 {
-    [SerializeField] private PlayerController _playerPrefab;
-    [SerializeField] private GameplayUI _gameplayUI;
+    [SerializeField] private PlayerUnpacker playerUnpacker;
+    [SerializeField] private PlayerController playerPrefab;
+    [SerializeField] private GameplayUI gameplayUI;
 
-    public PlayerController PlayerPrefab => _playerPrefab;
-    public GameplayUI GameplayUI => _gameplayUI;
+    public PlayerUnpacker PlayerUnpacker => playerUnpacker;
+    public PlayerController PlayerPrefab => playerPrefab;
+    public GameplayUI GameplayUI => gameplayUI;
 }

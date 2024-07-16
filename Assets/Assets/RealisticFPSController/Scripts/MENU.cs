@@ -1,6 +1,6 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace EvolveGames
 {
@@ -12,13 +12,12 @@ namespace EvolveGames
         [Header("Input")]
         [SerializeField] KeyCode BackKey = KeyCode.Escape;
 
-        private PlayerController Player;
         [SerializeField] private Image _logo;
 
-        public Image Logo => _logo;
+        public static Action GamePaused;
+        public static Action GameStarted;
 
-        [Inject]
-        private void Construct(PlayerController player) => Player = player;
+        public Image Logo => _logo;
 
         private void Update()
         {
@@ -27,7 +26,7 @@ namespace EvolveGames
                 if (MenuPanel.activeInHierarchy)
                 {
                     MenuPanel.SetActive(false);
-                    Player.ExitPause();
+                    GameStarted?.Invoke();
                     Cursor.visible = false;
                     Cursor.lockState = CursorLockMode.Locked;
                     Time.timeScale = 1.0f;
@@ -36,7 +35,7 @@ namespace EvolveGames
                 else
                 {
                     MenuPanel.SetActive(true);
-                    Player.EnterPause();
+                    GamePaused?.Invoke();
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
                     Time.timeScale = 0.0f;

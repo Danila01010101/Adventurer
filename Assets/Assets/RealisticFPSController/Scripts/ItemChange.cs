@@ -1,5 +1,5 @@
+using Adventurer;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -19,13 +19,14 @@ namespace EvolveGames
         [HideInInspector] public bool DefiniteHide;
         bool ItemChangeLogo;
         private Image _itemCanvasLogo;
-
-        public void Initialize(Image logo) => _itemCanvasLogo = logo;
+        private ICoroutineStarter coroutineStarter;
 
         [Inject]
-        private void Construct(MonoBehaviour coroutineStarter, PlayerController player)
+        private void Construct(ICoroutineStarter coroutineStarter, MENU menu, Animator animator)
         {
-            if (ani == null && player.GetComponent<Animator>()) ani = player.GetComponent<Animator>();
+            this.coroutineStarter = coroutineStarter;
+            _itemCanvasLogo = menu.Logo;
+            ani = animator;
             Color OpacityColor = _itemCanvasLogo.color;
             OpacityColor.a = 0;
             _itemCanvasLogo.color = OpacityColor;
@@ -34,7 +35,7 @@ namespace EvolveGames
             ChangeItemInt = ItemIdInt;
             _itemCanvasLogo.sprite = ItemLogos[ItemIdInt];
             MaxItems = Items.Length - 1;
-            StartCoroutine(ItemChangeObject());
+            this.coroutineStarter.StartCoroutine(ItemChangeObject());
         }
 
         public void Hide(bool Hide)
@@ -52,7 +53,7 @@ namespace EvolveGames
                 Items[i].SetActive(false);
             }
             Items[ItemIdInt].SetActive(true);
-            if (!ItemChangeLogo) StartCoroutine(ItemLogoChange());
+            if (!ItemChangeLogo) this.coroutineStarter.StartCoroutine(ItemLogoChange());
 
             if (!DefiniteHide) ani.SetBool("Hide", false);
         }
@@ -91,7 +92,7 @@ namespace EvolveGames
             if (ItemIdInt != ChangeItemInt)
             {
                 ChangeItemInt = ItemIdInt;
-                StartCoroutine(ItemChangeObject());
+                this.coroutineStarter.StartCoroutine(ItemChangeObject());
             }
         }
 
@@ -111,5 +112,4 @@ namespace EvolveGames
             }
         }
     }
-
 }

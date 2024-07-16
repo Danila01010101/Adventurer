@@ -1,17 +1,20 @@
-﻿using UnityEngine;
+﻿using Adventurer;
+using System;
+using UnityEngine;
 using Zenject;
 
 namespace EvolveGames
 {
     [RequireComponent(typeof(CharacterController))]
-    [RequireComponent(typeof(ItemChange))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IHandAnimatable
     {
         [Header("Parameters")]
         [SerializeField] private CharacterData characterData;
 
         [Header("PlayerController")]
         [SerializeField] private Transform characterCamera;
+        [SerializeField] private Animator animator;
+        
         private CharacterController characterController;
         private bool canMove = true;
         private bool isClimbing = false;
@@ -34,18 +37,16 @@ namespace EvolveGames
         private bool WallDistance;
         private float WalkingValue;
 
+        public Action<bool> ItemHide;
         public float Vertical => vertical;
         public float Horizontal => horizontal;
         public float yVelocity => characterController.velocity.y;
         public float CroughtSpeed => characterData.CroughSpeed;
-        public bool IsControllingItem => isRunning || ItemChange.DefiniteHide;
-
-        public ItemChange ItemChange { get; private set; }
+        public bool IsControllingItem => isRunning || WallDistance;
 
         [Inject]
-        private void Construct(ItemChange itemChange)
+        private void Construct()
         {
-            ItemChange = ItemChange;
             characterController = GetComponent<CharacterController>();
             cam = GetComponentInChildren<Camera>();
             Cursor.lockState = CursorLockMode.Locked;
@@ -58,6 +59,8 @@ namespace EvolveGames
             WalkingValue = characterData.WalkingSpeed;
             canRun = characterData.CanRun;
         }
+
+        public Animator GetHandsAnimator() => animator;
 
         void Update()
         {
@@ -135,8 +138,7 @@ namespace EvolveGames
                 characterData.CanHideDistanceWall)
             {
                 WallDistance = Physics.Raycast(GetComponentInChildren<Camera>().transform.position, transform.TransformDirection(Vector3.forward), out ObjectCheck, characterData.HideDistance, characterData.LayerMaskInt);
-                ItemChange.ani.SetBool("Hide", WallDistance);
-                ItemChange.DefiniteHide = WallDistance;
+                ItemHide?.Invoke(WallDistance);
             }
         }
 
@@ -150,7 +152,7 @@ namespace EvolveGames
                 canRun = false;
                 isClimbing = true;
                 WalkingValue /= 2;
-                ItemChange.Hide(true);
+                ItemHide?.Invoke(true);
             }
         }
 
@@ -169,9 +171,14 @@ namespace EvolveGames
                 canRun = true;
                 isClimbing = false;
                 WalkingValue *= 2;
-                ItemChange.ani.SetBool("Hide", false);
-                ItemChange.Hide(false);
+                ItemHide?.Invoke(false);
             }
+        }
+
+        private void OnValidate()
+        {
+            if (animator == null)
+                throw new NullReferenceException("Player has to have animator assigned!");
         }
     }
 }

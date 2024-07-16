@@ -1,10 +1,11 @@
+using Adventurer;
 using UnityEngine;
 
 namespace GenshinImpactMovementSystem
 {
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(PlayerResizableCapsuleCollider))]
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IHumanAnimatable
     {
         [field: Header("References")]
         [field: SerializeField] public PlayerSO Data { get; private set; }
@@ -44,6 +45,23 @@ namespace GenshinImpactMovementSystem
             movementStateMachine = new PlayerMovementStateMachine(this);
         }
 
+        public void OnMovementStateAnimationEnterEvent()
+        {
+            movementStateMachine.OnAnimationEnterEvent();
+        }
+
+        public void OnMovementStateAnimationExitEvent()
+        {
+            movementStateMachine.OnAnimationExitEvent();
+        }
+
+        public void OnMovementStateAnimationTransitionEvent()
+        {
+            movementStateMachine.OnAnimationTransitionEvent();
+        }
+
+        public Animator GetHumanAnimator() => Animator;
+
         private void Start()
         {
             movementStateMachine.ChangeState(movementStateMachine.IdlingState);
@@ -69,21 +87,6 @@ namespace GenshinImpactMovementSystem
         private void OnTriggerExit(Collider collider)
         {
             movementStateMachine.OnTriggerExit(collider);
-        }
-
-        public void OnMovementStateAnimationEnterEvent()
-        {
-            movementStateMachine.OnAnimationEnterEvent();
-        }
-
-        public void OnMovementStateAnimationExitEvent()
-        {
-            movementStateMachine.OnAnimationExitEvent();
-        }
-
-        public void OnMovementStateAnimationTransitionEvent()
-        {
-            movementStateMachine.OnAnimationTransitionEvent();
         }
     }
 }

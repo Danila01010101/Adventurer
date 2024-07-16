@@ -18,3 +18,5 @@ MonoBehaviour:
     type: 3}
   gameplayUI: {fileID: 3319928383299600992, guid: e78d03010a13e2c46861e70c428745cc,
     type: 3}
+  gameplayCoroutineStarter: {fileID: 4214556633806004653, guid: a878360f04286d24ea861fc5af2bb0b0,
+    type: 3}

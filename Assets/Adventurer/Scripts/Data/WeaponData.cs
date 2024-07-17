@@ -1,11 +1,9 @@
+using Adventurer;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Weapon", menuName = "ScriptableObjects/NewWeapon")]
-public class WeaponData : ScriptableObject
+public class WeaponData : ItemData
 {
-    [Header("Information")]
-    [SerializeField] private string weaponName;
-
     [Header("Shooting characteristics")]
     [SerializeField] private float damage;
     [SerializeField] private float maxDistance;
@@ -16,7 +14,7 @@ public class WeaponData : ScriptableObject
     [SerializeField] private float reloadTime;
 
     #region PublicProperties
-    public string WeaponName => weaponName;
+    public string WeaponName => Name;
     public float Damage => damage;
     public float MaxDistance => maxDistance;
     public int MagazineSize => magazineSize;

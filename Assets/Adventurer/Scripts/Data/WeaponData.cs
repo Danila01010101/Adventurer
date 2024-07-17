@@ -14,7 +14,6 @@ public class WeaponData : ItemData
     [SerializeField] private float reloadTime;
 
     #region PublicProperties
-    public string WeaponName => Name;
     public float Damage => damage;
     public float MaxDistance => maxDistance;
     public int MagazineSize => magazineSize;

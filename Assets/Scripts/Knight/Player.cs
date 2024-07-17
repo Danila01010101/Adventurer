@@ -1,11 +1,12 @@
 using Adventurer;
+using EvolveGames;
 using UnityEngine;
 
 namespace GenshinImpactMovementSystem
 {
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(PlayerResizableCapsuleCollider))]
-    public class Player : MonoBehaviour, IHumanAnimatable
+    public class Player : MonoBehaviour, IHumanAnimatable, IPlayerView
     {
         [field: Header("References")]
         [field: SerializeField] public PlayerSO Data { get; private set; }
@@ -26,8 +27,11 @@ namespace GenshinImpactMovementSystem
         public PlayerResizableCapsuleCollider ResizableCapsuleCollider { get; private set; }
 
         public Transform MainCameraTransform { get; private set; }
+        public bool IsActive => isActive;
 
         private PlayerMovementStateMachine movementStateMachine;
+
+        private bool isActive = false;
 
         private void Awake()
         {
@@ -87,6 +91,22 @@ namespace GenshinImpactMovementSystem
         private void OnTriggerExit(Collider collider)
         {
             movementStateMachine.OnTriggerExit(collider);
+        }
+
+        public void Activate()
+        {
+            if (isActive == true)
+                return;
+
+            Debug.Log($"{nameof(Player)} is activated");
+        }
+
+        public void Deactivate()
+        {
+            if (isActive == false)
+                return;
+
+            Debug.Log($"{nameof(Player)} is deactivated");
         }
     }
 }

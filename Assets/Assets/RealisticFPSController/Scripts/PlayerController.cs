@@ -6,7 +6,7 @@ using Zenject;
 namespace EvolveGames
 {
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerController : MonoBehaviour, IHandAnimatable
+    public class PlayerController : MonoBehaviour, IHandAnimatable, IPlayerView
     {
         [Header("Parameters")]
         [SerializeField] private CharacterData characterData;
@@ -35,6 +35,7 @@ namespace EvolveGames
         private float RunningValue;
         private float installGravity;
         private bool WallDistance;
+        private bool isActive = false;
         private float WalkingValue;
 
         public Action<bool> ItemHide;
@@ -43,6 +44,7 @@ namespace EvolveGames
         public float yVelocity => characterController.velocity.y;
         public float CroughtSpeed => characterData.CroughSpeed;
         public bool IsControllingItem => isRunning || WallDistance;
+        public bool IsActive => isActive;
 
         [Inject]
         private void Construct()
@@ -179,6 +181,22 @@ namespace EvolveGames
         {
             if (animator == null)
                 throw new NullReferenceException("Player has to have animator assigned!");
+        }
+
+        public void Activate()
+        {
+            if (isActive == true)
+                return;
+
+            Debug.Log($"{nameof(PlayerController)} is activated");
+        }
+
+        public void Deactivate()
+        {
+            if (isActive == false)
+                return;
+
+            Debug.Log($"{nameof(PlayerController)} is deactivated");
         }
     }
 }

@@ -11,16 +11,16 @@ public class PlayerInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        BindPlayer();
-        BindPlayerViewSwitcher();
-        BindItemChanger();
+        BindCoroutineStarter();
         BindGameplayCanvas();
+        BindPlayer();
+        BindItemChanger();
     }
 
     private void BindCoroutineStarter() 
     {
         var coroutineSpawner = Container.InstantiatePrefabForComponent<CoroutineStarter>(gameplaySceneData.GameplayCoroutineStarter);
-        Container.BindInterfacesTo<ICoroutineStarter>().FromInstance(coroutineSpawner);
+        Container.BindInterfacesAndSelfTo<ICoroutineStarter>().FromInstance(coroutineSpawner).AsSingle();
     }
     
     private void BindGameplayCanvas()
@@ -37,13 +37,17 @@ public class PlayerInstaller : MonoInstaller
     private void BindPlayer()
     {
         var thirdPersonViewPlayer = Instantiate(gameplaySceneData.PlayerUnpacker).Unpack();
-        Container.Bind<Player>().FromInstance(thirdPersonViewPlayer);
+        Container.BindInterfacesAndSelfTo<Player>().FromInstance(thirdPersonViewPlayer);
         var firstPersonViewPlayer = Container.InstantiatePrefabForComponent<PlayerController>(gameplaySceneData.PlayerPrefab, playerSpawnPoint.position, Quaternion.identity, null);
-        Container.Bind<PlayerController>().FromInstance(firstPersonViewPlayer).AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerController>().FromInstance(firstPersonViewPlayer).AsSingle();
+        BindPlayerViewSwitcher(firstPersonViewPlayer, thirdPersonViewPlayer);
     }
 
-    private void BindPlayerViewSwitcher() => 
-        Container.BindInterfacesAndSelfTo<PlayerViewSwitcher>().AsSingle().NonLazy();
+    private void BindPlayerViewSwitcher(IPlayerView firstPersonController, IPlayerView thirdPersonController)
+    {
+        var playerViewSwitcher = new PlayerViewSwitcher(firstPersonController, thirdPersonController);
+        Container.BindInterfacesAndSelfTo<PlayerViewSwitcher>().FromInstance(playerViewSwitcher).AsSingle().NonLazy();
+    }
 
     private void BindPlayerUIMediator() => 
         Container.BindInterfacesAndSelfTo<PlayerUIMediator>().AsSingle().NonLazy();

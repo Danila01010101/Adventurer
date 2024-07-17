@@ -22,11 +22,11 @@ namespace EvolveGames
         private ICoroutineStarter coroutineStarter;
 
         [Inject]
-        private void Construct(ICoroutineStarter coroutineStarter, MENU menu, Animator animator)
+        private void Construct(ICoroutineStarter coroutineStarter, MENU menu, IHandAnimatable animator)
         {
             this.coroutineStarter = coroutineStarter;
             _itemCanvasLogo = menu.Logo;
-            ani = animator;
+            ani = animator.GetHandsAnimator();
             Color OpacityColor = _itemCanvasLogo.color;
             OpacityColor.a = 0;
             _itemCanvasLogo.color = OpacityColor;

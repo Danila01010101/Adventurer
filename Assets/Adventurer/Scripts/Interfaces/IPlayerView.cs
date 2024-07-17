@@ -4,5 +4,6 @@ namespace Adventurer
 	{
         void Activate();
         void Deactivate();
+        bool IsActive { get; }
 	}
 }

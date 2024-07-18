@@ -7,7 +7,7 @@ namespace EvolveGames
     public class MovementEffects : MonoBehaviour
     {
         [Header("MOVEMENT FX")]
-        [SerializeField] PlayerController Player;
+        [SerializeField] FirstPersonPlayer Player;
         [SerializeField, Range(0.05f, 2)] float RotationAmount = 0.2f;
         [SerializeField, Range(1f, 20)] float RotationSmooth = 6f;
         [Header("Movement")]
@@ -18,7 +18,7 @@ namespace EvolveGames
         Vector3 MovementVector;
         private void Start()
         {
-            Player = GetComponentInParent<PlayerController>();
+            Player = GetComponentInParent<FirstPersonPlayer>();
             InstallRotation = transform.localRotation;
         }
 

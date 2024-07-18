@@ -2,7 +2,7 @@ namespace GenshinImpactMovementSystem
 {
     public class PlayerMovementStateMachine : StateMachine
     {
-        public Player Player { get; }
+        public ThirdViewPlayer Player { get; }
         public PlayerStateReusableData ReusableData { get; }
 
         public PlayerIdlingState IdlingState { get; }
@@ -23,7 +23,7 @@ namespace GenshinImpactMovementSystem
         public PlayerJumpingState JumpingState { get; }
         public PlayerFallingState FallingState { get; }
 
-        public PlayerMovementStateMachine(Player player)
+        public PlayerMovementStateMachine(ThirdViewPlayer player)
         {
             Player = player;
             ReusableData = new PlayerStateReusableData();

@@ -33,9 +33,13 @@ namespace EvolveGames
             ItemChangeLogo = false;
             DefiniteHide = false;
             ChangeItemInt = ItemIdInt;
-            _itemCanvasLogo.sprite = ItemLogos[ItemIdInt];
-            MaxItems = Items.Length - 1;
-            this.coroutineStarter.StartCoroutine(ItemChangeObject());
+
+            if (ItemLogos != null && ItemLogos.Length > 0)
+            {
+                _itemCanvasLogo.sprite = ItemLogos[ItemIdInt];
+                MaxItems = Items.Length - 1;
+                this.coroutineStarter.StartCoroutine(ItemChangeObject());
+            }
         }
 
         public void Hide(bool Hide)

@@ -6,7 +6,7 @@ using Zenject;
 namespace EvolveGames
 {
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerController : MonoBehaviour, IHandAnimatable, IPlayerView
+    public class FirstPersonPlayer : MonoBehaviour, IPlayerView, IHandAnimatable
     {
         [Header("Parameters")]
         [SerializeField] private CharacterData characterData;
@@ -46,8 +46,7 @@ namespace EvolveGames
         public bool IsControllingItem => isRunning || WallDistance;
         public bool IsActive => isActive;
 
-        [Inject]
-        private void Construct()
+        private void Awake()
         {
             characterController = GetComponent<CharacterController>();
             cam = GetComponentInChildren<Camera>();
@@ -188,7 +187,7 @@ namespace EvolveGames
             if (isActive == true)
                 return;
 
-            Debug.Log($"{nameof(PlayerController)} is activated");
+            Debug.Log($"{nameof(FirstPersonPlayer)} is activated");
         }
 
         public void Deactivate()
@@ -196,7 +195,7 @@ namespace EvolveGames
             if (isActive == false)
                 return;
 
-            Debug.Log($"{nameof(PlayerController)} is deactivated");
+            Debug.Log($"{nameof(FirstPersonPlayer)} is deactivated");
         }
     }
 }

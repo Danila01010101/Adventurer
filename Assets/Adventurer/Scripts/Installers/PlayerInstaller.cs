@@ -20,7 +20,7 @@ public class PlayerInstaller : MonoInstaller
     private void BindCoroutineStarter() 
     {
         var coroutineSpawner = Container.InstantiatePrefabForComponent<CoroutineStarter>(gameplaySceneData.GameplayCoroutineStarter);
-        Container.BindInterfacesAndSelfTo<ICoroutineStarter>().FromInstance(coroutineSpawner).AsSingle();
+        Container.BindInterfacesAndSelfTo<CoroutineStarter>().FromInstance(coroutineSpawner).AsSingle();
     }
     
     private void BindGameplayCanvas()
@@ -36,10 +36,11 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindPlayer()
     {
-        var thirdPersonViewPlayer = Instantiate(gameplaySceneData.PlayerUnpacker).Unpack();
-        Container.BindInterfacesAndSelfTo<Player>().FromInstance(thirdPersonViewPlayer);
-        var firstPersonViewPlayer = Container.InstantiatePrefabForComponent<PlayerController>(gameplaySceneData.PlayerPrefab, playerSpawnPoint.position, Quaternion.identity, null);
-        Container.BindInterfacesAndSelfTo<PlayerController>().FromInstance(firstPersonViewPlayer).AsSingle();
+        (ThirdViewPlayer, FirstPersonPlayer) playerViews = Instantiate(gameplaySceneData.PlayerUnpacker).Unpack();
+        ThirdViewPlayer thirdPersonViewPlayer = playerViews.Item1;
+        FirstPersonPlayer firstPersonViewPlayer = playerViews.Item2;
+        Container.BindInterfacesAndSelfTo<FirstPersonPlayer>().FromInstance(firstPersonViewPlayer).AsSingle();
+        Container.BindInterfacesAndSelfTo<ThirdViewPlayer>().FromInstance(thirdPersonViewPlayer).AsSingle();
         BindPlayerViewSwitcher(firstPersonViewPlayer, thirdPersonViewPlayer);
     }
 

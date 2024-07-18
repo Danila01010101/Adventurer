@@ -1,3 +1,4 @@
+using EvolveGames;
 using GenshinImpactMovementSystem;
 using UnityEngine;
 
@@ -5,11 +6,12 @@ namespace Adventurer
 {
 	public class PlayerUnpacker : MonoBehaviour
 	{
-    	[SerializeField] private Player player;
+    	[SerializeField] private ThirdViewPlayer player;
+    	[SerializeField] private FirstPersonPlayer playerController;
 
-		private float destructionTime = 0.1f;
+		private float destructionTime = 1f;
 
-		public Player Unpack()
+		public (ThirdViewPlayer, FirstPersonPlayer) Unpack()
 		{
 			while (transform.childCount > 0)
 			{
@@ -18,7 +20,7 @@ namespace Adventurer
 
 			Destroy(gameObject, destructionTime);
 
-			return player;
+			return (player, playerController);
 		}
 	}
 }

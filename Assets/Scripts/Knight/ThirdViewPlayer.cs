@@ -6,7 +6,7 @@ namespace GenshinImpactMovementSystem
 {
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(PlayerResizableCapsuleCollider))]
-    public class Player : MonoBehaviour, IHumanAnimatable, IPlayerView
+    public class ThirdViewPlayer : MonoBehaviour, IHumanAnimatable, IPlayerView
     {
         [field: Header("References")]
         [field: SerializeField] public PlayerSO Data { get; private set; }
@@ -98,7 +98,7 @@ namespace GenshinImpactMovementSystem
             if (isActive == true)
                 return;
 
-            Debug.Log($"{nameof(Player)} is activated");
+            Debug.Log($"{nameof(ThirdViewPlayer)} is activated");
         }
 
         public void Deactivate()
@@ -106,7 +106,7 @@ namespace GenshinImpactMovementSystem
             if (isActive == false)
                 return;
 
-            Debug.Log($"{nameof(Player)} is deactivated");
+            Debug.Log($"{nameof(ThirdViewPlayer)} is deactivated");
         }
     }
 }

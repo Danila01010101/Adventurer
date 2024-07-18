@@ -6,7 +6,7 @@ namespace Adventurer.Shooting
     public class ProceduralRecoil : MonoBehaviour
     {
         [SerializeField] private Transform recoilCamera;
-        [SerializeField] private PlayerController playerController;
+        [SerializeField] private FirstPersonPlayer playerController;
 
         [Header("Parameters")]
         [SerializeField] private float recoilX;

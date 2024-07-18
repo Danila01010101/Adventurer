@@ -6,12 +6,12 @@ namespace Adventurer
 {
     public class PlayerUIMediator : IDisposable
 	{
-        private PlayerController playerController;
+        private FirstPersonPlayer playerController;
         private ItemChange itemChange;
 
         [Inject]
         private void Construct(ItemChange itemChange, MENU menu, 
-            PlayerController playerController, IHandAnimatable handAnimatable)
+            FirstPersonPlayer playerController, IHandAnimatable handAnimatable)
         {
             this.playerController = playerController;
             this.itemChange = itemChange;

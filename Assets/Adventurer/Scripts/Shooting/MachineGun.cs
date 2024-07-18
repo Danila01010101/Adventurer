@@ -12,7 +12,7 @@ public class MachineGun : Weapon
     [SerializeField] private ParticleSystem impactParticles;
     [Space(20)]
     [SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private PlayerController playerController;
+    [SerializeField] private FirstPersonPlayer playerController;
     [Header("Parameters")]
     [SerializeField] private float reloadTime;
     [SerializeField] private int ammoAmount;

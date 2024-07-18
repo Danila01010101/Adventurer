@@ -4,11 +4,11 @@ namespace GenshinImpactMovementSystem
 {
     public class PlayerAnimationEventTrigger : MonoBehaviour
     {
-        private Player player;
+        private ThirdViewPlayer player;
 
         private void Awake()
         {
-            player = transform.parent.GetComponent<Player>();
+            player = transform.parent.GetComponent<ThirdViewPlayer>();
         }
 
         public void TriggerOnMovementStateAnimationEnterEvent()

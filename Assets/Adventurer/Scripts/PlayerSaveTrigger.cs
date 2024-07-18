@@ -12,7 +12,7 @@ namespace Adventurer
 
         private void OnTriggerEnter(Collider other)
         {
-            if (isSaved == false && other.gameObject.GetComponent<PlayerController>())
+            if (isSaved == false && other.gameObject.GetComponent<FirstPersonPlayer>())
             {
                 PlayerEnteredSaveZone?.Invoke();
                 isSaved = true;

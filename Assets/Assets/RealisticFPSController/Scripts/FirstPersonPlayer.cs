@@ -14,6 +14,7 @@ namespace EvolveGames
         [Header("PlayerController")]
         [SerializeField] private Transform characterCamera;
         [SerializeField] private Animator animator;
+        [SerializeField] private Camera handsCamera;
         
         private CharacterController characterController;
         private bool canMove = true;
@@ -35,7 +36,7 @@ namespace EvolveGames
         private float RunningValue;
         private float installGravity;
         private bool WallDistance;
-        private bool isActive = false;
+        private bool isActive = true;
         private float WalkingValue;
 
         public Action<bool> ItemHide;
@@ -187,6 +188,10 @@ namespace EvolveGames
             if (isActive == true)
                 return;
 
+            isActive = true;
+            cam.gameObject.SetActive(true);
+            handsCamera.gameObject.SetActive(true);
+            this.enabled = true;
             Debug.Log($"{nameof(FirstPersonPlayer)} is activated");
         }
 
@@ -195,6 +200,10 @@ namespace EvolveGames
             if (isActive == false)
                 return;
 
+            isActive = false;
+            cam.gameObject.SetActive(false);
+            handsCamera.gameObject.SetActive(false);
+            this.enabled = false;
             Debug.Log($"{nameof(FirstPersonPlayer)} is deactivated");
         }
     }

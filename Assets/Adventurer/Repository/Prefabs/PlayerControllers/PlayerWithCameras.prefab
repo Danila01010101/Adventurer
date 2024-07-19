@@ -4706,6 +4706,8 @@ MonoBehaviour:
     rollParameterName: isRolling
     hardLandParameterName: isHardLanding
     fallParameterName: isFalling
+  virtualCamera: {fileID: 8055863963103799778}
+  cinemachineInput: {fileID: 8055863963103799780}
 --- !u!114 &7715162230841707514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4781,6 +4783,7 @@ MonoBehaviour:
   characterData: {fileID: 11400000, guid: 58cbf0a59a1c0834d83acde69cdb4a48, type: 2}
   characterCamera: {fileID: 3279764456789432099}
   animator: {fileID: 5765470771714857814}
+  handsCamera: {fileID: 631812275570052816}
 --- !u!1 &7724049657676722486
 GameObject:
   m_ObjectHideFlags: 0
@@ -4923,7 +4926,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 575
+    m_Bits: 1599
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6255,6 +6258,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 551777210395616322}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8055863963103799780 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7522247111663242662, guid: 21b667a7238e0c440b6cafd867108fcb,
+    type: 3}
+  m_PrefabInstance: {fileID: 551777210395616322}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7194dc27b9df64c8beca7482ee8e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4062952559169696633
 PrefabInstance:
   m_ObjectHideFlags: 0

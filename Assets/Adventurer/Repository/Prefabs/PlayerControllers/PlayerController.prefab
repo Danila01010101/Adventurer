@@ -1363,6 +1363,7 @@ MonoBehaviour:
   characterData: {fileID: 11400000, guid: 58cbf0a59a1c0834d83acde69cdb4a48, type: 2}
   characterCamera: {fileID: 4582019822591254235}
   animator: {fileID: 4434987455181619956}
+  handsCamera: {fileID: 6990563542916841824}
 --- !u!136 &4434987454404763374
 CapsuleCollider:
   m_ObjectHideFlags: 0

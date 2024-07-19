@@ -1,3 +1,5 @@
+using EvolveGames;
+using GenshinImpactMovementSystem;
 using System;
 using UnityEngine;
 using Zenject;
@@ -13,36 +15,37 @@ namespace Adventurer
 		private IPlayerView firstPersonView;
 
         private ViewType currentView;
+        private bool isInitialized = false;
 
         public static Action PlayerViewInitialized;
 
         public enum ViewType { FPV, TPV }
 
-        public PlayerViewSwitcher(IPlayerView firstPersonView, IPlayerView thirdPersonView)
+        [Inject]
+        private void Construct(FirstPersonPlayer firstPersonView, ThirdViewPlayer thirdPersonView, IItemHandler itemHandler)
         {
             this.firstPersonView = firstPersonView;
             this.thirdPersonView = thirdPersonView;
 
-            if (firstPersonView.IsActive == true)
-                firstPersonView.Deactivate();
+            thirdPersonView.Deactivate();
+            firstPersonView.Deactivate();
 
-            if (thirdPersonView.IsActive == true)
-                thirdPersonView.Deactivate();
-        }
-
-        [Inject]
-        private void Construct(IItemHandler itemHandler)
-        {
             if (itemHandler.GetCurrentItemType() == ItemType.Gun)
+            {
                 SetView(ViewType.FPV);
+            }
             else
+            {
                 SetView(ViewType.TPV);
+            }
+
+            isInitialized = true;
             PlayerViewInitialized?.Invoke();
         }
 
         public void SetView(ViewType viewType)
         {
-            if (currentView == viewType)
+            if (isInitialized == true && currentView == viewType)
                 return;
 
             switch (viewType)

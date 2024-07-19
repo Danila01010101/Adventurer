@@ -1,4 +1,5 @@
 using Adventurer;
+using Cinemachine;
 using EvolveGames;
 using UnityEngine;
 
@@ -27,11 +28,13 @@ namespace GenshinImpactMovementSystem
         public PlayerResizableCapsuleCollider ResizableCapsuleCollider { get; private set; }
 
         public Transform MainCameraTransform { get; private set; }
+        public CinemachineVirtualCamera virtualCamera;
+        public Cinemachine.CinemachineInputProvider cinemachineInput;
         public bool IsActive => isActive;
 
         private PlayerMovementStateMachine movementStateMachine;
 
-        private bool isActive = false;
+        private bool isActive = true;
 
         private void Awake()
         {
@@ -98,6 +101,10 @@ namespace GenshinImpactMovementSystem
             if (isActive == true)
                 return;
 
+            isActive = true;
+            virtualCamera.gameObject.SetActive(true);
+            cinemachineInput.enabled = true;
+            this.enabled = true;
             Debug.Log($"{nameof(ThirdViewPlayer)} is activated");
         }
 
@@ -106,6 +113,10 @@ namespace GenshinImpactMovementSystem
             if (isActive == false)
                 return;
 
+            isActive = false;
+            virtualCamera.gameObject.SetActive(false);
+            cinemachineInput.enabled = false;
+            this.enabled = false;
             Debug.Log($"{nameof(ThirdViewPlayer)} is deactivated");
         }
     }

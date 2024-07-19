@@ -6,7 +6,7 @@ using Zenject;
 
 namespace EvolveGames
 {
-    public class ItemChange : ITickable, IFixedTickable
+    public class ItemChange : IItemHandler, ITickable, IFixedTickable
     {
         [Header("Item Change")]
         [SerializeField] public Animator ani;
@@ -114,6 +114,11 @@ namespace EvolveGames
                 OpacityColor.a = Mathf.Lerp(OpacityColor.a, 1, 6 * Time.deltaTime);
                 _itemCanvasLogo.color = OpacityColor;
             }
+        }
+
+        public ItemType GetCurrentItemType()
+        {
+            return ItemType.Gun;
         }
     }
 }

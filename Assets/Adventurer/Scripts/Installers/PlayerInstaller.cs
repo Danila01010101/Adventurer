@@ -15,6 +15,7 @@ public class PlayerInstaller : MonoInstaller
         BindGameplayCanvas();
         BindPlayer();
         BindItemChanger();
+        BindPlayerViewSwitcher();
     }
 
     private void BindCoroutineStarter() 
@@ -41,13 +42,11 @@ public class PlayerInstaller : MonoInstaller
         FirstPersonPlayer firstPersonViewPlayer = playerViews.Item2;
         Container.BindInterfacesAndSelfTo<FirstPersonPlayer>().FromInstance(firstPersonViewPlayer).AsSingle();
         Container.BindInterfacesAndSelfTo<ThirdViewPlayer>().FromInstance(thirdPersonViewPlayer).AsSingle();
-        BindPlayerViewSwitcher(firstPersonViewPlayer, thirdPersonViewPlayer);
     }
 
-    private void BindPlayerViewSwitcher(IPlayerView firstPersonController, IPlayerView thirdPersonController)
+    private void BindPlayerViewSwitcher()
     {
-        var playerViewSwitcher = new PlayerViewSwitcher(firstPersonController, thirdPersonController);
-        Container.BindInterfacesAndSelfTo<PlayerViewSwitcher>().FromInstance(playerViewSwitcher).AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PlayerViewSwitcher>().AsSingle().NonLazy();
     }
 
     private void BindPlayerUIMediator() => 

@@ -1,6 +1,5 @@
 using Adventurer;
 using Cinemachine;
-using EvolveGames;
 using UnityEngine;
 
 namespace GenshinImpactMovementSystem
@@ -29,7 +28,7 @@ namespace GenshinImpactMovementSystem
 
         public Transform MainCameraTransform { get; private set; }
         public CinemachineVirtualCamera virtualCamera;
-        public Cinemachine.CinemachineInputProvider cinemachineInput;
+        public CinemachineInputProvider cinemachineInput;
         public bool IsActive => isActive;
 
         private PlayerMovementStateMachine movementStateMachine;

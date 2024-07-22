@@ -1,4 +1,5 @@
 ﻿using Adventurer;
+using GenshinImpactMovementSystem;
 using System;
 using UnityEngine;
 using Zenject;
@@ -15,7 +16,8 @@ namespace EvolveGames
         [SerializeField] private Transform characterCamera;
         [SerializeField] private Animator animator;
         [SerializeField] private Camera handsCamera;
-        
+
+        private PlayerInput input;
         private CharacterController characterController;
         private bool canMove = true;
         private bool isClimbing = false;
@@ -46,6 +48,9 @@ namespace EvolveGames
         public float CroughtSpeed => characterData.CroughSpeed;
         public bool IsControllingItem => isRunning || WallDistance;
         public bool IsActive => isActive;
+
+        [Inject]
+        private void Construct(PlayerInput playerInput) => input = playerInput;
 
         private void Awake()
         {

@@ -12,10 +12,16 @@ public class PlayerInstaller : MonoInstaller
     public override void InstallBindings()
     {
         BindCoroutineStarter();
+        BindInput();
         BindGameplayCanvas();
         BindPlayer();
         BindItemChanger();
         BindPlayerViewSwitcher();
+    }
+
+    private void BindInput()
+    {
+        Container.Bind<PlayerInput>().AsSingle();
     }
 
     private void BindCoroutineStarter() 
@@ -37,7 +43,7 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindPlayer()
     {
-        (ThirdViewPlayer, FirstPersonPlayer) playerViews = Instantiate(gameplaySceneData.PlayerUnpacker).Unpack();
+        (ThirdViewPlayer, FirstPersonPlayer) playerViews = Container.InstantiatePrefabForComponent<PlayerUnpacker>(gameplaySceneData.PlayerUnpacker).Unpack();
         ThirdViewPlayer thirdPersonViewPlayer = playerViews.Item1;
         FirstPersonPlayer firstPersonViewPlayer = playerViews.Item2;
         Container.BindInterfacesAndSelfTo<FirstPersonPlayer>().FromInstance(firstPersonViewPlayer).AsSingle();

@@ -1,10 +1,10 @@
 using Adventurer;
 using Cinemachine;
 using UnityEngine;
+using Zenject;
 
 namespace GenshinImpactMovementSystem
 {
-    [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(PlayerResizableCapsuleCollider))]
     public class ThirdViewPlayer : MonoBehaviour, IHumanAnimatable, IPlayerView
     {
@@ -23,6 +23,7 @@ namespace GenshinImpactMovementSystem
         public Rigidbody Rigidbody { get; private set; }
         public Animator Animator { get; private set; }
 
+        [Inject]
         public PlayerInput Input { get; private set; }
         public PlayerResizableCapsuleCollider ResizableCapsuleCollider { get; private set; }
 
@@ -35,21 +36,8 @@ namespace GenshinImpactMovementSystem
 
         private bool isActive = true;
 
-        private void Awake()
-        {
-            CameraRecenteringUtility.Initialize();
-            AnimationData.Initialize();
-
-            Rigidbody = GetComponent<Rigidbody>();
-            Animator = GetComponentInChildren<Animator>();
-
-            Input = GetComponent<PlayerInput>();
-            ResizableCapsuleCollider = GetComponent<PlayerResizableCapsuleCollider>();
-
-            MainCameraTransform = Camera.main.transform;
-
-            movementStateMachine = new PlayerMovementStateMachine(this);
-        }
+        [Inject]
+        private void Construct(PlayerInput playerInput) => Input = playerInput;
 
         public void OnMovementStateAnimationEnterEvent()
         {
@@ -70,6 +58,18 @@ namespace GenshinImpactMovementSystem
 
         private void Start()
         {
+            CameraRecenteringUtility.Initialize();
+            AnimationData.Initialize();
+
+            Rigidbody = GetComponent<Rigidbody>();
+            Animator = GetComponentInChildren<Animator>();
+
+            ResizableCapsuleCollider = GetComponent<PlayerResizableCapsuleCollider>();
+
+            MainCameraTransform = Camera.main.transform;
+
+            movementStateMachine = new PlayerMovementStateMachine(this);
+
             movementStateMachine.ChangeState(movementStateMachine.IdlingState);
         }
 

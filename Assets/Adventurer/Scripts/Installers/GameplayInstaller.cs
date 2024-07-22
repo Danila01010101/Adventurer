@@ -6,13 +6,7 @@ namespace Adventurer
     {
         public override void InstallBindings()
         {
-            InstallMovement();
             InstallCheckpoints();
-        }
-
-        private void InstallMovement()
-        {
-            Container.Bind<MovementHandler>().AsSingle().NonLazy();
         }
 
         private void InstallCheckpoints()

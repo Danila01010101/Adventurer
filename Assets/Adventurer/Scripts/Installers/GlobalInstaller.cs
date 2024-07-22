@@ -1,3 +1,4 @@
+using GenshinImpactMovementSystem;
 using Zenject;
 
 namespace Adventurer
@@ -6,7 +7,6 @@ namespace Adventurer
     {
         public override void InstallBindings()
         {
-            BindInput();
             BindLoader();
             BindData();
         }
@@ -16,11 +16,6 @@ namespace Adventurer
             Container.Bind<ZenjectSceneLoaderWrapper>().AsSingle();
             Container.BindInterfacesAndSelfTo<SceneLoader>().AsSingle();
             Container.Bind<SceneLoadMediator>().AsSingle();
-        }
-
-        private void BindInput()
-        {
-            Container.BindInterfacesAndSelfTo<DesctopInput>().AsSingle();
         }
 
         private void BindData()

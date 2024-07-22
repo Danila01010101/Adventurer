@@ -4589,7 +4589,6 @@ GameObject:
   - component: {fileID: 7715162230841707516}
   - component: {fileID: 7715162230841707517}
   - component: {fileID: 7715162230841707515}
-  - component: {fileID: 7715162230841707514}
   - component: {fileID: 7715162230841707519}
   - component: {fileID: 8976454153822759631}
   - component: {fileID: 2529979384014786278}
@@ -4708,18 +4707,6 @@ MonoBehaviour:
     fallParameterName: isFalling
   virtualCamera: {fileID: 8055863963103799778}
   cinemachineInput: {fileID: 8055863963103799780}
---- !u!114 &7715162230841707514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7715162230841707512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa4fc31561d9a54ba8798c6b5057c2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7715162230841707519
 MonoBehaviour:
   m_ObjectHideFlags: 0

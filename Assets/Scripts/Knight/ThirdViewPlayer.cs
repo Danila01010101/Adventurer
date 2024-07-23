@@ -22,8 +22,6 @@ namespace GenshinImpactMovementSystem
 
         public Rigidbody Rigidbody { get; private set; }
         public Animator Animator { get; private set; }
-
-        [Inject]
         public PlayerInput Input { get; private set; }
         public PlayerResizableCapsuleCollider ResizableCapsuleCollider { get; private set; }
 

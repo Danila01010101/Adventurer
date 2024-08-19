@@ -85,11 +85,17 @@ namespace GenshinImpactMovementSystem
 
         private void OnTriggerEnter(Collider collider)
         {
+            if (isActive == false)
+                return;
+
             movementStateMachine.OnTriggerEnter(collider);
         }
 
         private void OnTriggerExit(Collider collider)
         {
+            if (isActive == false)
+                return;
+
             movementStateMachine.OnTriggerExit(collider);
         }
 

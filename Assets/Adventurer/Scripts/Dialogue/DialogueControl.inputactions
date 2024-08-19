@@ -1,0 +1,51 @@
+{
+    "name": "DialogueControl",
+    "maps": [
+        {
+            "name": "Dialogue",
+            "id": "45c84ae9-af6e-42f9-8902-d0d30ec006ac",
+            "actions": [
+                {
+                    "name": "Skip",
+                    "type": "Button",
+                    "id": "4042cdc1-574f-4e2f-b7a4-01ab11e63b7f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c0742b9a-9e45-46ca-ab34-8ccf92df7817",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and keyboard",
+                    "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Mouse and keyboard",
+            "bindingGroup": "Mouse and keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

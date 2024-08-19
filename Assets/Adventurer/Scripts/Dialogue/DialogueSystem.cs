@@ -2,26 +2,52 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DialogueSystem : MonoBehaviour
 {
+    public string NPCName;
     public List<string> Replic;
-    public TextMeshProUGUI TextMeshProUGUI;
 
-    public int _numReplic;
+    public TextMeshProUGUI Name;
+    public TextMeshProUGUI Text;
+
+    private int _numReplic;
+
+    private DialogueControl _input;
+    private void Awake()
+    {
+        _input = new DialogueControl();
+        _input.Dialogue.Skip.performed += context => ChangeReplic();
+    }
+
+    private void OnEnable()
+    {
+        _input.Enable();
+    }
+    private void OnDisable()
+    {
+        _input.Disable();
+    }
+
     void Start()
     {
         _numReplic = 0;
-        TextMeshProUGUI.text = Replic[_numReplic];
+        Text.text = Replic[_numReplic];
+
+        Name.text = NPCName;
     }
 
-    void Update()
+    void ChangeReplic() 
     {
-        Debug.Log(Replic.Count < _numReplic);
-        if (Input.GetMouseButtonDown(0) && Replic.Count - 1 > _numReplic)
+        if (_numReplic < Replic.Count - 1)
         {
             _numReplic++;
-            TextMeshProUGUI.text = Replic[_numReplic];
+            Text.text = Replic[_numReplic];
+        }
+        else
+        {
+            OnDisable();
         }
     }
 }

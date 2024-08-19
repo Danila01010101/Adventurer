@@ -118,7 +118,7 @@ namespace EvolveGames
 
         public ItemType GetCurrentItemType()
         {
-            return ItemType.Gun;
+            return ItemType.Meele;
         }
     }
 }

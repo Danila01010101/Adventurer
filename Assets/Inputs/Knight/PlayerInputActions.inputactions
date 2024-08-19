@@ -85,6 +85,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ViewSwitch",
+                    "type": "Button",
+                    "id": "4c0ce41d-2a9b-4d0a-9912-8b1a055a1519",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -250,6 +259,17 @@
                     "processors": "",
                     "groups": "Mouse and keyboard",
                     "action": "Atack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65478f03-8eac-42a0-ad47-9491fd0a9299",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and keyboard",
+                    "action": "ViewSwitch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

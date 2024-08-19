@@ -4680,6 +4680,8 @@ MonoBehaviour:
     <VirtualCamera>k__BackingField: {fileID: 8055863963103799778}
     <DefaultHorizontalWaitTime>k__BackingField: 0
     <DefaultHorizontalRecenteringTime>k__BackingField: 4
+  <HandsCamera>k__BackingField: {fileID: 2204843932414876578}
+  <FirstPersonCamera>k__BackingField: {fileID: 631812275570052816}
   <AnimationData>k__BackingField:
     groundedParameterName: Grounded
     movingParameterName: Moving

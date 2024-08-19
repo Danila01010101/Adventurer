@@ -181,7 +181,10 @@ namespace GenshinImpactMovementSystem
         {
             float directionAngle = UpdateTargetRotation(direction);
 
-            RotateTowardsTargetRotation();
+            if (stateMachine.ReusableData.isThirdView)
+            {
+                RotateTowardsTargetRotation();
+            }
 
             return directionAngle;
         }

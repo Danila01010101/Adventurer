@@ -14,8 +14,10 @@ namespace GenshinImpactMovementSystem
         [field: Header("Collisions")]
         [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
 
-        [field: Header("Camera")]
+        [field: Header("Cameras")]
         [field: SerializeField] public PlayerCameraRecenteringUtility CameraRecenteringUtility { get; private set; }
+        [field: SerializeField] public Camera HandsCamera { get; private set; }
+        [field: SerializeField] public Camera FirstPersonCamera { get; private set; }
 
         [field: Header("Animations")]
         [field: SerializeField] public PlayerAnimationData AnimationData { get; private set; }
@@ -28,14 +30,19 @@ namespace GenshinImpactMovementSystem
         public Transform MainCameraTransform { get; private set; }
         public CinemachineVirtualCamera virtualCamera;
         public CinemachineInputProvider cinemachineInput;
-        public bool IsActive => isActive;
+        public bool IsActive => isThirdViewActive;
 
         private PlayerMovementStateMachine movementStateMachine;
 
-        private bool isActive = true;
+        private bool isThirdViewActive = true;
 
         [Inject]
-        private void Construct(PlayerInput playerInput) => Input = playerInput;
+        private void Construct(PlayerInput playerInput) 
+        {
+            Input = playerInput;
+
+            movementStateMachine = new PlayerMovementStateMachine(this);
+        }
 
         public void OnMovementStateAnimationEnterEvent()
         {
@@ -66,8 +73,6 @@ namespace GenshinImpactMovementSystem
 
             MainCameraTransform = Camera.main.transform;
 
-            movementStateMachine = new PlayerMovementStateMachine(this);
-
             movementStateMachine.ChangeState(movementStateMachine.IdlingState);
         }
 
@@ -85,7 +90,7 @@ namespace GenshinImpactMovementSystem
 
         private void OnTriggerEnter(Collider collider)
         {
-            if (isActive == false)
+            if (isThirdViewActive == false)
                 return;
 
             movementStateMachine.OnTriggerEnter(collider);
@@ -93,34 +98,38 @@ namespace GenshinImpactMovementSystem
 
         private void OnTriggerExit(Collider collider)
         {
-            if (isActive == false)
+            if (isThirdViewActive == false)
                 return;
 
             movementStateMachine.OnTriggerExit(collider);
         }
 
-        public void Activate()
+        public void ChangeToThirdPersonView()
         {
-            if (isActive == true)
+            if (isThirdViewActive == true)
                 return;
 
-            isActive = true;
+            isThirdViewActive = true;
+            HandsCamera.gameObject.SetActive(false);
+            FirstPersonCamera.gameObject.SetActive(true);
             virtualCamera.gameObject.SetActive(true);
             cinemachineInput.enabled = true;
-            this.enabled = true;
-            Debug.Log($"{nameof(ThirdViewPlayer)} is activated");
+            movementStateMachine.ReusableData.isThirdView = true;
+            Debug.Log($"Third person view is activated");
         }
 
-        public void Deactivate()
+        public void ChangeToFirstPersonView()
         {
-            if (isActive == false)
+            if (isThirdViewActive == false)
                 return;
 
-            isActive = false;
+            isThirdViewActive = false;
+            HandsCamera.gameObject.SetActive(true);
+            FirstPersonCamera.gameObject.SetActive(false);
             virtualCamera.gameObject.SetActive(false);
             cinemachineInput.enabled = false;
-            this.enabled = false;
-            Debug.Log($"{nameof(ThirdViewPlayer)} is deactivated");
+            movementStateMachine.ReusableData.isThirdView = false;
+            Debug.Log($"First person view is activated");
         }
     }
 }

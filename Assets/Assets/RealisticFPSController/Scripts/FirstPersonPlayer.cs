@@ -188,7 +188,7 @@ namespace EvolveGames
                 throw new NullReferenceException("Player has to have animator assigned!");
         }
 
-        public void Activate()
+        public void ChangeToThirdPersonView()
         {
             if (isActive == true)
                 return;
@@ -200,7 +200,7 @@ namespace EvolveGames
             Debug.Log($"{nameof(FirstPersonPlayer)} is activated");
         }
 
-        public void Deactivate()
+        public void ChangeToFirstPersonView()
         {
             if (isActive == false)
                 return;

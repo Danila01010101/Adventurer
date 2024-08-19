@@ -2,8 +2,8 @@ namespace Adventurer
 {
     public interface IPlayerView
 	{
-        void Activate();
-        void Deactivate();
+        void ChangeToThirdPersonView();
+        void ChangeToFirstPersonView();
         bool IsActive { get; }
 	}
 }

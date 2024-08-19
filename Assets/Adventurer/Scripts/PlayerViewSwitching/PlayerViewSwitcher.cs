@@ -68,10 +68,7 @@ namespace Adventurer
 
 		public void Tick()
         {
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-
-            }
+            //добавить смену вида по нажатию клавиши для теста
         }
     }
 }

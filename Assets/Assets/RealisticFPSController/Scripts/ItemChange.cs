@@ -73,21 +73,21 @@ namespace EvolveGames
 
         public void Tick()
         {
-            //if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-            //{
-            //    ItemIdInt++;
-            //}
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+            {
+                ItemIdInt++;
+            }
 
-            //if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-            //{
-            //    ItemIdInt--;
-            //}
+            if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+            {
+                ItemIdInt--;
+            }
 
-            //if (Input.GetKeyDown(KeyCode.H))
-            //{
-            //    if (ani.GetBool("Hide")) Hide(false);
-            //    else Hide(true);
-            //}
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                if (ani.GetBool("Hide")) Hide(false);
+                else Hide(true);
+            }
 
             if (ItemIdInt < 0) ItemIdInt = LoopItems ? MaxItems : 0;
             if (ItemIdInt > MaxItems) ItemIdInt = LoopItems ? 0 : MaxItems;

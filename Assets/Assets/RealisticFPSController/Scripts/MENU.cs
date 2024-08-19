@@ -21,27 +21,27 @@ namespace EvolveGames
 
         private void Update()
         {
-            //if (Input.GetKeyDown(BackKey))
-            //{
-            //    if (MenuPanel.activeInHierarchy)
-            //    {
-            //        MenuPanel.SetActive(false);
-            //        GameStarted?.Invoke();
-            //        Cursor.visible = false;
-            //        Cursor.lockState = CursorLockMode.Locked;
-            //        Time.timeScale = 1.0f;
-            //        ani.SetBool("START", false);
-            //    }
-            //    else
-            //    {
-            //        MenuPanel.SetActive(true);
-            //        GamePaused?.Invoke();
-            //        Cursor.visible = true;
-            //        Cursor.lockState = CursorLockMode.None;
-            //        Time.timeScale = 0.0f;
-            //        ani.SetBool("START", true);
-            //    }
-            //}
+            if (Input.GetKeyDown(BackKey))
+            {
+                if (MenuPanel.activeInHierarchy)
+                {
+                    MenuPanel.SetActive(false);
+                    GameStarted?.Invoke();
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Time.timeScale = 1.0f;
+                    ani.SetBool("START", false);
+                }
+                else
+                {
+                    MenuPanel.SetActive(true);
+                    GamePaused?.Invoke();
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+                    Time.timeScale = 0.0f;
+                    ani.SetBool("START", true);
+                }
+            }
         }
     }
 }

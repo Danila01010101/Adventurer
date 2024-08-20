@@ -1,20 +1,28 @@
-﻿using System.Collections;
+﻿using Adventurer;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class DialogueSystem : MonoBehaviour
 {
-    public string NPCName;
-    public List<string> Replic;
+    public DialogueData DialogueData;
 
     public TextMeshProUGUI Name;
     public TextMeshProUGUI Text;
 
+    public float ReplicSpeed;
+
+    private string _name;
+    private List<string> _replic;
+    
     private int _numReplic;
+    private string _showReplic;
 
     private DialogueControl _input;
+    
     private void Awake()
     {
         _input = new DialogueControl();
@@ -33,21 +41,34 @@ public class DialogueSystem : MonoBehaviour
     void Start()
     {
         _numReplic = 0;
-        Text.text = Replic[_numReplic];
+        Text.text = _replic[_numReplic];
 
-        Name.text = NPCName;
+        Name.text = _name;
+
+        StartCoroutine(ShowReplic());
     }
-
     void ChangeReplic() 
     {
-        if (_numReplic < Replic.Count - 1)
+        if (_numReplic < _replic.Count - 1 && _replic[_numReplic] == _showReplic)
         {
             _numReplic++;
-            Text.text = Replic[_numReplic];
+            Text.text = _replic[_numReplic];
         }
         else
         {
-            OnDisable();
+            Debug.Log("Конец диалога");
+            Destroy(gameObject);
         }
+    }
+
+    IEnumerator ShowReplic()
+    {
+        foreach (var replic in _replic[_numReplic])
+        {
+            yield return new WaitForSeconds(ReplicSpeed);
+            _showReplic += replic;
+            Text.text = _showReplic;
+        }
+        yield break;
     }
 }

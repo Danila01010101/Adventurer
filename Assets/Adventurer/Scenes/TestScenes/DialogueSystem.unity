@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48eb24654507a064dba2db6aa0c714dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DialogueData: {fileID: 0}
+  DialogueData: {fileID: 11400000, guid: bd6c25742a79bef48906f859b8d47a13, type: 2}
   Name: {fileID: 2749598}
   Text: {fileID: 768460559}
   ReplicSpeed: 0.1

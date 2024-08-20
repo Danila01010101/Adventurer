@@ -10,20 +10,17 @@ namespace Adventurer
         [SerializeField] private List<string> _replics;
         [SerializeField] private string _name;
 
+        [Header("Command")]
+        private string _debugLog = "/Debug";
+        private string _menu = "/Menu";
+
+        public string DebugLog
+        { get { return _debugLog;} }
+        public string Menu
+        { get { return _menu;} }
         public List<string> Replic 
-        {
-            get
-            {
-                return _replics; 
-            }
-        }
-        
+        { get { return _replics;} }
         public string Name
-        {
-            get
-            {
-                return _name;
-            }
-        }
+        { get { return _name; } }
     }
 }

@@ -65,7 +65,7 @@ namespace Adventurer
 
         private void SwitchState(InputAction.CallbackContext context)
         {
-            if (thirdPersonView.IsActive)
+            if (thirdPersonView.IsThirdViewActive)
             {
                 SetView(ViewType.FPV);
             }

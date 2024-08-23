@@ -4,6 +4,6 @@ namespace Adventurer
 	{
         void ChangeToThirdPersonView();
         void ChangeToFirstPersonView();
-        bool IsActive { get; }
+        bool IsThirdViewActive { get; }
 	}
 }

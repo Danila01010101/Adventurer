@@ -47,7 +47,7 @@ namespace EvolveGames
         public float yVelocity => characterController.velocity.y;
         public float CroughtSpeed => characterData.CroughSpeed;
         public bool IsControllingItem => isRunning || WallDistance;
-        public bool IsActive => isActive;
+        public bool IsThirdViewActive => isActive;
 
         [Inject]
         private void Construct(PlayerInput playerInput) => input = playerInput;

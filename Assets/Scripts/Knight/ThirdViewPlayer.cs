@@ -30,7 +30,7 @@ namespace GenshinImpactMovementSystem
         public Transform MainCameraTransform { get; private set; }
         public CinemachineVirtualCamera virtualCamera;
         public CinemachineInputProvider cinemachineInput;
-        public bool IsActive => isThirdViewActive;
+        public bool IsThirdViewActive => isThirdViewActive;
 
         private PlayerMovementStateMachine movementStateMachine;
 

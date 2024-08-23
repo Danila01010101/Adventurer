@@ -8,7 +8,5 @@ namespace Adventurer
     {
         public const string Debug = "/Debug";
         public const string Menu = "/Menu";
-        public const string Label = "/Label";
-        public const string Jump = "/Jump";
     }
 }

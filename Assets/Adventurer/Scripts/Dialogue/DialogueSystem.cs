@@ -5,8 +5,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-// Однажды я обрету вечную мудрость и начну писать подобный код без ошибок. Каждый починеный баг\моя затупость будет комментироваться этим прекрасным символом "&"
-// &&
+
+// (https://vk.com/video-149258223_456242495)
 public class DialogueSystem : MonoBehaviour
 {
     public DialogueData DialogueData;
@@ -15,9 +15,10 @@ public class DialogueSystem : MonoBehaviour
     public TextMeshProUGUI Text;
 
     public float ReplicSpeed;
-
     
     private int numReplic;
+    private int numLabel = 0;
+
     private string showReplic;
 
     private DialogueControl input;
@@ -41,7 +42,7 @@ public class DialogueSystem : MonoBehaviour
     void Start()
     {
         numReplic = 0;
-        Text.text = DialogueData.Replic[numReplic];
+        Text.text = DialogueData.Label[numLabel].Replic[numReplic];
 
         Name.text = DialogueData.Name;
 
@@ -50,35 +51,22 @@ public class DialogueSystem : MonoBehaviour
 
     void ChangeReplic() 
     {
-        if (numReplic < DialogueData.Replic.Count - 1)
+        if (numReplic < DialogueData.Label[numLabel].Replic.Count - 1)
         {
             StopAllCoroutines();
             numReplic++;
 
-            if (DialogueData.Replic[numReplic] == DialogueCommands.Debug)
+            if (DialogueData.Label[numLabel].Replic[numReplic] == DialogueCommands.Debug)
             {
                 Debug.Log("Debug!");
                 ChangeReplic();
                 return;
             }
 
-            if (DialogueData.Replic[numReplic] == DialogueCommands.Menu)
+            if (DialogueData.Label[numLabel].Replic[numReplic] == DialogueCommands.Menu)
             {
                 Debug.Log("Dialogue Menu");
-                ChangeReplic();
-                return;
-            }
-
-            if (DialogueData.Replic[numReplic] == DialogueCommands.Label)
-            {
-                ChangeReplic();
-                return;
-            }
-
-            if (DialogueData.Replic[numReplic] == DialogueCommands.Jump)
-            {
-                MoveToLabel();
-                ChangeReplic();
+                ShowMenu();
                 return;
             }
 
@@ -87,24 +75,22 @@ public class DialogueSystem : MonoBehaviour
         }
         else
         {
-            Debug.Log("Конец диалога");
-            Destroy(gameObject);
+            numLabel = DialogueData.Label[numLabel].NextLabel;
+            numReplic = 0;
+            showReplic = "";
+            StopAllCoroutines();
+            StartCoroutine(ShowReplic());
         }
     }
 
-    void MoveToLabel()
+    void ShowMenu()
     {
-        foreach (var replic in DialogueData.Replic)
-        {
-            if(replic == DialogueCommands.Label + DialogueData.Replic[numReplic + 1])
-            {
-                
-            }
-        }
+
     }
+
     IEnumerator ShowReplic()
     {
-        foreach (var replic in DialogueData.Replic[numReplic])
+        foreach (var replic in DialogueData.Label[numLabel].Replic[numReplic])
         {
             yield return new WaitForSeconds(ReplicSpeed);
             
@@ -113,4 +99,6 @@ public class DialogueSystem : MonoBehaviour
         }
         yield break;
     }
+
+   
 }

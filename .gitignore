@@ -72,3 +72,52 @@ crashlytics-build.properties
 # Exceptions
 !*.dll
 !*.obj
+.erp
+Assets/ERP.meta
+Assets/ERP/CHANGELOG.MD
+Assets/ERP/CHANGELOG.MD.meta
+Assets/ERP/Documentation.meta
+Assets/ERP/Documentation/Editor Rich Presence Documentation.pdf
+Assets/ERP/Documentation/Editor Rich Presence Documentation.pdf.meta
+Assets/ERP/Editor.meta
+Assets/ERP/Editor/com.ben-w.erp.asmdef
+Assets/ERP/Editor/com.ben-w.erp.asmdef.meta
+Assets/ERP/Editor/ERP.cs
+Assets/ERP/Editor/ERP.cs.meta
+Assets/ERP/Editor/ERPSettings.cs
+Assets/ERP/Editor/ERPSettings.cs.meta
+Assets/ERP/Editor/ERPWindow.cs
+Assets/ERP/Editor/ERPWindow.cs.meta
+Assets/ERP/Editor/Plugins.meta
+Assets/ERP/Editor/Plugins/DiscordSDK.meta
+Assets/ERP/README.md.meta
+Assets/ERP/README.md
+Assets/ERP/package.json.meta
+Assets/ERP/package.json
+Assets/ERP/LICENSE.md.meta
+Assets/ERP/LICENSE.md
+Assets/ERP/Editor/Scenes/ERP Example Scene.unity.meta
+Assets/ERP/Editor/Scenes/ERP Example Scene.unity
+Assets/ERP/Editor/Scenes.meta
+Assets/ERP/Editor/Plugins/DiscordSDK/x86_64/discord_game_sdk.dll.meta
+Assets/ERP/Editor/Plugins/DiscordSDK/x86_64/discord_game_sdk.dll
+Assets/ERP/Editor/Plugins/DiscordSDK/x86_64.meta
+Assets/ERP/Editor/Plugins/DiscordSDK/x86/discord_game_sdk.dll.meta
+Assets/ERP/Editor/Plugins/DiscordSDK/x86/discord_game_sdk.dll
+Assets/ERP/Editor/Plugins/DiscordSDK/x86.meta
+Assets/ERP/Editor/Plugins/DiscordSDK/StoreManager.cs.meta
+Assets/ERP/Editor/Plugins/DiscordSDK/StoreManager.cs
+Assets/ERP/Editor/Plugins/DiscordSDK/StorageManager.cs.meta
+Assets/ERP/Editor/Plugins/DiscordSDK/StorageManager.cs
+Assets/ERP/Editor/Plugins/DiscordSDK/LobbyManager.cs.meta
+Assets/ERP/Editor/Plugins/DiscordSDK/LobbyManager.cs
+Assets/ERP/Editor/Plugins/DiscordSDK/ImageManager.cs.meta
+Assets/ERP/Editor/Plugins/DiscordSDK/ImageManager.cs
+Assets/ERP/Editor/Plugins/DiscordSDK/Core.cs.meta
+Assets/ERP/Editor/Plugins/DiscordSDK/Core.cs
+Assets/ERP/Editor/Plugins/DiscordSDK/Constants.cs.meta
+Assets/ERP/Editor/Plugins/DiscordSDK/ActivityManager.cs.meta
+Assets/ERP/Editor/Plugins/DiscordSDK/ActivityManager.cs
+Assets/ERP/Editor/Plugins/DiscordSDK/Constants.cs
+ProjectSettings/Packages/com.unity.probuilder/Settings.json
+ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json

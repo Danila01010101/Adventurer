@@ -2,9 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 // (https://vk.com/video-149258223_456242495)
 public class DialogueSystem : MonoBehaviour
@@ -13,14 +12,20 @@ public class DialogueSystem : MonoBehaviour
 
     public TextMeshProUGUI Name;
     public TextMeshProUGUI Text;
-
+    public GameObject AnswerPanel;
+    [Header("Меню выбора реплики")]
+    public List<Button> Buttons = new List<Button>();
+    public List<TextMeshProUGUI> Answers = new List<TextMeshProUGUI>();
+    [Header("Скорость текста")]
     public float ReplicSpeed;
     
     private int numReplic;
     private int numLabel = 0;
 
     private string showReplic;
+    private int countReplic;
 
+    private bool activeChangeReplic = true;
     private DialogueControl input;
     //До первого кадра
     private void Awake()
@@ -46,11 +51,22 @@ public class DialogueSystem : MonoBehaviour
 
         Name.text = DialogueData.Name;
 
+        foreach (Button button in Buttons)
+        {
+            button.gameObject.SetActive(false);
+        }
+
+        AnswerPanel.SetActive(false);
         StartCoroutine(ShowReplic());
     }
 
     void ChangeReplic() 
     {
+        if (activeChangeReplic == false)
+        {
+            return;
+        }
+
         if (numReplic < DialogueData.Label[numLabel].Replic.Count - 1)
         {
             StopAllCoroutines();
@@ -63,17 +79,11 @@ public class DialogueSystem : MonoBehaviour
                 return;
             }
 
-            if (DialogueData.Label[numLabel].Replic[numReplic] == DialogueCommands.Menu)
-            {
-                Debug.Log("Dialogue Menu");
-                ShowMenu();
-                return;
-            }
-
             showReplic = "";
             StartCoroutine(ShowReplic());
         }
-        else
+
+        if (DialogueData.Label[numLabel].Answers == null)
         {
             numLabel = DialogueData.Label[numLabel].NextLabel;
             numReplic = 0;
@@ -81,11 +91,37 @@ public class DialogueSystem : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(ShowReplic());
         }
+
+        else
+        {
+            ShowMenu();
+        }
     }
 
     void ShowMenu()
     {
+        activeChangeReplic = false;
+        AnswerPanel.SetActive(true);
+        foreach (Answer answer in DialogueData.Label[numLabel].Answers)
+        {
+            countReplic++;
+        }
 
+        for (int i = 0; i < countReplic; i++)
+        {
+            Buttons[i].gameObject.SetActive(true);
+            Answers[i].text = DialogueData.Label[numLabel].Answers[i].AnswerText;
+        }
+    }
+
+    public void ChoiseReplic(int num)
+    {
+        activeChangeReplic = true;
+        numLabel = DialogueData.Label[numLabel].Answers[num].MoveTo;
+        Debug.Log("NumLabel: " + numLabel);
+        numReplic = 0;
+        showReplic = "";
+        
     }
 
     IEnumerator ShowReplic()

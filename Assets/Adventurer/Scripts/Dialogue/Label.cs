@@ -10,6 +10,7 @@ namespace Adventurer
     {
         public string labelName;
         public List<string> Replic;
-        public int NextLabel;
+        public List<Answer> Answers;
+        public int NextLabel = -1;
     }
 }

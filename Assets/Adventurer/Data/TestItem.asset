@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: TestItem
   m_EditorClassIdentifier: 
   <Name>k__BackingField: 
+  <Icon>k__BackingField: {fileID: 0}
+  <ItemModel>k__BackingField: {fileID: 4014823248212861632, guid: ea77b6cfe28ef32408aa5d3a1fa046b0,
+    type: 3}

@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d4150463fb2344a8c311dad979296f, type: 3}
   m_Name: Ak74u
   m_EditorClassIdentifier: 
-  weaponName: AKS-74u
+  <Name>k__BackingField: Aka
+  <Icon>k__BackingField: {fileID: 21300000, guid: e31336f90594ef941a8b25959960a5d8,
+    type: 3}
+  <ItemModel>k__BackingField: {fileID: 2435290251775531409, guid: 4fa22248900b84446b59c7caba2899ef,
+    type: 3}
   damage: 4
   maxDistance: 100
   magazineSize: 30

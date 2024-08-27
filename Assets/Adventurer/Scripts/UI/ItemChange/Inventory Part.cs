@@ -8,10 +8,9 @@ namespace Adventurer
     {
         [SerializeField] private GameObject part;
         [SerializeField] private float HowManyPart = 1;
-        [SerializeField] private Canvas CanvasObject;
+        [SerializeField] private GameObject CanvasObject;
        
         private int a = 0;
-        private InventaryPart _imput;
         private float HowManyStart;
         private List<GameObject> parts = new List<GameObject>();
         private int lastKey = 0;
@@ -28,6 +27,7 @@ namespace Adventurer
                   
                     var spa = Instantiate(part, new Vector2(a, 0), Quaternion.identity);
                     spa.transform.SetParent(CanvasObject.transform);
+
                     parts.Add(spa);
 
                     var sp = Instantiate(part, new Vector2(-a, 0), Quaternion.identity);
@@ -75,35 +75,35 @@ namespace Adventurer
             }
             if (Input.GetKeyDown(KeyCode.Alpha2) && parts.Count >= 2)
             {
-                ChoosePart(0); 
+                ChoosePart(1); 
             }
             if (Input.GetKeyDown(KeyCode.Alpha3) && parts.Count >= 3)
             {
-                ChoosePart(0);
+                ChoosePart(2);
             }
             if (Input.GetKeyDown(KeyCode.Alpha4) && parts.Count >= 4)
             {
-                ChoosePart(0);
+                ChoosePart(3);
             }
             if (Input.GetKeyDown(KeyCode.Alpha5) && parts.Count >= 5)
             {
-                ChoosePart(0); 
+                ChoosePart(4); 
             }
             if (Input.GetKeyDown(KeyCode.Alpha6) && parts.Count >= 6)
             {
-                ChoosePart(0);
+                ChoosePart(5);
             }
             if (Input.GetKeyDown(KeyCode.Alpha7) && parts.Count >= 7)
             {
-                ChoosePart(0);
+                ChoosePart(6);
             }
             if (Input.GetKeyDown(KeyCode.Alpha8) && parts.Count >= 8)
             {
-                ChoosePart(0);
+                ChoosePart(7);
             }
             if (Input.GetKeyDown(KeyCode.Alpha9) && parts.Count >= 9)
             {
-                ChoosePart(0);
+                ChoosePart(8);
             }
         }
 

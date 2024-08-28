@@ -724,7 +724,8 @@ PrefabInstance:
       propertyPath: <CameraRecenteringUtility>k__BackingField.<VirtualCamera>k__BackingField
       value: 
       objectReference: {fileID: 551777210664832647}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6766970634901535919, guid: 65dc63cdce16e9e44891f4264dd7c1c0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -927,6 +928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 3961154314009222546}
+  playerController: {fileID: 0}
 --- !u!1001 &8136573142778571412
 PrefabInstance:
   m_ObjectHideFlags: 0

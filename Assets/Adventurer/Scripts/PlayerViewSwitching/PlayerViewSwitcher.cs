@@ -12,9 +12,7 @@ namespace Adventurer
 	{
 		[Header("ThirdPersonView")]
         private ThirdViewPlayer thirdPersonView;
-
-        [Header("FirstPersonView")]
-		private IPlayerView firstPersonView;
+        private FirstPersonPlayer firstPersonView;
 
         private ViewType currentView;
         private bool isInitialized = false;
@@ -24,13 +22,12 @@ namespace Adventurer
         public enum ViewType { FPV, TPV }
 
         [Inject]
-        private void Construct(FirstPersonPlayer firstPersonView, ThirdViewPlayer thirdPersonView, IItemHandler itemHandler)
+        private void Construct(ThirdViewPlayer thirdPersonView, FirstPersonPlayer firstPersonView, IItemHandler itemHandler)
         {
-            this.firstPersonView = firstPersonView;
             this.thirdPersonView = thirdPersonView;
+            this.firstPersonView = firstPersonView;
 
             thirdPersonView.ChangeToFirstPersonView();
-            firstPersonView.ChangeToFirstPersonView();
 
             if (itemHandler.GetCurrentItemType() == ItemType.Gun)
             {
@@ -48,14 +45,17 @@ namespace Adventurer
 
         public void SetView(ViewType viewType)
         {
+            Cursor.lockState = CursorLockMode.Locked;
             switch (viewType)
             {
                 case ViewType.FPV:
                     currentView = viewType;
+                    firstPersonView.enabled = true;
                     thirdPersonView.ChangeToFirstPersonView();
                     break;
                 case ViewType.TPV:
                     currentView = viewType;
+                    firstPersonView.enabled = false;
                     thirdPersonView.ChangeToThirdPersonView();
                     break;
                 default:

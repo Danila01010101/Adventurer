@@ -1,5 +1,6 @@
 using Adventurer;
 using Cinemachine;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -21,6 +22,8 @@ namespace GenshinImpactMovementSystem
 
         [field: Header("Animations")]
         [field: SerializeField] public PlayerAnimationData AnimationData { get; private set; }
+        [field: Header("Meshes")]
+        [field: SerializeField] public List<SkinnedMeshRenderer> CharacterMeshes { get; private set; }
 
         public Rigidbody Rigidbody { get; private set; }
         public Animator Animator { get; private set; }
@@ -109,9 +112,14 @@ namespace GenshinImpactMovementSystem
             if (isThirdViewActive == true)
                 return;
 
+            foreach (SkinnedMeshRenderer renderer in CharacterMeshes)
+            {
+                renderer.enabled = true;
+            }
+
             isThirdViewActive = true;
             HandsCamera.gameObject.SetActive(false);
-            FirstPersonCamera.gameObject.SetActive(true);
+            FirstPersonCamera.gameObject.SetActive(false);
             virtualCamera.gameObject.SetActive(true);
             cinemachineInput.enabled = true;
             movementStateMachine.ReusableData.isThirdView = true;
@@ -123,9 +131,14 @@ namespace GenshinImpactMovementSystem
             if (isThirdViewActive == false)
                 return;
 
+            foreach (SkinnedMeshRenderer renderer in CharacterMeshes)
+            {
+                renderer.enabled = false;
+            }
+
             isThirdViewActive = false;
             HandsCamera.gameObject.SetActive(true);
-            FirstPersonCamera.gameObject.SetActive(false);
+            FirstPersonCamera.gameObject.SetActive(true);
             virtualCamera.gameObject.SetActive(false);
             cinemachineInput.enabled = false;
             movementStateMachine.ReusableData.isThirdView = false;

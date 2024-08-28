@@ -6,8 +6,7 @@ using Zenject;
 
 namespace EvolveGames
 {
-    [RequireComponent(typeof(CharacterController))]
-    public class FirstPersonPlayer : MonoBehaviour, IPlayerView, IHandAnimatable
+    public class FirstPersonPlayer : MonoBehaviour, IHandAnimatable
     {
         [Header("Parameters")]
         [SerializeField] private CharacterData characterData;
@@ -18,7 +17,6 @@ namespace EvolveGames
         [SerializeField] private Camera handsCamera;
 
         private PlayerInput input;
-        private CharacterController characterController;
         private bool canMove = true;
         private bool isClimbing = false;
         private bool isCrough = false;
@@ -38,73 +36,30 @@ namespace EvolveGames
         private float RunningValue;
         private float installGravity;
         private bool WallDistance;
-        private bool isActive = true;
         private float WalkingValue;
 
         public Action<bool> ItemHide;
         public float Vertical => vertical;
         public float Horizontal => horizontal;
-        public float yVelocity => characterController.velocity.y;
         public float CroughtSpeed => characterData.CroughSpeed;
         public bool IsControllingItem => isRunning || WallDistance;
-        public bool IsThirdViewActive => isActive;
 
         [Inject]
         private void Construct(PlayerInput playerInput) => input = playerInput;
 
         private void Awake()
         {
-            characterController = GetComponent<CharacterController>();
             cam = GetComponentInChildren<Camera>();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            InstallCroughHeight = characterController.height;
             InstallCameraMovement = characterCamera.localPosition;
             InstallFOV = cam.fieldOfView;
-            RunningValue = characterData.RunningSpeed;
-            installGravity = characterData.Gravity;
-            WalkingValue = characterData.WalkingSpeed;
-            canRun = characterData.CanRun;
         }
 
         public Animator GetHandsAnimator() => animator;
 
         void Update()
         {
-            RaycastHit CroughCheck;
-            RaycastHit ObjectCheck;
-
-            if (!characterController.isGrounded && !isClimbing)
-            {
-                moveDirection.y -= characterData.Gravity * Time.deltaTime;
-            }
-
-            Vector3 forward = transform.TransformDirection(Vector3.forward);
-            Vector3 right = transform.TransformDirection(Vector3.right);
-            isRunning = !isCrough ? canRun ? Input.GetKey(KeyCode.LeftShift) : false : false;
-            vertical = canMove ? (isRunning ? RunningValue : WalkingValue) * Input.GetAxis("Vertical") : 0;
-            horizontal = canMove ? (isRunning ? RunningValue : WalkingValue) * Input.GetAxis("Horizontal") : 0;
-
-            if (isRunning) 
-                RunningValue = Mathf.Lerp(RunningValue, characterData.RunningSpeed, characterData.TimeToRunning * Time.deltaTime);
-            else 
-                RunningValue = WalkingValue;
-
-            float movementDirectionY = moveDirection.y;
-            moveDirection = (forward * vertical) + (right * horizontal);
-
-            if (Input.GetButton("Jump") && canMove && characterController.isGrounded && !isClimbing)
-            {
-                moveDirection.y = characterData.JumpSpeed;
-            }
-            else
-            {
-                moveDirection.y = movementDirectionY;
-            }
-
-            characterController.Move(moveDirection * Time.deltaTime);
-            Moving = horizontal < 0 || vertical < 0 || horizontal > 0 || vertical > 0 ? true : false;
-
             if (Cursor.lockState == CursorLockMode.Locked && canMove)
             {
                 Lookvertical = -Input.GetAxis("Mouse Y");
@@ -115,38 +70,31 @@ namespace EvolveGames
                 characterCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
                 transform.rotation *= Quaternion.Euler(0, Lookhorizontal * characterData.LookSpeed, 0);
 
-                if (isRunning && Moving) 
+                if (isRunning && Moving)
                     cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, characterData.RunningFOV, characterData.SpeedToFOV * Time.deltaTime);
-                else 
+                else
                     cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, InstallFOV, characterData.SpeedToFOV * Time.deltaTime);
             }
 
-            if (Input.GetKey(characterData.CroughKey))
-            {
-                isCrough = true;
-                float Height = Mathf.Lerp(characterController.height, characterData.CroughHeight, 5 * Time.deltaTime);
-                characterController.height = Height;
-                WalkingValue = Mathf.Lerp(WalkingValue, characterData.CroughSpeed, 6 * Time.deltaTime);
-            }
-            else if (!Physics.Raycast(GetComponentInChildren<Camera>().transform.position, transform.TransformDirection(Vector3.up), out CroughCheck, 0.8f, 1))
-            {
-                if (characterController.height != InstallCroughHeight)
-                {
-                    isCrough = false;
-                    float Height = Mathf.Lerp(characterController.height, InstallCroughHeight, 6 * Time.deltaTime);
-                    characterController.height = Height;
-                    WalkingValue = Mathf.Lerp(WalkingValue, characterData.WalkingSpeed, 4 * Time.deltaTime);
-                }
-            }
+            //if (!Physics.Raycast(GetComponentInChildren<Camera>().transform.position, transform.TransformDirection(Vector3.up), out CroughCheck, 0.8f, 1))
+            //{
+            //    if (characterController.height != InstallCroughHeight)
+            //    {
+            //        isCrough = false;
+            //        float Height = Mathf.Lerp(characterController.height, InstallCroughHeight, 6 * Time.deltaTime);
+            //        characterController.height = Height;
+            //        WalkingValue = Mathf.Lerp(WalkingValue, characterData.WalkingSpeed, 4 * Time.deltaTime);
+            //    }
+            //}
 
-            if(WallDistance != Physics.Raycast(
-                GetComponentInChildren<Camera>().transform.position, 
-                transform.TransformDirection(Vector3.forward), out ObjectCheck, characterData.HideDistance, characterData.LayerMaskInt) && 
-                characterData.CanHideDistanceWall)
-            {
-                WallDistance = Physics.Raycast(GetComponentInChildren<Camera>().transform.position, transform.TransformDirection(Vector3.forward), out ObjectCheck, characterData.HideDistance, characterData.LayerMaskInt);
-                ItemHide?.Invoke(WallDistance);
-            }
+            //if(WallDistance != Physics.Raycast(
+            //    GetComponentInChildren<Camera>().transform.position, 
+            //    transform.TransformDirection(Vector3.forward), out ObjectCheck, characterData.HideDistance, characterData.LayerMaskInt) && 
+            //    characterData.CanHideDistanceWall)
+            //{
+            //    WallDistance = Physics.Raycast(GetComponentInChildren<Camera>().transform.position, transform.TransformDirection(Vector3.forward), out ObjectCheck, characterData.HideDistance, characterData.LayerMaskInt);
+            //    ItemHide?.Invoke(WallDistance);
+            //}
         }
 
         public void EnterPause() => canMove = false;
@@ -154,62 +102,54 @@ namespace EvolveGames
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Ladder" && characterData.CanClimbing)
-            {
-                canRun = false;
-                isClimbing = true;
-                WalkingValue /= 2;
-                ItemHide?.Invoke(true);
-            }
+            //if (other.tag == "Ladder" && characterData.CanClimbing)
+            //{
+            //    canRun = false;
+            //    isClimbing = true;
+            //    WalkingValue /= 2;
+            //    ItemHide?.Invoke(true);
+            //}
         }
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.tag == "Ladder" && characterData.CanClimbing)
-            {
-                moveDirection = new Vector3(0, Input.GetAxis("Vertical") * characterData.Speed * (-characterCamera.localRotation.x / 1.7f), 0);
-            }
+            //if (other.tag == "Ladder" && characterData.CanClimbing)
+            //{
+            //    moveDirection = new Vector3(0, Input.GetAxis("Vertical") * characterData.Speed * (-characterCamera.localRotation.x / 1.7f), 0);
+            //}
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.tag == "Ladder" && characterData.CanClimbing)
-            {
-                canRun = true;
-                isClimbing = false;
-                WalkingValue *= 2;
-                ItemHide?.Invoke(false);
-            }
+            //if (other.tag == "Ladder" && characterData.CanClimbing)
+            //{
+            //    canRun = true;
+            //    isClimbing = false;
+            //    WalkingValue *= 2;
+            //    ItemHide?.Invoke(false);
+            //}
         }
 
         private void OnValidate()
         {
-            if (animator == null)
-                throw new NullReferenceException("Player has to have animator assigned!");
+            //if (animator == null)
+            //    throw new NullReferenceException("Player has to have animator assigned!");
         }
 
         public void ChangeToThirdPersonView()
         {
-            if (isActive == true)
-                return;
-
-            isActive = true;
-            cam.gameObject.SetActive(true);
-            handsCamera.gameObject.SetActive(true);
-            this.enabled = true;
-            Debug.Log($"{nameof(FirstPersonPlayer)} is activated");
+            //cam.gameObject.SetActive(true);
+            //handsCamera.gameObject.SetActive(true);
+            //this.enabled = true;
+            //Debug.Log($"{nameof(FirstPersonPlayer)} is activated");
         }
 
         public void ChangeToFirstPersonView()
         {
-            if (isActive == false)
-                return;
-
-            isActive = false;
-            cam.gameObject.SetActive(false);
-            handsCamera.gameObject.SetActive(false);
-            this.enabled = false;
-            Debug.Log($"{nameof(FirstPersonPlayer)} is deactivated");
+            //cam.gameObject.SetActive(false);
+            //handsCamera.gameObject.SetActive(false);
+            //this.enabled = false;
+            //Debug.Log($"{nameof(FirstPersonPlayer)} is deactivated");
         }
     }
 }

@@ -1,20 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Adventurer
 {
     public class CaseHelper : MonoBehaviour
     {
-
         private CaseBrain lastCase;
+
         private void SelectCell(CaseBrain cell)
         {
             if (lastCase == null)
             {
                 lastCase = cell;
-                
             }
             else
             {
@@ -38,16 +34,15 @@ namespace Adventurer
 
             lastCase = null;
         }
+
         private void OnEnable()
         {
             CaseBrain.CaseClicked += SelectCell;
         }
 
-         private void OnDisable()
-         {
-         CaseBrain.CaseClicked -= SelectCell;
-         }
-        
+        private void OnDisable()
+        {
+            CaseBrain.CaseClicked -= SelectCell;
+        }
     }
-
 }

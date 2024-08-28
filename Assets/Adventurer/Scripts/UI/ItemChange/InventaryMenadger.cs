@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Adventurer
 {
     public class InventaryMenadger : MonoBehaviour
     {
-
         [SerializeField] private GameObject Inventary;
         [SerializeField] private GameObject Hotbar;
         [SerializeField] private GameObject Weaponlist;
@@ -32,29 +29,27 @@ namespace Adventurer
                     Inventary.SetActive(false);
                     InventaryIsOpen = false;
                     crutch = 1;
-
                 }
             }
 
             if (Input.GetKeyDown(KeyCode.I))
+            {
+                if (InventaryIsOpen == false && crutch == 0)
                 {
-                  if (InventaryIsOpen == false && crutch == 0)
-                  {
                     Hotbar.SetActive(false);
                     Inventary.SetActive(true);
                     InventaryIsOpen = true;
                     crutch = 1;
-                  }
+                }
             }
             crutch = 0;
         }
 
         public void Weapon() 
         {
-           Weaponlist.SetActive(true);
-           Skilllist.SetActive(false);
-          UsebleItemsList.SetActive(false);
-
+            Weaponlist.SetActive(true);
+            Skilllist.SetActive(false);
+            UsebleItemsList.SetActive(false);
         }
 
         public void Skill()
@@ -70,8 +65,5 @@ namespace Adventurer
             Skilllist.SetActive(false);
             UsebleItemsList.SetActive(true);
         }
-
-
-
     }
 }

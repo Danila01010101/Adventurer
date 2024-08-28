@@ -101,6 +101,7 @@ public class DialogueSystem : MonoBehaviour
 
     void ShowMenu()
     {
+        countReplic = 0;
         activeChangeReplic = false;
         AnswerPanel.SetActive(true);
         foreach (Answer answer in DialogueData.Label[numLabel].Answers)

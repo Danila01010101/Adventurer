@@ -7,18 +7,14 @@ namespace Adventurer
 {
     public class CaseHelper : MonoBehaviour
     {
-        private CaseWeapon lastCase;
 
-        private void Awake()
-        {
-            CaseWeapon.CaseClicked += SelectCell;
-        }
-
-        private void SelectCell(CaseWeapon cell)
+        private CaseBrain lastCase;
+        private void SelectCell(CaseBrain cell)
         {
             if (lastCase == null)
             {
                 lastCase = cell;
+                
             }
             else
             {
@@ -26,7 +22,7 @@ namespace Adventurer
             }
         }
 
-        private void SwapCellsData(CaseWeapon firstCell, CaseWeapon secondCell)
+        private void SwapCellsData(CaseBrain firstCell, CaseBrain secondCell)
         {
             var secondCellItem = secondCell.ItemData;
             secondCell.SetItem(firstCell.ItemData);
@@ -42,14 +38,16 @@ namespace Adventurer
 
             lastCase = null;
         }
-        //private void OnEnable()
-        //{
-        //    CaseWeapon.CaseClicked += SelectCell;
-        //}
+        private void OnEnable()
+        {
+            CaseBrain.CaseClicked += SelectCell;
+        }
 
-        //private void OnDisable()
-        //{
-        //    CaseWeapon.CaseClicked -= SelectCell;
-        //}
+         private void OnDisable()
+         {
+         CaseBrain.CaseClicked -= SelectCell;
+         }
+        
     }
+
 }

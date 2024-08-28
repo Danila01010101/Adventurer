@@ -62,6 +62,7 @@ public class DialogueSystem : MonoBehaviour
 
     void ChangeReplic() 
     {
+        Debug.Log("numLabel:" + numLabel + "numReplic:" + numReplic);
         if (activeChangeReplic == false)
         {
             return;
@@ -70,7 +71,7 @@ public class DialogueSystem : MonoBehaviour
         if (numReplic < DialogueData.Label[numLabel].Replic.Count - 1)
         {
             StopAllCoroutines();
-            numReplic++;
+            numReplic++; //Тот самый ++
 
             if (DialogueData.Label[numLabel].Replic[numReplic] == DialogueCommands.Debug)
             {
@@ -116,12 +117,18 @@ public class DialogueSystem : MonoBehaviour
 
     public void ChoiseReplic(int num)
     {
+        //foreach (Button button in Buttons)
+        //{
+        //    button.gameObject.SetActive(false);
+        //}
+
+        // AnswerPanel.SetActive(false);
+
         activeChangeReplic = true;
         numLabel = DialogueData.Label[numLabel].Answers[num].MoveTo;
-        Debug.Log("NumLabel: " + numLabel);
         numReplic = 0;
         showReplic = "";
-        
+        ChangeReplic();
     }
 
     IEnumerator ShowReplic()

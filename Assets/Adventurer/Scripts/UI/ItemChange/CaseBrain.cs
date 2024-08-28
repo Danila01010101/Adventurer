@@ -30,14 +30,13 @@ namespace Adventurer
             }
         }
 
-        private void Update()
+        private void OnMouseOver()
         {
-          
-        }
-
-        private void OnMouseUp()
-        {
-           CaseClicked?.Invoke(this);
+            if (Input.GetMouseButtonUp(0))
+            {
+                CaseClicked?.Invoke(this);
+                Debug.Log($"Drug ended on {gameObject.name}");
+            }
         }
 
         private void OnMouseDown()
@@ -45,6 +44,7 @@ namespace Adventurer
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
             CaseClicked?.Invoke(this);
             Crutch = true;
+            Debug.Log($"Drug started on {gameObject.name}");
         }
 
         public void SetItem(ItemData item)

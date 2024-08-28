@@ -109,6 +109,15 @@ namespace GenshinImpactMovementSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ViewSwitch"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c0ce41d-2a9b-4d0a-9912-8b1a055a1519"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -276,6 +285,17 @@ namespace GenshinImpactMovementSystem
                     ""action"": ""Atack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65478f03-8eac-42a0-ad47-9491fd0a9299"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and keyboard"",
+                    ""action"": ""ViewSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -310,6 +330,7 @@ namespace GenshinImpactMovementSystem
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_CursorToggle = m_Player.FindAction("CursorToggle", throwIfNotFound: true);
             m_Player_Atack = m_Player.FindAction("Atack", throwIfNotFound: true);
+            m_Player_ViewSwitch = m_Player.FindAction("ViewSwitch", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -380,6 +401,7 @@ namespace GenshinImpactMovementSystem
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_CursorToggle;
         private readonly InputAction m_Player_Atack;
+        private readonly InputAction m_Player_ViewSwitch;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -393,6 +415,7 @@ namespace GenshinImpactMovementSystem
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @CursorToggle => m_Wrapper.m_Player_CursorToggle;
             public InputAction @Atack => m_Wrapper.m_Player_Atack;
+            public InputAction @ViewSwitch => m_Wrapper.m_Player_ViewSwitch;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -429,6 +452,9 @@ namespace GenshinImpactMovementSystem
                 @Atack.started += instance.OnAtack;
                 @Atack.performed += instance.OnAtack;
                 @Atack.canceled += instance.OnAtack;
+                @ViewSwitch.started += instance.OnViewSwitch;
+                @ViewSwitch.performed += instance.OnViewSwitch;
+                @ViewSwitch.canceled += instance.OnViewSwitch;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -460,6 +486,9 @@ namespace GenshinImpactMovementSystem
                 @Atack.started -= instance.OnAtack;
                 @Atack.performed -= instance.OnAtack;
                 @Atack.canceled -= instance.OnAtack;
+                @ViewSwitch.started -= instance.OnViewSwitch;
+                @ViewSwitch.performed -= instance.OnViewSwitch;
+                @ViewSwitch.canceled -= instance.OnViewSwitch;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -497,6 +526,7 @@ namespace GenshinImpactMovementSystem
             void OnJump(InputAction.CallbackContext context);
             void OnCursorToggle(InputAction.CallbackContext context);
             void OnAtack(InputAction.CallbackContext context);
+            void OnViewSwitch(InputAction.CallbackContext context);
         }
     }
 }

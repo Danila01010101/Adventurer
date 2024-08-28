@@ -3,17 +3,16 @@ using GenshinImpactMovementSystem;
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Adventurer
 {
-    public class PlayerViewSwitcher : ITickable
+    public class PlayerViewSwitcher : IDisposable
 	{
 		[Header("ThirdPersonView")]
-        private IPlayerView thirdPersonView;
-
-        [Header("FirstPersonView")]
-		private IPlayerView firstPersonView;
+        private ThirdViewPlayer thirdPersonView;
+        private FirstPersonPlayer firstPersonView;
 
         private ViewType currentView;
         private bool isInitialized = false;
@@ -23,13 +22,12 @@ namespace Adventurer
         public enum ViewType { FPV, TPV }
 
         [Inject]
-        private void Construct(FirstPersonPlayer firstPersonView, ThirdViewPlayer thirdPersonView, IItemHandler itemHandler)
+        private void Construct(ThirdViewPlayer thirdPersonView, FirstPersonPlayer firstPersonView, IItemHandler itemHandler)
         {
-            this.firstPersonView = firstPersonView;
             this.thirdPersonView = thirdPersonView;
+            this.firstPersonView = firstPersonView;
 
-            thirdPersonView.Deactivate();
-            firstPersonView.Deactivate();
+            thirdPersonView.ChangeToFirstPersonView();
 
             if (itemHandler.GetCurrentItemType() == ItemType.Gun)
             {
@@ -40,38 +38,46 @@ namespace Adventurer
                 SetView(ViewType.TPV);
             }
 
+            thirdPersonView.Input.PlayerActions.ViewSwitch.started += SwitchState;
             isInitialized = true;
             PlayerViewInitialized?.Invoke();
         }
 
         public void SetView(ViewType viewType)
         {
-            if (isInitialized == true && currentView == viewType)
-                return;
-
+            Cursor.lockState = CursorLockMode.Locked;
             switch (viewType)
             {
                 case ViewType.FPV:
                     currentView = viewType;
-                    thirdPersonView.Deactivate();
-                    firstPersonView.Activate();
+                    firstPersonView.enabled = true;
+                    thirdPersonView.ChangeToFirstPersonView();
                     break;
                 case ViewType.TPV:
                     currentView = viewType;
-                    firstPersonView.Deactivate();
-                    thirdPersonView.Activate();
+                    firstPersonView.enabled = false;
+                    thirdPersonView.ChangeToThirdPersonView();
                     break;
                 default:
                     throw new ArgumentException("This player view is not registered.");
             }
         }
 
-		public void Tick()
+        private void SwitchState(InputAction.CallbackContext context)
         {
-            if (Input.GetKeyDown(KeyCode.C))
+            if (thirdPersonView.IsThirdViewActive)
             {
-
+                SetView(ViewType.FPV);
             }
+            else
+            {
+                SetView(ViewType.TPV);
+            }
+        }
+
+        public void Dispose()
+        {
+            thirdPersonView.Input.PlayerActions.ViewSwitch.started -= SwitchState;
         }
     }
 }

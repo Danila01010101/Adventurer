@@ -161,26 +161,47 @@ namespace GenshinImpactMovementSystem
 
             Vector3 movementDirection = GetMovementInputDirection();
 
-            float targetRotationYAngle = Rotate(movementDirection);
-
-            Vector3 targetRotationDirection = GetTargetRotationDirection(targetRotationYAngle);
-
             float movementSpeed = GetMovementSpeed();
 
             Vector3 currentPlayerHorizontalVelocity = GetPlayerHorizontalVelocity();
 
-            stateMachine.Player.Rigidbody.AddForce(targetRotationDirection * movementSpeed - currentPlayerHorizontalVelocity, ForceMode.VelocityChange);
+            if (stateMachine.Player.IsThirdViewActive)
+            {
+                float targetRotationYAngle = Rotate(movementDirection);
+
+                Vector3 targetRotationDirection = GetTargetRotationDirection(targetRotationYAngle);
+
+                stateMachine.Player.Rigidbody.AddForce(targetRotationDirection * movementSpeed - currentPlayerHorizontalVelocity, ForceMode.VelocityChange);
+            }
+            else
+            {
+                stateMachine.Player.Rigidbody.AddForce(movementDirection * movementSpeed - currentPlayerHorizontalVelocity, ForceMode.VelocityChange);
+            }
         }
 
         protected Vector3 GetMovementInputDirection()
         {
-            return new Vector3(stateMachine.ReusableData.MovementInput.x, 0f, stateMachine.ReusableData.MovementInput.y);
+            if (stateMachine.Player.IsThirdViewActive)
+            {
+                return GetMovementDirectionTPV();
+            }
+
+            return GetMovementDirectionFPV();
         }
+
+        protected Vector3 GetMovementDirectionFPV()
+        {
+            Vector3 verticalDirection = stateMachine.Player.transform.forward * stateMachine.ReusableData.MovementInput.y;
+            Vector3 horizontalDirection = stateMachine.Player.transform.right * stateMachine.ReusableData.MovementInput.x;
+
+            return verticalDirection + horizontalDirection;
+        }
+
+        protected Vector3 GetMovementDirectionTPV() => new Vector3(stateMachine.ReusableData.MovementInput.x, 0f, stateMachine.ReusableData.MovementInput.y);
 
         private float Rotate(Vector3 direction)
         {
             float directionAngle = UpdateTargetRotation(direction);
-
             RotateTowardsTargetRotation();
 
             return directionAngle;
@@ -236,6 +257,9 @@ namespace GenshinImpactMovementSystem
 
         protected void RotateTowardsTargetRotation()
         {
+            if (stateMachine.Player.IsThirdViewActive == false)
+                return;
+
             float currentYAngle = stateMachine.Player.Rigidbody.rotation.eulerAngles.y;
 
             if (currentYAngle == stateMachine.ReusableData.CurrentTargetRotation.y)

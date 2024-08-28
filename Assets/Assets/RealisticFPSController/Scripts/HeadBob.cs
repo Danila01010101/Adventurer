@@ -1,5 +1,7 @@
+using GenshinImpactMovementSystem;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace EvolveGames
 {
@@ -16,17 +18,15 @@ namespace EvolveGames
         [SerializeField] private bool EnabledRoationMovement = true;
         [SerializeField, Range(1f, 10f)] private float RoationMovementAmount = 3.0f;
         [SerializeField] private Camera playerCamera;
+        [SerializeField] private ThirdViewPlayer player;
 
         private float ToggleSpeed = 3.0f;
         private Vector3 StartPos;
         private Vector3 StartRot;
         private Vector3 FinalRot;
-        private CharacterController characterController;
-
 
         private void Awake()
         {
-            characterController = GetComponentInParent<CharacterController>();
             StartPos = transform.localPosition;
             StartRot = transform.localRotation.eulerAngles;
         }
@@ -41,9 +41,9 @@ namespace EvolveGames
 
         private void CheckMotion()
         {
-            float speed = new Vector3(characterController.velocity.x, 0, characterController.velocity.z).magnitude;
+            float speed = new Vector3(player.Rigidbody.velocity.x, 0, player.Rigidbody.velocity.z).magnitude;
             if (speed < ToggleSpeed) return;
-            if (!characterController.isGrounded) return;
+            //if (!player.isGrounded) return;
             PlayMotion(HeadBobMotion());
         }
 

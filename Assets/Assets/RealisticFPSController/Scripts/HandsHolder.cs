@@ -1,3 +1,4 @@
+using GenshinImpactMovementSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,19 +18,20 @@ namespace EvolveGames
         [Header("RotationMovement")]
         [SerializeField] bool EnabledRotationMovement = true;
         [SerializeField, Range(0.1f, 10.0f)] float RotationMultipler = 6f;
+        [SerializeField] private ThirdViewPlayer player;
+
         float ToggleSpeed = 1.5f;
         float AmountValue;
         Vector3 StartPos;
         Vector3 StartRot;
         Vector3 FinalPos;
         Vector3 FinalRot;
-        CharacterController player;
+
         private void Awake()
         {
-            player = GetComponentInParent<CharacterController>();
-            var playerController = player.transform.GetComponent<FirstPersonPlayer>();
-            if (player.transform.TryGetComponent<FirstPersonPlayer>(out playerController)) ToggleSpeed = playerController.CroughtSpeed * 1.5f;
-            else ToggleSpeed = 1.5f;
+            //var playerController = player.transform.GetComponent<FirstPersonPlayer>();
+            //if (player.transform.TryGetComponent(out playerController)) ToggleSpeed = playerController.CroughtSpeed * 1.5f;
+            //else ToggleSpeed = 1.5f;
             AmountValue = Amount;
             StartPos = transform.localPosition;
             StartRot = transform.localRotation.eulerAngles;
@@ -38,14 +40,14 @@ namespace EvolveGames
         private void Update()
         {
             if (!Enabled) return;
-            float speed = new Vector3(player.velocity.x, 0, player.velocity.z).magnitude;
+            float speed = new Vector3(player.Rigidbody.velocity.x, 0, player.Rigidbody.velocity.z).magnitude;
             Reset();
-            if (speed > ToggleSpeed && player.isGrounded)
-            {
+            //if (speed > ToggleSpeed && player.Rigidbody.isGrounded)
+            //{
                 FinalPos += HeadBobMotion();
                 FinalRot += new Vector3(-HeadBobMotion().z, 0, HeadBobMotion().x) * RotationMultipler * 10;
-            }
-            else if (speed > ToggleSpeed) FinalPos += HeadBobMotion() / 2f;
+            //} else 
+            if (speed > ToggleSpeed) FinalPos += HeadBobMotion() / 2f;
 
             if (Input.GetKeyDown(KeyCode.LeftShift)) AmountValue = Amount * SprintAmount;
             else if (Input.GetKeyUp(KeyCode.LeftShift)) AmountValue = Amount / SprintAmount;

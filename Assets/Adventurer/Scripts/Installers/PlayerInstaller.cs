@@ -21,7 +21,7 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindInput()
     {
-        Container.Bind<PlayerInput>().AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle();
     }
 
     private void BindCoroutineStarter() 
@@ -38,7 +38,7 @@ public class PlayerInstaller : MonoInstaller
 
     private void BindItemChanger()
     {
-        Container.BindInterfacesAndSelfTo<ItemChange>().AsSingle();
+        Container.BindInterfacesAndSelfTo<ItemChange>().AsSingle().NonLazy();
     }
 
     private void BindPlayer()

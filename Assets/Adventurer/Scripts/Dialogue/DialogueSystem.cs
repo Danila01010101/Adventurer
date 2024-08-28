@@ -1,6 +1,7 @@
 ﻿using Adventurer;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -82,15 +83,17 @@ public class DialogueSystem : MonoBehaviour
 
             showReplic = "";
             StartCoroutine(ShowReplic());
+            return;
         }
 
-        if (DialogueData.Label[numLabel].Answers == null)
+        if (DialogueData.Label[numLabel].Answers.Any() == false)
         {
             numLabel = DialogueData.Label[numLabel].NextLabel;
             numReplic = 0;
             showReplic = "";
             StopAllCoroutines();
             StartCoroutine(ShowReplic());
+            return;
         }
 
         else
@@ -118,12 +121,12 @@ public class DialogueSystem : MonoBehaviour
 
     public void ChoiseReplic(int num)
     {
-        //foreach (Button button in Buttons)
-        //{
-        //    button.gameObject.SetActive(false);
-        //}
+        foreach (Button button in Buttons)
+        {
+            button.gameObject.SetActive(false);
+        }
 
-        // AnswerPanel.SetActive(false);
+        AnswerPanel.SetActive(false);
 
         activeChangeReplic = true;
         numLabel = DialogueData.Label[numLabel].Answers[num].MoveTo;
@@ -131,7 +134,9 @@ public class DialogueSystem : MonoBehaviour
         countReplic = 0;
 
         showReplic = "";
-        ChangeReplic();
+
+        StopAllCoroutines();
+        StartCoroutine(ShowReplic());
     }
 
     IEnumerator ShowReplic()

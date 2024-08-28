@@ -127,6 +127,8 @@ public class DialogueSystem : MonoBehaviour
         activeChangeReplic = true;
         numLabel = DialogueData.Label[numLabel].Answers[num].MoveTo;
         numReplic = 0;
+        countReplic = 0;
+
         showReplic = "";
         ChangeReplic();
     }

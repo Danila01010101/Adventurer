@@ -58,9 +58,14 @@ public class DialogueSystem : MonoBehaviour
         }
 
         AnswerPanel.SetActive(false);
-        StartCoroutine(ShowReplic());
+        gameObject.SetActive(false);
     }
 
+    public void StartDialog()
+    {
+        gameObject.SetActive(true);
+        StartCoroutine(ShowReplic());
+    }
     void ChangeReplic() 
     {
         Debug.Log("numLabel:" + numLabel + "numReplic:" + numReplic);
@@ -72,7 +77,7 @@ public class DialogueSystem : MonoBehaviour
         if (numReplic < DialogueData.Label[numLabel].Replic.Count - 1)
         {
             StopAllCoroutines();
-            numReplic++; //Тот самый ++
+            numReplic++; 
 
             if (DialogueData.Label[numLabel].Replic[numReplic] == DialogueCommands.Debug)
             {

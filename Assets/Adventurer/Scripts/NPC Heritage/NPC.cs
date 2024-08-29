@@ -2,21 +2,38 @@ using UnityEngine;
 
 namespace Adventurer
 {
+    [RequireComponent(typeof(CharacterMovement))]
     public class NPC : MonoBehaviour, IDamagable
     {
-        public string Name { get; set; }
-        public float Health { get; set; }
+        public string Name;
+        public float Health;
 
-        public NPC(float health, string name) 
+        protected CharacterMovement movement;
+
+        private void Start()
         {
-            Health = health;
-            Name = name;
+            CharacterMovement movement = GetComponent<CharacterMovement>();
         }
-        public void TakeDamage(float damage) 
+        public void TakeDamage(float damage)
         {
             Health -= damage;
         }
+        private void Update()
+        {
+            Move();
+            if (Health<=0)
+            {
+                NPCDeath();
+            }
+        }
         public virtual void Move()
+        {
+            movement.HandleMovement();
+            movement.HandleGroundCheck();
+            movement.HandleGravity();
+            movement.HandleAnimation();
+        }
+        public virtual void NPCDeath() 
         {
 
         }

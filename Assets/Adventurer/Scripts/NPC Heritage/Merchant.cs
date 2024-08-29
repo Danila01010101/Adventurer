@@ -6,8 +6,8 @@ namespace Adventurer
     public class  Product
     {
         public string Name { get; set; }
-
         public int Count { get; set; }
+
         public Product(string name, int count)
         {
             Name = name;

@@ -2,10 +2,11 @@ namespace Adventurer
 {
     public class Enemy : NPC
     {
-        float Damage { get; set; }
+        public float Damage { get; set; }
+
         public Enemy(float health, string name, float damage) : base (health, name)
         {
-            damage = Damage;
+            Damage = damage;
         }
 
         public void Attack(NPC target)
@@ -14,7 +15,7 @@ namespace Adventurer
         }
         public override void Move()
         {
-            base.Move();
+            
         }
     }
 }

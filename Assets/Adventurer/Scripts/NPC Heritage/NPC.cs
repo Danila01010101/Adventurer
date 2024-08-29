@@ -1,6 +1,8 @@
+using UnityEngine;
+
 namespace Adventurer
 {
-    public class NPC : IDamagable
+    public class NPC : MonoBehaviour, IDamagable
     {
         public string Name { get; set; }
         public float Health { get; set; }

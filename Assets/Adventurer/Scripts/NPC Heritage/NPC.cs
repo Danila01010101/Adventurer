@@ -10,7 +10,7 @@ namespace Adventurer
 
         protected CharacterMovement movement;
 
-        private void Start()
+        public virtual void Start()
         {
             CharacterMovement movement = GetComponent<CharacterMovement>();
         }
@@ -18,7 +18,7 @@ namespace Adventurer
         {
             Health -= damage;
         }
-        private void Update()
+        public virtual void Update()
         {
             Move();
             if (Health<=0)

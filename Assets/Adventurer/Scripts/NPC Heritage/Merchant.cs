@@ -17,12 +17,7 @@ namespace Adventurer
     public class Merchant : NPC
     {
         public GameObject Window;
-        public List<Product> Products { get; set; }
-        public Merchant(string name,float health, List<Product> products, GameObject window) :base (health,name)
-        {
-            Products = products;
-            Window = window;
-        }
+        public List<Product> Products;
 
         public void OpenUI() 
         {

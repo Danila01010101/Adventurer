@@ -2,12 +2,7 @@ namespace Adventurer
 {
     public class Enemy : NPC
     {
-        public float Damage { get; set; }
-
-        public Enemy(float health, string name, float damage) : base (health, name)
-        {
-            Damage = damage;
-        }
+        public float Damage;
 
         public void Attack(NPC target)
         {

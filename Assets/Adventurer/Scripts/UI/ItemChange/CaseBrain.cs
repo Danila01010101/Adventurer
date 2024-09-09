@@ -42,13 +42,10 @@ namespace Adventurer
             }
         }
 
-        public void OnMouseOverForButton()
+        public void OnMouseUpForButton()
         {
-            if (Input.GetMouseButtonUp(0))
-            {
-                CaseClicked?.Invoke(this);
-                Crutch = false;
-            }
+            CaseClicked?.Invoke(this);
+            Crutch = false;
         }
 
         public void OnMouseDownForButton()

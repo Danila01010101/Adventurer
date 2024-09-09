@@ -24,7 +24,8 @@ namespace Adventurer
                 HowManyStart = HowManyPart / 2;
                 for (int i = 0; i < HowManyStart; i++)
                 {
-                  
+
+                    //var spa = Instantiate(part, CanvasObject.transform.position + new Vector3(a, 0, 0), Quaternion.identity);
                     var spa = Instantiate(part, new Vector2(a, 0), Quaternion.identity);
                     spa.transform.SetParent(CanvasObject.transform);
 

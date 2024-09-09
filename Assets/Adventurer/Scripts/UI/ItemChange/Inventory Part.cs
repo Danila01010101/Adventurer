@@ -19,22 +19,21 @@ namespace Adventurer
         {
             if (HowManyPart % 2 == 0)
             {
-                a = 1;
+                a = 50;
 
                 HowManyStart = HowManyPart / 2;
                 for (int i = 0; i < HowManyStart; i++)
                 {
 
-                    //var spa = Instantiate(part, CanvasObject.transform.position + new Vector3(a, 0, 0), Quaternion.identity);
-                    var spa = Instantiate(part, new Vector2(a, 0), Quaternion.identity);
+                    var spa = Instantiate(part, CanvasObject.transform.position + new Vector3(a, 0, 0), Quaternion.identity);
                     spa.transform.SetParent(CanvasObject.transform);
 
                     parts.Add(spa);
 
-                    var sp = Instantiate(part, new Vector2(-a, 0), Quaternion.identity);
+                    var sp = Instantiate(part, CanvasObject.transform.position + new Vector3(-a, 0, 0), Quaternion.identity);
                     sp.transform.SetParent(CanvasObject.transform);
                     parts.Add(sp); 
-                    a = a + 2;
+                    a = a + 100;
 
                   
     }
@@ -45,19 +44,19 @@ namespace Adventurer
                 for (int i = 0; i < HowManyStart; i++)
                 {
 
-                    var spawn = Instantiate(part, new Vector2(a, 0), Quaternion.identity);
+                    var spawn = Instantiate(part, CanvasObject.transform.position + new Vector3(a, 0, 0), Quaternion.identity);
                     spawn.transform.SetParent(CanvasObject.transform);
                     parts.Add(spawn);
                     
 
                     if (a != 0)
                     {
-                        var spaw = Instantiate(part, new Vector2(-a, 0), Quaternion.identity);
+                        var spaw = Instantiate(part, CanvasObject.transform.position + new Vector3(-a, 0, 0), Quaternion.identity);
                         spaw.transform.SetParent(CanvasObject.transform);
                         parts.Add(spaw);
                        
                     }
-                    a = a + 2;
+                    a = a + 100;
                    
                    
                 }

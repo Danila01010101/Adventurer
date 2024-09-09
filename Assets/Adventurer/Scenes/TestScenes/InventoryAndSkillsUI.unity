@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -212,12 +212,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &22602014 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2960080613669947035, guid: 77e4a6e326f15df4e8f4a4ccf4756b6e,
-    type: 3}
-  m_PrefabInstance: {fileID: 2314167265345002772}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &31996219
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,7 +602,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 1960667969}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1775,7 +1769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   part: {fileID: 3066089464341137747, guid: 2bd87aa4b15e1e046b2f8cee0ca446ac, type: 3}
   HowManyPart: 5
-  CanvasObject: {fileID: 22602014}
+  CanvasObject: {fileID: 1471397797}
 --- !u!222 &442366645
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6595,6 +6589,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462996978}
   m_CullTransparentMesh: 1
+--- !u!1 &1471397797 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2960080613669947035, guid: 77e4a6e326f15df4e8f4a4ccf4756b6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2314167265345002772}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1484740715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9787,7 +9787,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: HotBar
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2688164562635691738, guid: 77e4a6e326f15df4e8f4a4ccf4756b6e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

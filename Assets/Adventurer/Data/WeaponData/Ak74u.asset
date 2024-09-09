@@ -15,8 +15,9 @@ MonoBehaviour:
   <Name>k__BackingField: Aka
   <Icon>k__BackingField: {fileID: 21300000, guid: e31336f90594ef941a8b25959960a5d8,
     type: 3}
-  <ItemModel>k__BackingField: {fileID: 2435290251775531409, guid: 4fa22248900b84446b59c7caba2899ef,
+  <ItemModel>k__BackingField: {fileID: 100000, guid: 15fc4d7b13207df44b7428e7e3047fa5,
     type: 3}
+  <ItemType>k__BackingField: 0
   damage: 4
   maxDistance: 100
   magazineSize: 30

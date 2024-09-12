@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ladder
   - Ground
+  - Road
+  - RoadCrossing
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Water
   - UI
   - Hands
-  - 
+  - Obstacles
   - 
   - Player
   - Ground

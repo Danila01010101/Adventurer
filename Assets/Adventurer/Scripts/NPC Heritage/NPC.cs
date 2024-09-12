@@ -2,17 +2,18 @@ using UnityEngine;
 
 namespace Adventurer
 {
-    [RequireComponent(typeof(CharacterMovement))]
+    [RequireComponent(typeof(NPCMovement))]
     public class NPC : MonoBehaviour, IDamagable
     {
         public string Name;
         public float Health;
 
-        protected CharacterMovement movement;
+        protected NPCMovement movement;
 
         public virtual void Start()
         {
-            CharacterMovement movement = GetComponent<CharacterMovement>();
+           movement = GetComponent<NPCMovement>();
+           Debug.Log(movement.gameObject);
         }
         public void TakeDamage(float damage)
         {
@@ -28,10 +29,7 @@ namespace Adventurer
         }
         public virtual void Move()
         {
-            movement.HandleMovement();
-            movement.HandleGroundCheck();
-            movement.HandleGravity();
-            movement.HandleAnimation();
+
         }
         public virtual void NPCDeath() 
         {

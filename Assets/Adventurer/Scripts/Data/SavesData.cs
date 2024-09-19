@@ -45,7 +45,7 @@ namespace Adventurer
                     throw new ArgumentException("Invalid slot parameters, cant switch to empty slot");
             }
 
-            DataParser.Save(FILENAME, data);
+            SaveGame();
         }
 
         [Serializable]
@@ -66,5 +66,7 @@ namespace Adventurer
             if (CurrentSlotData.LastSceneIndex == SceneID.Bootstrap)
                 CurrentSlotData.LastSceneIndex = SceneID.StartLocation;
         }
+
+        public void SaveGame() => DataParser.Save(FILENAME, data);
     }
 }

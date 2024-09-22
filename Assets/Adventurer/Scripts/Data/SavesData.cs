@@ -1,3 +1,4 @@
+using Palmmedia.ReportGenerator.Core;
 using System;
 using UnityEngine;
 using static Adventurer.SaveSlotData;

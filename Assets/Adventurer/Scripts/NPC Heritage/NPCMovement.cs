@@ -32,33 +32,36 @@ public class NPCMovement : MonoBehaviour
 
     void Update()
     {
-        if (currentTarget != null)
+        if (points.Length!=0) 
         {
-            MoveTowards(currentTarget);  // Движение к текущей точке
-        }
-        else if (path.Count > 0)
-        {
-            currentTarget = path.Dequeue();  // Получаем следующую точку пути
-        }
-        else
-        {
-            SetNewTarget();  // Ставим новую цель после достижения предыдущей
-        }
-
-        // Проверяем, если NPC находится на дороге
-        if (isOnRoad && !isCrossingRoad && !hasPassedCrossing)
-        {
-            // Если NPC не находится в переходе, то ищем переход и добавляем его в путь
-            if (path.Count == 0)
+            if (currentTarget != null)
             {
-                RoadCrossing crossing = FindClosestCrossing(transform.position, target.position);
-                Transform start = IsOnSameSide(transform.position, crossing.startPoint.position) ? crossing.startPoint : crossing.endPoint;
-                Transform end = IsOnSameSide(target.position, crossing.startPoint.position) ? crossing.startPoint : crossing.endPoint;
+                MoveTowards(currentTarget);  // Движение к текущей точке
+            }
+            else if (path.Count > 0)
+            {
+                currentTarget = path.Dequeue();  // Получаем следующую точку пути
+            }
+            else
+            {
+                SetNewTarget();  // Ставим новую цель после достижения предыдущей
+            }
 
-                path.Enqueue(start);
-                path.Enqueue(crossing.middlePoint);
-                path.Enqueue(end);
-                path.Enqueue(target);  // Добавляем финальную цель к пути
+            // Проверяем, если NPC находится на дороге
+            if (isOnRoad && !isCrossingRoad && !hasPassedCrossing)
+            {
+                // Если NPC не находится в переходе, то ищем переход и добавляем его в путь
+                if (path.Count == 0)
+                {
+                    RoadCrossing crossing = FindClosestCrossing(transform.position, target.position);
+                    Transform start = IsOnSameSide(transform.position, crossing.startPoint.position) ? crossing.startPoint : crossing.endPoint;
+                    Transform end = IsOnSameSide(target.position, crossing.startPoint.position) ? crossing.startPoint : crossing.endPoint;
+
+                    path.Enqueue(start);
+                    path.Enqueue(crossing.middlePoint);
+                    path.Enqueue(end);
+                    path.Enqueue(target);  // Добавляем финальную цель к пути
+                }
             }
         }
     }

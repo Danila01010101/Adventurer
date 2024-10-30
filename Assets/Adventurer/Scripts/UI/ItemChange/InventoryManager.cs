@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Adventurer
 {
-    public class InventaryMenadger : MonoBehaviour
+    public class InventoryManager : MonoBehaviour
     {
         [SerializeField] private GameObject Inventary;
         [SerializeField] private GameObject Hotbar;

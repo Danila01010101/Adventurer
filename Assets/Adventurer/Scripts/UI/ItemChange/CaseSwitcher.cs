@@ -56,7 +56,10 @@ namespace Adventurer
                 CaseBrain caseUnderMouse = GetCaseUnderMouse();
 
                 if (caseUnderMouse == null)
+                {
+                    lastCase = null;
                     return;
+                }
 
                 // Логика для работы с кнопкой, конец движения
                 SelectCell(caseUnderMouse);

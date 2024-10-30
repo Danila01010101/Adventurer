@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Adventurer
 {
-    public class InventoryPart : MonoBehaviour
+    public class InventoryPartsView : MonoBehaviour
     {
         [SerializeField] private GameObject part;
         [SerializeField] private float HowManyPart = 1;

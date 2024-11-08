@@ -3,18 +3,24 @@ using UnityEngine;
 
 namespace Adventurer
 {
-    public class CaseBrain : MonoBehaviour
+    [RequireComponent(typeof(ItemCaseView))]
+    public class CaseBrain : MonoBehaviour, IItemCase
     {
         [SerializeField] private ItemData item;
-        [SerializeField] private int howManyItems;
         [SerializeField] private ItemType type;
 
         public ItemData ItemData { get { return item; } }
+        public Action ItemChanged { get; set; }
         public static Action<CaseBrain> CaseClicked;
 
-        // public static Action<CaseBrain> ZeroingIsNeeded;
-
+        private ItemCaseView caseView;
         private Vector2 StartPosition;
+
+        private void Start()
+        {
+            caseView = GetComponent<ItemCaseView>();
+            caseView.Initialize(this);
+        }
 
         public bool CanPlace(ItemType newItemType)
         {
@@ -24,14 +30,6 @@ namespace Adventurer
             }
 
             return false;
-        }
-
-        private void Awake()
-        {
-            if (item != null)
-            {
-               gameObject.transform.GetChild(1).GetComponent<UnityEngine.UI.Image>().sprite = item.Icon;
-            }
         }
 
         public void SetItem(ItemData item)
@@ -47,14 +45,14 @@ namespace Adventurer
             }
 
             this.item = item;
-            gameObject.transform.GetChild(1).GetComponent<UnityEngine.UI.Image>().sprite = item.Icon;
+            ItemChanged?.Invoke();
             EndDrag();
         }
 
         public void Reset() 
         {
             item = null;
-            gameObject.transform.GetChild(1).GetComponent<UnityEngine.UI.Image>().sprite = null;
+            ItemChanged?.Invoke();
             EndDrag();
         }
 

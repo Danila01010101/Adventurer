@@ -38,7 +38,7 @@ namespace Adventurer
             if (Input.GetMouseButtonDown(LeftMouseButton))
             {
                 isSwiping = true;
-                ClickUp?.Invoke(Input.mousePosition);
+                ClickDown?.Invoke(Input.mousePosition);
             }
         }
 

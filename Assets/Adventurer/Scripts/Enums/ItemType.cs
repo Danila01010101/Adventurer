@@ -4,6 +4,8 @@ namespace Adventurer
 	{
     	Gun,
         Meele,
-        Tool
+        Tool,
+        Skill,
+        UsableItem
 	}
 }

@@ -14,4 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Adventurer/Scenes/GameScenes/StartScene.unity
     guid: f8519f9de8744714a8946c614dc4b1d6
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 84a53ce3328cd334d8c5e79c7ad4cb26,
+      type: 2}

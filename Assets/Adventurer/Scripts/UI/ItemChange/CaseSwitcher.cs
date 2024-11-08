@@ -10,36 +10,26 @@ namespace Adventurer
 
         public CaseBrain GetCaseUnderMouse()
         {
-            // Создаем список для хранения результатов рэйкаста
             List<RaycastResult> raycastResults = new List<RaycastResult>();
-
-            // Создаем данные указателя мыши
             PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-            pointerEventData.position = Input.mousePosition;  // Текущая позиция мыши
-
-            // Выполняем рэйкаст
+            pointerEventData.position = Input.mousePosition;
             EventSystem.current.RaycastAll(pointerEventData, raycastResults);
 
-            // Проходимся по результатам рэйкаста
             foreach (RaycastResult result in raycastResults)
             {
-                // Проверяем, есть ли у объекта компонент CaseBrain
                 CaseBrain caseButton = result.gameObject.GetComponent<CaseBrain>();
                 if (caseButton != null)
                 {
                     Debug.Log("Над кнопкой: " + caseButton.name);
-                    return caseButton;  // Возвращаем найденную кнопку
+                    return caseButton;
                 }
             }
 
-            // Если кнопка не найдена, возвращаем null
             return null;
         }
 
         void Update()
         {
-            // Проверяем в каждом кадре, есть ли кнопка под мышью
-
             if (Input.GetMouseButtonDown(0))
             {
                 CaseBrain caseUnderMouse = GetCaseUnderMouse();
@@ -47,7 +37,6 @@ namespace Adventurer
                 if (caseUnderMouse == null)
                     return;
 
-                // Логика для работы с кнопкой, начало движения
                 SelectCell(caseUnderMouse);
             }
 
@@ -61,7 +50,6 @@ namespace Adventurer
                     return;
                 }
 
-                // Логика для работы с кнопкой, конец движения
                 SelectCell(caseUnderMouse);
             }
         }

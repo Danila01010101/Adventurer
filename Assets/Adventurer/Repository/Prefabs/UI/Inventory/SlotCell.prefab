@@ -87,6 +87,8 @@ GameObject:
   - component: {fileID: 2597725621682616522}
   - component: {fileID: 8728936459117350390}
   - component: {fileID: 1099779967573079106}
+  - component: {fileID: 7479519814425956029}
+  - component: {fileID: 5168197176791048008}
   m_Layer: 5
   m_Name: SlotCell
   m_TagString: InventoryPart
@@ -155,6 +157,31 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7479519814425956029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3066089464341137747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e9baa30e82a88d4ba14d2d87b32fdb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2512757009335752685}
+--- !u!114 &5168197176791048008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3066089464341137747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d268e43ef2dbf2d4e8547059e9329f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4145213287901181899
 GameObject:
   m_ObjectHideFlags: 0

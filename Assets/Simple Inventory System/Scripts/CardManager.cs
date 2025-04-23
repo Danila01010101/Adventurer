@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -17,12 +18,14 @@ namespace RedstoneinventeGameStudio
 
         [SerializeField] TMP_Text itemName;
         [SerializeField] Image itemIcon;
+        
+        [SerializeField] CardsManager cardsManager;
 
         private void Awake()
         {
             if (useAsDrag)
             {
-                ItemDraggingManager.dragCard = this;
+                InventoryManager.DragCard = this;
                 isOccupied = true;
 
                 gameObject.SetActive(false);
@@ -36,6 +39,9 @@ namespace RedstoneinventeGameStudio
             {
                 SetItem(itemData);
             }
+            
+            if (cardsManager == null)
+                cardsManager = GetComponentInParent<CardsManager>();
         }
 
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
@@ -45,7 +51,7 @@ namespace RedstoneinventeGameStudio
                 return;
             }
 
-            ItemDraggingManager.fromCard = this;
+            InventoryManager.FromCard = this;
             TooltipManagerInventory.UnSetToolTip();
         }
 
@@ -53,9 +59,9 @@ namespace RedstoneinventeGameStudio
         {
             if (isOccupied)
             {
-                ItemDraggingManager.toCard = ItemDraggingManager.fromCard;
+                InventoryManager.ToCard = InventoryManager.FromCard;
 
-                if (ItemDraggingManager.toCard == default)
+                if (InventoryManager.ToCard == default)
                 {
                     TooltipManagerInventory.SetTooltip(itemData);
                 }
@@ -63,7 +69,7 @@ namespace RedstoneinventeGameStudio
                 return;
             }
 
-            ItemDraggingManager.toCard = this;
+            InventoryManager.ToCard = this;
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -102,7 +108,7 @@ namespace RedstoneinventeGameStudio
             RefreshDisplay();
         }
 
-        void RefreshDisplay()
+        public void RefreshDisplay()
         {
             emptyCard.SetActive(!isOccupied);
         }

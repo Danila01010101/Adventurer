@@ -502,6 +502,7 @@ MonoBehaviour:
   emptyCard: {fileID: 8735576786140541516}
   itemName: {fileID: 266009646096215596}
   itemIcon: {fileID: 6030095665085941289}
+  cardsManager: {fileID: 0}
 --- !u!1 &475776733245109193
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,6 +678,7 @@ MonoBehaviour:
   emptyCard: {fileID: 8670097854066672853}
   itemName: {fileID: 7075930712781995081}
   itemIcon: {fileID: 2776068978902838062}
+  cardsManager: {fileID: 0}
 --- !u!1 &626629889779828269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,6 +1468,7 @@ MonoBehaviour:
   emptyCard: {fileID: 2592575805487439951}
   itemName: {fileID: 6704689604669059842}
   itemIcon: {fileID: 5933038176926146691}
+  cardsManager: {fileID: 0}
 --- !u!1 &1908760319332878018
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,6 +1856,7 @@ MonoBehaviour:
   emptyCard: {fileID: 4296338519107306792}
   itemName: {fileID: 7264214496010570841}
   itemIcon: {fileID: 677466402214558050}
+  cardsManager: {fileID: 0}
 --- !u!1 &2096347834921281854
 GameObject:
   m_ObjectHideFlags: 0
@@ -2746,6 +2750,7 @@ MonoBehaviour:
   emptyCard: {fileID: 8551808768604222861}
   itemName: {fileID: 8895528671418585568}
   itemIcon: {fileID: 3388113921060132355}
+  cardsManager: {fileID: 0}
 --- !u!1 &3148206872919909044
 GameObject:
   m_ObjectHideFlags: 0
@@ -3114,6 +3119,7 @@ MonoBehaviour:
   emptyCard: {fileID: 8182756537130832642}
   itemName: {fileID: 9190010035183678970}
   itemIcon: {fileID: 2176892429411729686}
+  cardsManager: {fileID: 0}
 --- !u!1 &3525786277993955897
 GameObject:
   m_ObjectHideFlags: 0
@@ -3741,6 +3747,7 @@ MonoBehaviour:
   emptyCard: {fileID: 5515044318431361278}
   itemName: {fileID: 3755114072271132947}
   itemIcon: {fileID: 4294011524903873718}
+  cardsManager: {fileID: 0}
 --- !u!1 &3876763762208518142
 GameObject:
   m_ObjectHideFlags: 0
@@ -5042,6 +5049,7 @@ MonoBehaviour:
   emptyCard: {fileID: 8792973879318943883}
   itemName: {fileID: 7606015416173597898}
   itemIcon: {fileID: 72760613687113586}
+  cardsManager: {fileID: 0}
 --- !u!1 &5515044318431361278
 GameObject:
   m_ObjectHideFlags: 0
@@ -5597,6 +5605,7 @@ MonoBehaviour:
   emptyCard: {fileID: 7456779100224301250}
   itemName: {fileID: 6317722356394678547}
   itemIcon: {fileID: 2502252515050210218}
+  cardsManager: {fileID: 0}
 --- !u!1 &6726385951468429060
 GameObject:
   m_ObjectHideFlags: 0
@@ -5695,6 +5704,7 @@ MonoBehaviour:
   emptyCard: {fileID: 7178776638732841412}
   itemName: {fileID: 4734022069059509798}
   itemIcon: {fileID: 9018031980680800803}
+  cardsManager: {fileID: 0}
 --- !u!1 &6894014847862828308
 GameObject:
   m_ObjectHideFlags: 0
@@ -6636,6 +6646,7 @@ MonoBehaviour:
   emptyCard: {fileID: 3876763762208518142}
   itemName: {fileID: 6512358305901021955}
   itemIcon: {fileID: 67975781505476385}
+  cardsManager: {fileID: 0}
 --- !u!1 &7851184198045300566
 GameObject:
   m_ObjectHideFlags: 0
@@ -6946,6 +6957,7 @@ MonoBehaviour:
   emptyCard: {fileID: 2114537263088886060}
   itemName: {fileID: 5490761623594665168}
   itemIcon: {fileID: 7828759087235058182}
+  cardsManager: {fileID: 0}
 --- !u!1 &8105666480828483528
 GameObject:
   m_ObjectHideFlags: 0
@@ -7690,6 +7702,7 @@ MonoBehaviour:
   emptyCard: {fileID: 2264614662447002392}
   itemName: {fileID: 218186349267207821}
   itemIcon: {fileID: 7936297391156176027}
+  cardsManager: {fileID: 0}
 --- !u!1 &8667083505326090614
 GameObject:
   m_ObjectHideFlags: 0
@@ -7745,6 +7758,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipOffset: {x: 0, y: 0, z: 0}
   draggingCardOffset: {x: 0, y: 0, z: 0}
+  playerInventory: {fileID: 0}
+  cardsManager: {fileID: 0}
+  testItemData: {fileID: 0}
 --- !u!1 &8670097854066672853
 GameObject:
   m_ObjectHideFlags: 0

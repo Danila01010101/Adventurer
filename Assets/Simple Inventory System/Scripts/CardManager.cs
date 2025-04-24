@@ -46,6 +46,7 @@ namespace RedstoneinventeGameStudio
 
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
+            Debug.Log("OnPointerDown");
             if (useAsDrag || !isOccupied)
             {
                 return;
@@ -57,6 +58,7 @@ namespace RedstoneinventeGameStudio
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            Debug.Log("OnPointerEnter");
             if (isOccupied)
             {
                 InventoryManager.ToCard = InventoryManager.FromCard;
@@ -74,6 +76,7 @@ namespace RedstoneinventeGameStudio
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            Debug.Log("OnPointerExit");
             if (!isOccupied)
             {
                 return;

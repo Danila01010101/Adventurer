@@ -37,6 +37,7 @@ namespace RedstoneinventeGameStudio
 
             if (Input.GetKeyDown(KeyCode.Mouse0) && FromCard != default)
             {
+                Debug.Log($"Dragging Card: {DragCard.itemData}");
                 DragCard.SetItem(FromCard.itemData);
                 FromCard.UnSetItem();
 
